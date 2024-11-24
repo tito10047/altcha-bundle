@@ -7,6 +7,9 @@ services:
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']
+    arguments:
+      $enable: '%huluti_altcha.enable%'
+      $hmacKey: '%huluti_altcha.hmacKey%'
   Huluti\AltchaBundle\Controller\HulutiAltchaChallengeController:
     public: true
     autowire: true
