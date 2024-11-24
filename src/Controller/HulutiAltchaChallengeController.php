@@ -31,6 +31,6 @@ class HulutiAltchaChallengeController extends AbstractController
 
         $challenge = Altcha::createChallenge($options);
 
-        return new JsonReponse($challenge);
+        return new JsonResponse($challenge);
     }
 }
