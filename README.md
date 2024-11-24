@@ -54,7 +54,7 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class, ['label' => false, 'attr' => ['placeholder' => 'name']])
             ->add('message', TextareaType::class, ['label' => false, 'attr' => ['placeholder' => 'message']])
-            ->add('security', AltchaType::class, ['attr' => ['data-action' => 'contact', 'data-theme' => 'dark'], 'label' => false])
+            ->add('security', AltchaType::class, ['label' => false])
             ->add('submit', SubmitType::class)
         ;
     }
