@@ -1,6 +1,7 @@
 {
   "name": "huluti/altcha-bundle",
   "description": "A simple package to help integrate Altcha on Symfony.",
+  "version": "0.1",
   "keywords": [
     "symfony bundle",
     "altcha",
