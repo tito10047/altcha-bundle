@@ -12,6 +12,8 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 class HulutiAltchaBundle extends AbstractBundle
 {
+    protected string $extensionAlias = 'huluti_altcha';
+
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
@@ -22,12 +24,9 @@ class HulutiAltchaBundle extends AbstractBundle
     {
         $definition->rootNode()
             ->children()
-                ->arrayNode('huluti_altcha')
-                    ->children()
-                        ->booleanNode('enable')->defaultTrue()->end()
-                        ->booleanNode('floating')->defaultTrue()->end()
-                        ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty() ->end()
-                ->end()
+                ->booleanNode('enable')->defaultTrue()->end()
+                ->booleanNode('floating')->defaultFalse()->end()
+                ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()->end()
             ->end()
         ;
     }
@@ -35,6 +34,6 @@ class HulutiAltchaBundle extends AbstractBundle
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         // load an XML, PHP or YAML file
-        $container->import('../config/services.xml');
+        $container->import('../config/services.yml');
     }
 }
