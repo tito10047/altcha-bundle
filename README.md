@@ -1,4 +1,4 @@
-A simple package to help integrate Altcha on Symfony Form.
+A simple package to help integrate ALTCHA on Symfony Form.
 ======================
 
 ![Packagist Version](https://img.shields.io/packagist/v/huluti/altcha-bundle)
