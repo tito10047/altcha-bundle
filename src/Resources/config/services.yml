@@ -1,0 +1,13 @@
+services:
+  altcha.type:
+    class: Huluti\AltchaBundle\Type\AltchaType
+    tags: ['form.type']
+    arguments:
+      $enable: '%huluti_altcha.enable%'
+  altcha.validator:
+    class: Huluti\AltchaBundle\Validator\AltchaValidator
+    tags: ['validator.constraint_validator']
+  Huluti\AltchaBundle\Controller\:
+    resource: '../src/Controller/*'
+    autowire: true
+    autoconfigure: true

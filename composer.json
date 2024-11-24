@@ -1,0 +1,43 @@
+{
+  "name": "huluti/altcha-bundle",
+  "description": "A simple package to help integrate Altcha on Symfony.",
+  "keywords": [
+    "symfony bundle",
+    "altcha",
+    "form security",
+    "captcha"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hugo Posnic",
+      "homepage": "https://github.com/Huluti"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "symfony/form": "^5.0|^6.0|^7.0",
+    "symfony/framework-bundle": "^5.0|^6.0|^7.0",
+    "symfony/http-client": "^5.0|^6.0|^7.0",
+    "symfony/yaml": "^5.0|^6.0|^7.0",
+    "symfony/validator": "^5.0|^6.0|^7.0",
+    "symfony/twig-bundle": "^5.0|^6.0|^7.0",
+    "altcha-org/altcha": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Huluti\\AltchaBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Huluti\\AltchaBundle\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.8",
+    "phpstan/phpstan-symfony": "^1.2",
+    "rector/rector": "^0.14.5",
+    "phpunit/phpunit": "^9.6"
+  }
+}

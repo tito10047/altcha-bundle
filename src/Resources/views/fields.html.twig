@@ -1,0 +1,7 @@
+{% block altcha_widget %}
+    {% if enable %}
+        <script src="https://eu.altcha.org/js/latest/altcha.min.js" defer></script>
+
+        <altcha-widget challengeurl="{{ path('huluti_altcha_challenge') }}"></altcha-widget>
+    {% endif %}
+{% endblock %}

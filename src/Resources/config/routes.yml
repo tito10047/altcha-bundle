@@ -1,0 +1,3 @@
+huluti_altcha:
+  resource: "../src/Controller/"
+  type: attribute

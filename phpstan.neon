@@ -1,0 +1,7 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+    level: 7
+    ignoreErrors:
+        - '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint\:\:\$message\.$#'
