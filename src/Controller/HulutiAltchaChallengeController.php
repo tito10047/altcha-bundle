@@ -1,5 +1,8 @@
 <?php
-namespace MyWork\MyBundle\Controller;
+
+declare(strict_types=1);
+
+namespace Huluti\AltchaBundle\Controller;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
