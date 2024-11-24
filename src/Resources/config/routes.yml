@@ -1,5 +1,4 @@
 huluti_altcha:
-  prefix: /huluti_altcha
   type: attribute
   resource:
       path: '@HulutiAltchaBundle/src/Controller/'
