@@ -37,6 +37,12 @@ class HulutiAltchaBundle extends AbstractBundle
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
+        $container->parameters()
+            ->set('huluti_altcha.enable', $config['enable'])
+            ->set('huluti_altcha.floating', $config['floating'])
+            ->set('huluti_altcha.hmacKey', $config['hmacKey'])
+        ;
+
         // load an XML, PHP or YAML file
         $container->import('../config/services.yml');
     }

@@ -17,7 +17,7 @@ class HulutiAltchaBundleCompilerPass implements CompilerPassInterface
         if ($container->hasParameter('twig.form.resources')) {
             /** @var array<int, string> $resources */
             $resources = $container->getParameter('twig.form.resources') ?: [];
-            array_unshift($resources, '@HulutiAltcha/templates/fields.html.twig');
+            array_unshift($resources, '@HulutiAltcha/fields.html.twig');
             $container->setParameter('twig.form.resources', $resources);
         }
     }
