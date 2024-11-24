@@ -10,6 +10,7 @@ services:
     arguments:
       $enable: '%huluti_altcha.enable%'
       $hmacKey: '%huluti_altcha.hmacKey%'
+      $requestStack: '@request_stack'
   Huluti\AltchaBundle\Controller\HulutiAltchaChallengeController:
     public: true
     autowire: true
