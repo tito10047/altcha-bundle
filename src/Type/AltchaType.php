@@ -13,8 +13,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AltchaType extends AbstractType
 {
-    public function __construct(private readonly bool $enable)
-    {
+    public function __construct(
+        private readonly bool $enable,
+        private readonly bool $floating,
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -28,6 +30,7 @@ class AltchaType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['enable'] = $this->enable;
+        $view->vars['floating'] = $this->floating;
     }
 
     public function getBlockPrefix(): string
