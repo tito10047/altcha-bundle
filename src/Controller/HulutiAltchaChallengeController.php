@@ -20,7 +20,7 @@ class HulutiAltchaChallengeController extends AbstractController
         $this->hmacKey = $hmacKey;
     }
 
-    #[Route('/huluti_altcha/challenge', name: 'huluti_altcha_challenge')]
+    #[Route('/challenge', name: 'huluti_altcha_challenge')]
     public function index(): JsonResponse
     {
         $options = new ChallengeOptions([

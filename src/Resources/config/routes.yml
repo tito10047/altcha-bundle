@@ -1,3 +1,6 @@
 huluti_altcha:
-  resource: "../../src/Controller/"
+  prefix: /huluti_altcha
   type: attribute
+  resource:
+      path: '@HulutiAltchaBundle/src/Controller/'
+      namespace: Huluti\AltchaBundle\Controller
