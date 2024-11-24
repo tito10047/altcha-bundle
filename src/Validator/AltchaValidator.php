@@ -12,21 +12,21 @@ use Symfony\Component\Validator\ConstraintValidator;
 final class AltchaValidator extends ConstraintValidator
 {
     public function __construct(
-        private readonly bool $enable, 
-        private readonly string $hmacKey, 
-        private readonly RequestStack $requestStack
+        private readonly bool $enable,
+        private readonly string $hmacKey,
+        private readonly RequestStack $requestStack,
     ) {
     }
 
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed $value The value that should be validated
+     * @param mixed      $value      The value that should be validated
      * @param Constraint $constraint The constraint for the validation
      */
     public function validate($value, Constraint $constraint): void
     {
-        if ($this->enable === false) {
+        if (false === $this->enable) {
             return;
         }
 
@@ -35,13 +35,15 @@ final class AltchaValidator extends ConstraintValidator
         if (!is_string($altchaEncoded)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
-                return;
+
+            return;
         }
         $altchaJson = base64_decode($altchaEncoded, true);
         if (!is_string($altchaJson)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
-                return;
+
+            return;
         }
         $payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
 

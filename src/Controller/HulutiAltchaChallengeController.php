@@ -20,9 +20,9 @@ class HulutiAltchaChallengeController extends AbstractController
     public function challenge(): JsonResponse
     {
         $options = new ChallengeOptions([
-            'hmacKey'   => $this->hmacKey,
+            'hmacKey' => $this->hmacKey,
             'maxNumber' => 100000,
-            'expires' => (new \DateTime())->modify('+15 minute')
+            'expires' => (new \DateTime())->modify('+15 minute'),
         ]);
 
         $challenge = Altcha::createChallenge($options);
