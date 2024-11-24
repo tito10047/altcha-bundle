@@ -4,6 +4,7 @@ services:
     tags: ['form.type']
     arguments:
       $enable: '%huluti_altcha.enable%'
+      $floating: '%huluti_altcha.floating%'
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']

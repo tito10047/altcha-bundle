@@ -2,6 +2,9 @@
     {% if enable %}
         <script async defer src="https://eu.altcha.org/js/latest/altcha.min.js" type="module"></script>
 
-        <altcha-widget challengeurl="{{ path('huluti_altcha_challenge') }}"></altcha-widget>
+        <altcha-widget 
+            challengeurl="{{ path('huluti_altcha_challenge') }}"
+            {% if floating %}floating{% endif %}
+        ></altcha-widget>
     {% endif %}
 {% endblock %}
