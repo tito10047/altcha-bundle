@@ -44,7 +44,7 @@ huluti_altcha:
 Import routes:
 
 ```php
-$routingConfigurator->import('@HulutiAltchaBundle/Resources/config/routes.yml');
+$routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
 ```
 
 ### Use with your Symfony Form
