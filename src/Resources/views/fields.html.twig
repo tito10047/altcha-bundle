@@ -1,6 +1,6 @@
 {% block altcha_widget %}
     {% if enable %}
-        <script src="https://eu.altcha.org/js/latest/altcha.min.js" defer></script>
+        <script async defer src="https://eu.altcha.org/js/latest/altcha.min.js" type="module"></script>
 
         <altcha-widget challengeurl="{{ path('huluti_altcha_challenge') }}"></altcha-widget>
     {% endif %}
