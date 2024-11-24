@@ -38,6 +38,13 @@ Add a config file into config/packages/huluti_altcha.yaml :
 huluti_altcha:
   enable: true
   hmacKey: RANDOM_SECRET_KEY
+  floating: true
+```
+
+Import routes:
+
+```php
+$routingConfigurator->import('@HulutiAltchaBundle/Resources/config/routes.yml');
 ```
 
 ### Use with your Symfony Form
