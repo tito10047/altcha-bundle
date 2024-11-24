@@ -8,8 +8,6 @@ A simple package to help integrate Altcha on Symfony Form.
 
 This packages provides helper for setting up and validating Altcha CAPTCHA responses.
 
-![Altcha for Symfony Form](screenshot.png)
-
 ## Installation
 
 You can install the package via Composer:
