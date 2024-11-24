@@ -40,10 +40,18 @@ final class AltchaValidator extends ConstraintValidator
 
         $request = $this->requestStack->getCurrentRequest();
         $altchaEncoded = $request->request->get('altcha');
+        if (!is_string($altchaEncoded)) {
+            $this->context->buildViolation($constraint->message)
+                ->addviolation();
+                return;
+        }
         $altchaJson = base64_decode($altchaEncoded, true);
+        if (!is_string($altchaJson)) {
+            $this->context->buildViolation($constraint->message)
+                ->addviolation();
+                return;
+        }
         $payload = json_decode($altchaJson, true);
-
-        // TODO: verify each line above
 
         if (!Altcha::verifySolution($payload, $this->hmacKey, true)) {
             $this->context->buildViolation($constraint->message)
