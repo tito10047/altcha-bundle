@@ -1,5 +1,5 @@
 huluti_altcha:
   type: attribute
   resource:
-    path: "@HulutiAltchaBundle/src/Controller/"
+    path: "@HulutiAltchaBundle/Controller/"
     namespace: Huluti\AltchaBundle\Controller
