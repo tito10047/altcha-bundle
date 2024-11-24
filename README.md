@@ -89,7 +89,3 @@ class ContactType extends AbstractType
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
-
-## Thanks
-
-Largely based on: https://github.com/Pixel-Open/cloudflare-turnstile-bundle
