@@ -22,6 +22,7 @@ class HulutiAltchaBundle extends AbstractBundle
     
     public function configure(DefinitionConfigurator $definition): void
     {
+        // @phpstan-ignore-next-line
         $definition->rootNode()
             ->children()
                 ->booleanNode('enable')->defaultTrue()->end()
@@ -31,6 +32,9 @@ class HulutiAltchaBundle extends AbstractBundle
         ;
     }
 
+    /**
+     * @param array<mixed> $config The configuration array.
+     */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         // load an XML, PHP or YAML file
