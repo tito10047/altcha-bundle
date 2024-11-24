@@ -12,12 +12,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HulutiAltchaChallengeController extends AbstractController
 {
-    private string $hmacKey;
-
-    public function __construct(
-        string $hmacKey,
-    ) {
-        $this->hmacKey = $hmacKey;
+    public function __construct(private readonly string $hmacKey)
+    {
     }
 
     #[Route('/huluti_altcha/challenge', name: 'huluti_altcha_challenge')]

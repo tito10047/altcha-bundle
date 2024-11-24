@@ -11,19 +11,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class AltchaValidator extends ConstraintValidator
 {
-    private bool $enable;
-    private string $hmacKey;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        bool $enable,
-        string $hmacKey,
-        RequestStack $requestStack,
+        private readonly bool $enable, 
+        private readonly string $hmacKey, 
+        private readonly RequestStack $requestStack
     ) {
-        $this->enable = $enable;
-        $this->hmacKey = $hmacKey;
-        $this->requestStack = $requestStack;
     }
 
     /**
@@ -51,7 +43,7 @@ final class AltchaValidator extends ConstraintValidator
                 ->addviolation();
                 return;
         }
-        $payload = json_decode($altchaJson, true);
+        $payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
 
         if (!Altcha::verifySolution($payload, $this->hmacKey, true)) {
             $this->context->buildViolation($constraint->message)

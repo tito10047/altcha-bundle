@@ -13,14 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AltchaType extends AbstractType
 {
-    /**
-     * @var bool
-     */
-    private $enable;
-
-    public function __construct(bool $enable)
+    public function __construct(private readonly bool $enable)
     {
-        $this->enable = $enable;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
