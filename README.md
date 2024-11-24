@@ -37,7 +37,7 @@ Add a config file into config/packages/huluti_altcha.yaml :
 ```yaml
 huluti_altcha:
   enable: true
-  hmacKey: RANDOM_SECRET_KEY
+  hmacKey: 'RANDOM_SECRET_KEY'
   floating: true
 ```
 
