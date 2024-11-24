@@ -1,10 +1,9 @@
 A simple package to help integrate Altcha on Symfony Form.
 ======================
 
-<!-- [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-green)](https://php.net/)
-[![Minimum Symfony Version](https://img.shields.io/badge/symfony-%3E%3D%205.4-green)](https://symfony.com)
-[![GitHub release](https://img.shields.io/github/v/release/huluti/altcha-bundle)](https://github.com/huluti/altcha-bundle/releases)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=huluti_altcha-bundle&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=huluti_altcha-bundle) -->
+![Packagist Version](https://img.shields.io/packagist/v/huluti/altcha-bundle)
+![Packagist License](https://img.shields.io/packagist/l/huluti/altcha-bundle)
+![Packagist Downloads](https://img.shields.io/packagist/dt/huluti/altcha-bundle)
 
 This packages provides helper for setting up and validating Altcha CAPTCHA responses.
 
