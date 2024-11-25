@@ -32,16 +32,29 @@ Add bundle into config/bundles.php file :
 ```php
 Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
 ```
-Add a config file into config/packages/huluti_altcha.yaml : 
 
-```yaml
-huluti_altcha:
-  enable: true
-  hmacKey: 'RANDOM_SECRET_KEY'
-  floating: true
+Add a config file `config/packages/huluti_altcha.php`: 
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $containerConfigurator->extension('huluti_altcha', [
+        'enable' => true,
+        'hmacKey' => 'RANDOM_SECRET_KEY',
+        'floating' => true,
+    ]);
+
+    if ('test' === $containerConfigurator->env()) {
+        // Disable captcha in test environment
+        $containerConfigurator->extension('huluti_altcha', [
+            'enable' => false,
+        ]);
+    }
+};
 ```
 
-Import routes:
+Import bundle routes:
 
 ```php
 $routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
