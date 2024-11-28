@@ -12,7 +12,7 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 > 
 >Unlike other solutions, ALTCHA is free, open-source and self-hosted, does not use cookies nor fingerprinting, does not track users, and is fully compliant with GDPR.
 >
-> Say goodbye to tedious puzzle-solving and improve your website's UX by integrating a fully automated proof-or-work mechanism.
+> Say goodbye to tedious puzzle-solving and improve your website's UX by integrating a fully automated proof-of-work mechanism.
 
 ## Support
 
@@ -62,7 +62,7 @@ $routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
 
 ### Use with your Symfony Form
 
-Create a form type and insert an Altcha Type to add a Altcha : 
+Create a form type and insert an AltchaType to add the captcha: 
 
 ```php
 <?php
