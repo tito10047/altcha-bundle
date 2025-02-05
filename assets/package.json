@@ -1,0 +1,28 @@
+{
+  "name": "@huluti/altcha-bundle",
+  "description": "altcha captcha for Symfony",
+  "version": "1.0.0",
+  "license": "MIT",
+  "symfony": {
+    "controllers": {
+      "ace": {
+        "main": "controllers/altcha_controller.js",
+        "webpackMode": "eager",
+        "fetch": "eager",
+        "enabled": true,
+        "autoimport": {
+          "altcha/dist/altcha.js": true
+        }
+      }
+    },
+    "importmap": {
+      "@hotwired/stimulus": "^3.0.0"
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
+}

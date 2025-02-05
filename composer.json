@@ -1,12 +1,16 @@
 {
   "name": "huluti/altcha-bundle",
+  "type": "symfony-bundle",
   "description": "A simple package to help integrate Altcha on Symfony.",
-  "version": "0.2",
   "keywords": [
     "symfony bundle",
     "altcha",
     "form security",
-    "captcha"
+    "captcha",
+    "form",
+    "bundle",
+    "symfony",
+    "symfony-ux"
   ],
   "license": "MIT",
   "authors": [
@@ -39,6 +43,8 @@
     "phpstan/phpstan": "^1.8",
     "phpstan/phpstan-symfony": "^1.2",
     "rector/rector": "^0.14.5",
+    "symfony/asset-mapper": "6.4 || ^7.0",
+    "symfony/stimulus-bundle": "^2.16",
     "phpunit/phpunit": "^9.6"
   }
 }
