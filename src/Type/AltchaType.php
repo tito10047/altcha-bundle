@@ -29,11 +29,7 @@ class AltchaType extends AbstractType
             "attr"=>[
                 "hidden"=>true
             ],
-            "constraints"=>[
-                new Altcha([
-                    "message"=>"Altcha is not valid"
-                ])
-            ]
+            'constraints' => new Altcha(),
         ]);
     }
 
