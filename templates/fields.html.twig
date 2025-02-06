@@ -1,13 +1,22 @@
 {% block altcha_widget %}
     {% if enable %}
-        {% if not use_stimulus %}
+        <div data-controller="huluti--altcha-bundle--altcha">
+        {% if use_stimulus %}
+            {{ form_widget(form,{
+                attr:{
+                    'data-huluti--altcha-bundle--altcha-target':'input',
+                }
+            }) }}
+            {{ form_errors(form) }}
+        {% else %}
             <script async defer src="https://eu.altcha.org/js/latest/altcha.min.js" type="module"></script>
         {% endif %}
         <altcha-widget
-                data-controller="altcha"
+                data-huluti--altcha-bundle--altcha-target="altcha"
                 data-live-ignore="data-live-ignore"
                 challengeurl="{{ path('huluti_altcha_challenge') }}"
                 {% if floating %}floating{% endif %}
         ></altcha-widget>
+        </div>
     {% endif %}
 {% endblock %}

@@ -5,7 +5,7 @@
   "license": "MIT",
   "symfony": {
     "controllers": {
-      "ace": {
+      "altcha": {
         "main": "controllers/altcha_controller.js",
         "webpackMode": "eager",
         "fetch": "eager",

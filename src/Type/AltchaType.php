@@ -20,11 +20,20 @@ class AltchaType extends AbstractType
     ) {
     }
 
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'mapped' => false,
-            'constraints' => new Altcha(),
+            "required"=>false,
+            "attr"=>[
+                "hidden"=>true
+            ],
+            "constraints"=>[
+                new Altcha([
+                    "message"=>"Altcha is not valid"
+                ])
+            ]
         ]);
     }
 
