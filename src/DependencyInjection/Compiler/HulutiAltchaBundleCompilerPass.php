@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle;
+namespace Huluti\AltchaBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -21,17 +21,19 @@ final class AltchaValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed      $value      The value that should be validated
+     * @param mixed      $altchaEncoded      The value that should be validated
      * @param Constraint $constraint The constraint for the validation
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate($altchaEncoded, Constraint $constraint): void
     {
         if (false === $this->enable) {
             return;
         }
 
-        $request = $this->requestStack->getCurrentRequest();
-        $altchaEncoded = $request->request->get('altcha');
+        if (!$altchaEncoded) {
+            $request = $this->requestStack->getCurrentRequest();
+            $altchaEncoded = $request->request->get('altcha');
+        }
         if (!is_string($altchaEncoded)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();

@@ -17,16 +17,20 @@ class AltchaType extends AbstractType
     public function __construct(
         private readonly bool $enable,
         private readonly bool $floating,
+        private readonly bool $useStimulus,
         private readonly string $jsPath,
         private readonly TranslatorInterface $translator
     ) {
     }
 
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'mapped' => false,
+            "required"=>false,
+            "attr"=>[
+                "hidden"=>true
+            ],
             'constraints' => new Altcha(),
         ]);
     }
@@ -35,6 +39,7 @@ class AltchaType extends AbstractType
     {
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $this->floating;
+        $view->vars['use_stimulus'] = $this->useStimulus;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['strings'] = [
             "ariaLinkLabel" => $this->translator->trans("ariaLinkLabel", [], "altcha"),

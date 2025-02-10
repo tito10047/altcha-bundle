@@ -5,6 +5,7 @@ services:
     arguments:
       $enable: '%huluti_altcha.enable%'
       $floating: '%huluti_altcha.floating%'
+      $useStimulus: '%huluti_altcha.use_stimulus%'
       $jsPath: '%huluti_altcha.js_path%'
       $translator: '@translator'
   altcha.validator:

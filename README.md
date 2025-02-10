@@ -43,6 +43,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'enable' => true,
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => true,
+        'use_stimulus' => false,
     ]);
 
     if ('test' === $containerConfigurator->env()) {
@@ -97,6 +98,25 @@ class ContactType extends AbstractType
         ]);
     }
 }
+```
+
+### Use inside UX Live component
+
+Asset mapper is required to use this package in the UX Live component.
+
+```composer require symfony/asset-mapper```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $containerConfigurator->extension('huluti_altcha', [
+        'enable' => true,
+        'hmacKey' => 'RANDOM_SECRET_KEY',
+        'floating' => false,
+        'use_stimulus' => true,
+    ]);
+};
 ```
 
 ## License
