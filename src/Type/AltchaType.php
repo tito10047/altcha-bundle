@@ -16,13 +16,19 @@ class AltchaType extends AbstractType
     public function __construct(
         private readonly bool $enable,
         private readonly bool $floating,
+        private readonly bool $useStimulus
     ) {
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'mapped' => false,
+            "required"=>false,
+            "attr"=>[
+                "hidden"=>true
+            ],
             'constraints' => new Altcha(),
         ]);
     }
@@ -31,6 +37,7 @@ class AltchaType extends AbstractType
     {
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $this->floating;
+        $view->vars['use_stimulus'] = $this->useStimulus;
     }
 
     public function getBlockPrefix(): string
