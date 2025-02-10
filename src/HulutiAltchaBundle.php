@@ -26,6 +26,7 @@ class HulutiAltchaBundle extends AbstractBundle
             ->children()
                 ->booleanNode('enable')->defaultTrue()->end()
                 ->booleanNode('floating')->defaultFalse()->end()
+            ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()
                 ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()->end()
             ->end()
         ;
@@ -40,6 +41,7 @@ class HulutiAltchaBundle extends AbstractBundle
             ->set('huluti_altcha.enable', $config['enable'])
             ->set('huluti_altcha.floating', $config['floating'])
             ->set('huluti_altcha.hmacKey', $config['hmacKey'])
+            ->set('huluti_altcha.js_path', $config['altcha_js_path'])
         ;
 
         // load an XML, PHP or YAML file

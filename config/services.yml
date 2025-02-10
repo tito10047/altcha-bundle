@@ -5,6 +5,8 @@ services:
     arguments:
       $enable: '%huluti_altcha.enable%'
       $floating: '%huluti_altcha.floating%'
+      $jsPath: '%huluti_altcha.js_path%'
+      $translator: '@translator'
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']
