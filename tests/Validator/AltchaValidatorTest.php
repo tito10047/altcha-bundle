@@ -11,6 +11,7 @@ namespace Huluti\AltchaBundle\Tests\Validator;
 use AltchaOrg\Altcha\Algorithm;
 use AltchaOrg\Altcha\ChallengeOptions;
 use Huluti\AltchaBundle\Validator\Altcha;
+use Symfony\Component\HttpFoundation\InputBag;
 
 class AltchaValidatorTest extends \PHPUnit\Framework\TestCase
 {
@@ -19,8 +20,9 @@ class AltchaValidatorTest extends \PHPUnit\Framework\TestCase
         $requestStack = $this->createMock(\Symfony\Component\HttpFoundation\RequestStack::class);
         $request = $this->createMock(\Symfony\Component\HttpFoundation\Request::class);
         $requestStack->method('getCurrentRequest')->willReturn($request);
-        $request->request = $this->createMock(\Symfony\Component\HttpFoundation\ParameterBag::class);
-        $request->request->method('get')->willReturn(null);
+        $request->request = new InputBag([
+            "altcha" => null
+        ]);
 
         $validator = new \Huluti\AltchaBundle\Validator\AltchaValidator(true, 'key', $requestStack);
         $constraint = new Altcha();
@@ -37,8 +39,9 @@ class AltchaValidatorTest extends \PHPUnit\Framework\TestCase
         $requestStack = $this->createMock(\Symfony\Component\HttpFoundation\RequestStack::class);
         $request = $this->createMock(\Symfony\Component\HttpFoundation\Request::class);
         $requestStack->method('getCurrentRequest')->willReturn($request);
-        $request->request = $this->createMock(\Symfony\Component\HttpFoundation\ParameterBag::class);
-        $request->request->method('get')->willReturn('not base64 encoded');
+        $request->request = new InputBag([
+            "altcha" => 'not base64 encoded'
+        ]);
 
         $validator = new \Huluti\AltchaBundle\Validator\AltchaValidator(true, 'key', $requestStack);
         $constraint = new Altcha();
@@ -56,8 +59,9 @@ class AltchaValidatorTest extends \PHPUnit\Framework\TestCase
         $requestStack = $this->createMock(\Symfony\Component\HttpFoundation\RequestStack::class);
         $request = $this->createMock(\Symfony\Component\HttpFoundation\Request::class);
         $requestStack->method('getCurrentRequest')->willReturn($request);
-        $request->request = $this->createMock(\Symfony\Component\HttpFoundation\ParameterBag::class);
-        $request->request->method('get')->willReturn(base64_encode(json_encode(['solution' => 'not valid'])));
+        $request->request = new InputBag([
+            "altcha" => base64_encode(json_encode(['solution' => 'not valid']))
+        ]);
 
         $validator = new \Huluti\AltchaBundle\Validator\AltchaValidator(true, 'key', $requestStack);
         $constraint = new Altcha();
@@ -85,8 +89,9 @@ class AltchaValidatorTest extends \PHPUnit\Framework\TestCase
         $requestStack = $this->createMock(\Symfony\Component\HttpFoundation\RequestStack::class);
         $request = $this->createMock(\Symfony\Component\HttpFoundation\Request::class);
         $requestStack->method('getCurrentRequest')->willReturn($request);
-        $request->request = $this->createMock(\Symfony\Component\HttpFoundation\ParameterBag::class);
-        $request->request->method('get')->willReturn(base64_encode(json_encode($challenge)));
+        $request->request = new InputBag([
+            "altcha" => base64_encode(json_encode($challenge))
+        ]);
 
         $validator = new \Huluti\AltchaBundle\Validator\AltchaValidator(true, 'test-key', $requestStack);
         $constraint = new Altcha();
