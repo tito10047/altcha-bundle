@@ -115,6 +115,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => false,
         'use_stimulus' => true,
+        'hide_logo' => false
+        'hide_footer' => false,
     ]);
 };
 ```
