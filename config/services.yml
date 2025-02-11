@@ -6,6 +6,8 @@ services:
       $enable: '%huluti_altcha.enable%'
       $floating: '%huluti_altcha.floating%'
       $useStimulus: '%huluti_altcha.use_stimulus%'
+      $hideLogo: '%huluti_altcha.hide_logo%'
+      $hideFooter: '%huluti_altcha.hide_footer%'
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']

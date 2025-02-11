@@ -16,7 +16,9 @@ class AltchaType extends AbstractType
     public function __construct(
         private readonly bool $enable,
         private readonly bool $floating,
-        private readonly bool $useStimulus
+        private readonly bool $useStimulus,
+        private readonly bool $hideLogo,
+        private readonly bool $hideFooter
     ) {
     }
 
@@ -38,6 +40,8 @@ class AltchaType extends AbstractType
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $this->floating;
         $view->vars['use_stimulus'] = $this->useStimulus;
+        $view->vars['hide_logo'] = $this->hideLogo;
+        $view->vars['hide_footer'] = $this->hideFooter;
     }
 
     public function getBlockPrefix(): string
