@@ -23,6 +23,8 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('enable')->defaultTrue()->end()
             ->booleanNode('floating')->defaultFalse()->end()
             ->booleanNode('use_stimulus')->defaultNull()->end()
+            ->booleanNode('hide_logo')->defaultNull()->end()
+            ->booleanNode('hide_footer')->defaultNull()->end()
             ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()
             ->end()
         ->end();
