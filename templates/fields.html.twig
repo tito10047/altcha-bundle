@@ -16,6 +16,8 @@
                 data-live-ignore="data-live-ignore"
                 challengeurl="{{ path('huluti_altcha_challenge') }}"
                 strings='{{ strings|json_encode }}'
+                {% if hide_logo %}hidelogo{% endif %}
+                {% if hide_footer %}hidefooter{% endif %}
                 {% if floating %}floating{% endif %}
         ></altcha-widget>
         </div>

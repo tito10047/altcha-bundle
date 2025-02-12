@@ -44,6 +44,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => true,
         'use_stimulus' => false,
+        'hide_logo' => false,
+        'hide_footer' => false
     ]);
 
     if ('test' === $containerConfigurator->env()) {
@@ -114,7 +116,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'enable' => true,
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => false,
-        'use_stimulus' => true,
+        'use_stimulus' => true
     ]);
 };
 ```
