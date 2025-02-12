@@ -29,6 +29,15 @@ class ConfigurationTest extends TestCase
         $this->assertArrayHasKey('use_stimulus', $config);
         $this->assertNull($config['use_stimulus']);
 
+        $this->assertArrayHasKey('hide_logo', $config);
+        $this->assertFalse($config['hide_logo']);
+
+        $this->assertArrayHasKey('hide_footer', $config);
+        $this->assertFalse($config['hide_footer']);
+
+        $this->assertArrayHasKey('altcha_js_path', $config);
+        $this->assertIsString($config['altcha_js_path']);
+
         $this->assertArrayHasKey('hmacKey', $config);
         $this->assertNotNull($config['hmacKey']);
 
