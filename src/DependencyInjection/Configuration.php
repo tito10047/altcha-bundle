@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('use_stimulus')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultTrue()->end()
             ->booleanNode('hide_footer')->defaultTrue()->end()
+            ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()
             ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()
             ->end()
         ->end();

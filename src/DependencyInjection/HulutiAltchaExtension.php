@@ -39,6 +39,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('huluti_altcha.hmacKey', $config['hmacKey']);
         $container->setParameter('huluti_altcha.hide_logo', $config['hide_logo']);
         $container->setParameter('huluti_altcha.hide_footer', $config['hide_footer']);
+        $container->setParameter('huluti_altcha.js_path', $config['altcha_js_path']);
 
         $useStimulus = $config['use_stimulus'];
         if ($useStimulus === null) {
