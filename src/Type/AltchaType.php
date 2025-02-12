@@ -18,6 +18,8 @@ class AltchaType extends AbstractType
         private readonly bool $enable,
         private readonly bool $floating,
         private readonly bool $useStimulus,
+        private readonly bool $hideLogo,
+        private readonly bool $hideFooter,
         private readonly string $jsPath,
         private readonly TranslatorInterface $translator
     ) {
@@ -40,6 +42,8 @@ class AltchaType extends AbstractType
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $this->floating;
         $view->vars['use_stimulus'] = $this->useStimulus;
+        $view->vars['hide_logo'] = $this->hideLogo;
+        $view->vars['hide_footer'] = $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['strings'] = [
             "ariaLinkLabel" => $this->translator->trans("ariaLinkLabel", [], "altcha"),
