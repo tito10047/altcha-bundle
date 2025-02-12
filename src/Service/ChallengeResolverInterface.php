@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jozef Môstka
- * Date: 11. 2. 2025
- * Time: 19:07
- */
+
+declare(strict_types=1);
 
 namespace Huluti\AltchaBundle\Service;
 
