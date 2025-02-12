@@ -12,7 +12,7 @@ use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\Challenge;
 use AltchaOrg\Altcha\ChallengeOptions;
 
-class ChallengeOptionResolver implements ChallengeOptionResolverInterface
+class ChallengeResolver implements ChallengeResolverInterface
 {
 
     public function __construct(

@@ -10,7 +10,7 @@ namespace Huluti\AltchaBundle\Service;
 
 use AltchaOrg\Altcha\Challenge;
 
-interface ChallengeOptionResolverInterface
+interface ChallengeResolverInterface
 {
     public function getChallenge(): Challenge;
 }

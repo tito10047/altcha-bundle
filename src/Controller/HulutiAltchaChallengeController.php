@@ -6,14 +6,14 @@ namespace Huluti\AltchaBundle\Controller;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
-use Huluti\AltchaBundle\Service\ChallengeOptionResolverInterface;
+use Huluti\AltchaBundle\Service\ChallengeResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HulutiAltchaChallengeController extends AbstractController
 {
-    public function __construct(private readonly ChallengeOptionResolverInterface $challengeOptionResolver)
+    public function __construct(private readonly ChallengeResolverInterface $challengeOptionResolver)
     {
     }
 
