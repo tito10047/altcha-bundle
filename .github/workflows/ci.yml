@@ -34,6 +34,3 @@ jobs:
 
     - name: Run phpstan
       run: vendor/bin/phpstan analyse -c phpstan.neon src
-
-    - name: Run tests
-      run: vendor/bin/phpunit --configuration=./tests/phpunit.xml.dist

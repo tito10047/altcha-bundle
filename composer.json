@@ -36,7 +36,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Huluti\\AltchaBundle\\": "tests/"
+      "Huluti\\AltchaBundle\\Tests\\": "tests/"
     }
   },
   "require-dev": {
@@ -45,6 +45,11 @@
     "rector/rector": "^0.14.5",
     "symfony/asset-mapper": "6.4 || ^7.0",
     "symfony/stimulus-bundle": "^2.16",
-    "phpunit/phpunit": "^9.6"
+    "phpunit/phpunit": "^10.5"
+  },
+  "scripts" : {
+    "test": [
+      "phpunit"
+    ]
   }
 }

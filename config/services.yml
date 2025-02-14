@@ -22,4 +22,9 @@ services:
     autowire: true
     autoconfigure: true
     arguments:
+      $challengeOptionResolver: '@Huluti\AltchaBundle\Service\ChallengeResolverInterface'
+  Huluti\AltchaBundle\Service\ChallengeResolverInterface:
+    class: Huluti\AltchaBundle\Service\ChallengeResolver
+    arguments:
       $hmacKey: '%huluti_altcha.hmacKey%'
+      $expires: '+15 minute'
