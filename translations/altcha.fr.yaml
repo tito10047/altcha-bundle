@@ -1,0 +1,8 @@
+ariaLinkLabel: "Visiter Altcha.org"
+error: "La vérification a échoué. Réessayez plus tard."
+expired: "La vérification a expiré. Réessayez."
+footer: "Protégé par <a href=\"https://altcha.org/\" target=\"_blank\" aria-label=\"Visiter Altcha.org\">ALTCHA</a>"
+label: "Je ne suis pas un robot"
+verified: "Vérifié"
+verifying: "Vérification..."
+waitAlert: "Vérification... veuillez patienter."
