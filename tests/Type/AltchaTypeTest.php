@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Huluti\AltchaBundle\Tests\Type;
 
-use AceEditorBundle\Form\Extension\AceEditor\Type\AceEditorType;
 use Generator;
 use Huluti\AltchaBundle\Type\AltchaType;
 use PHPUnit\Framework\Attributes\DataProvider;
