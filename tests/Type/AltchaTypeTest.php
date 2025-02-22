@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jozef Môstka
- * Date: 22. 2. 2025
- * Time: 18:37
- */
+
+declare(strict_types=1);
 
 namespace Huluti\AltchaBundle\Tests\Type;
 
