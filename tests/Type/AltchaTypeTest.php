@@ -9,6 +9,8 @@ use Huluti\AltchaBundle\Type\AltchaType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -23,7 +25,7 @@ class AltchaTypeTest extends TestCase
         $translator = $this->createMock(TranslatorInterface::class);
         $translator->method('trans')->willReturn('test');
 
-        $this->formType = new AltchaType(
+        $this->altchaType = new AltchaType(
             enable: true,
             floating: true,
             useStimulus: true,
@@ -36,13 +38,13 @@ class AltchaTypeTest extends TestCase
 
     public function testGetParent(): void
     {
-        $this->assertSame(TextType::class, $this->formType->getParent());
+        $this->assertSame(TextType::class, $this->altchaType->getParent());
     }
 
     public function testOptionsWidthHeightUnitNormalizer(): void
     {
         $opts = new OptionsResolver();
-        $this->formType->configureOptions($opts);
+        $this->altchaType->configureOptions($opts);
 
         $resolved = $opts->resolve(['floating' => null, 'hide_logo' => null, 'hide_footer' => null]);
         $this->assertSame( null, $resolved['floating']);
@@ -61,11 +63,40 @@ class AltchaTypeTest extends TestCase
 
     }
 
+    #[DataProvider('goodOptionsProvide')]
+    public function testBuildView(string $option, mixed $value):void
+    {
+        $opts = new OptionsResolver();
+        $this->altchaType->configureOptions($opts);
+        $resolved = $opts->resolve([$option => $value]);
+
+        $formView = $this->createMock(FormView::class);
+        $formInterface = $this->createMock(FormInterface::class);
+        $formView->vars = [];
+        $this->altchaType->buildView($formView, $formInterface, $resolved);
+        $this->assertSame($value, $formView->vars[$option]);
+    }
+
+    #[DataProvider('defaultOptionsProvide')]
+    public function testdefaultOptionsView(string $option, mixed $value):void
+    {
+        $opts = new OptionsResolver();
+        $this->altchaType->configureOptions($opts);
+        $resolved = $opts->resolve([$option => null]);
+
+        $formView = $this->createMock(FormView::class);
+        $formInterface = $this->createMock(FormInterface::class);
+        $formView->vars = [];
+        $this->altchaType->buildView($formView, $formInterface, $resolved);
+        $this->assertSame($value, $formView->vars[$option]);
+    }
+
+
     #[DataProvider('badOptionsProvider')]
     public function testBadOptions(string $option, mixed $value): void
     {
         $opts = new OptionsResolver();
-        $this->formType->configureOptions($opts);
+        $this->altchaType->configureOptions($opts);
 
         $this->expectException(InvalidOptionsException::class);
         $opts->resolve([$option => $value]);
@@ -77,6 +108,21 @@ class AltchaTypeTest extends TestCase
             foreach(["foo",1,1.1,[], new \stdClass()] as $value){
                 yield "bad option {$option} ".json_encode($value)=>[$option, $value];
             }
+        }
+    }
+
+    public static function goodOptionsProvide(): Generator
+    {
+        foreach(["floating", "hide_logo", "hide_footer"] as $option){
+            foreach([true, false] as $value){
+                yield "good option {$option} ".json_encode($value)=>[$option, $value];
+            }
+        }
+    }
+    public static function defaultOptionsProvide(): Generator
+    {
+        foreach(["floating"=>true, "hide_logo"=>true, "hide_footer"=>true] as $option=>$value){
+                yield "good option {$option} ".json_encode($value)=>[$option, $value];
         }
     }
 }
