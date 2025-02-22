@@ -41,34 +41,14 @@ class AltchaTypeTest extends TestCase
         $this->assertSame(TextType::class, $this->altchaType->getParent());
     }
 
-    public function testOptionsWidthHeightUnitNormalizer(): void
-    {
-        $opts = new OptionsResolver();
-        $this->altchaType->configureOptions($opts);
-
-        $resolved = $opts->resolve(['floating' => null, 'hide_logo' => null, 'hide_footer' => null]);
-        $this->assertSame( null, $resolved['floating']);
-        $this->assertSame( null, $resolved['hide_logo']);
-        $this->assertSame(null, $resolved['hide_footer']);
-
-        $resolved = $opts->resolve(['floating' => true, 'hide_logo' => true, 'hide_footer' => true]);
-        $this->assertSame(true, $resolved['floating']);
-        $this->assertSame( true, $resolved['hide_logo']);
-        $this->assertSame( true, $resolved['hide_footer']);
-
-        $resolved = $opts->resolve(['floating' => false, 'hide_logo' => false, 'hide_footer' => false]);
-        $this->assertSame( false, $resolved['floating']);
-        $this->assertSame( false, $resolved['hide_logo']);
-        $this->assertSame( false, $resolved['hide_footer']);
-
-    }
-
     #[DataProvider('goodOptionsProvide')]
     public function testBuildView(string $option, mixed $value):void
     {
         $opts = new OptionsResolver();
         $this->altchaType->configureOptions($opts);
         $resolved = $opts->resolve([$option => $value]);
+
+        $this->assertSame($value, $resolved[$option]);
 
         $formView = $this->createMock(FormView::class);
         $formInterface = $this->createMock(FormInterface::class);
