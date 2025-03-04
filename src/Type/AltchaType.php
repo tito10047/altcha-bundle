@@ -30,20 +30,27 @@ class AltchaType extends AbstractType
         $resolver->setDefaults([
             'mapped' => false,
             "required"=>false,
+            "floating"=>null,
+            "hide_logo"=>null,
+            "hide_footer"=>null,
             "attr"=>[
                 "hidden"=>true
             ],
             'constraints' => new Altcha(),
         ]);
+
+        $resolver->setAllowedTypes('floating', ['null', 'bool']);
+        $resolver->setAllowedTypes('hide_logo', ['null', 'bool']);
+        $resolver->setAllowedTypes('hide_footer', ['null', 'bool']);
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['enable'] = $this->enable;
-        $view->vars['floating'] = $this->floating;
+        $view->vars['floating'] = $options['floating'] ?? $this->floating;
         $view->vars['use_stimulus'] = $this->useStimulus;
-        $view->vars['hide_logo'] = $this->hideLogo;
-        $view->vars['hide_footer'] = $this->hideFooter;
+        $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
+        $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['strings'] = [
             "ariaLinkLabel" => $this->translator->trans("ariaLinkLabel", [], "altcha"),
