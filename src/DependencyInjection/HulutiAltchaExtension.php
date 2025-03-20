@@ -9,7 +9,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\UX\StimulusBundle\StimulusBundle;
 
 class HulutiAltchaExtension extends Extension implements PrependExtensionInterface
@@ -54,7 +54,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
     /**
      * @see https://symfony.com/doc/current/frontend/create_ux_bundle.html
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         if ($this->isAssetMapperAvailable($container)) {
             $container->prependExtensionConfig('framework', [
