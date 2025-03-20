@@ -21,7 +21,7 @@ class AltchaType extends AbstractType
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
         private readonly string $jsPath,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -29,12 +29,12 @@ class AltchaType extends AbstractType
     {
         $resolver->setDefaults([
             'mapped' => false,
-            "required"=>false,
-            "floating"=>null,
-            "hide_logo"=>null,
-            "hide_footer"=>null,
-            "attr"=>[
-                "hidden"=>true
+            'required' => false,
+            'floating' => null,
+            'hide_logo' => null,
+            'hide_footer' => null,
+            'attr' => [
+                'hidden' => true,
             ],
             'constraints' => new Altcha(),
         ]);
@@ -53,14 +53,14 @@ class AltchaType extends AbstractType
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['strings'] = [
-            "ariaLinkLabel" => $this->translator->trans("ariaLinkLabel", [], "altcha"),
-            "error" => $this->translator->trans("error", [], "altcha"),
-            "expired" => $this->translator->trans("expired", [], "altcha"),
-            "footer" => $this->translator->trans("footer", [], "altcha"),
-            "label" => $this->translator->trans("label", [], "altcha"),
-            "verified" => $this->translator->trans("verified", [], "altcha"),
-            "verifying" => $this->translator->trans("verifying", [], "altcha"),
-            "waitAlert" => $this->translator->trans("waitAlert", [], "altcha"),
+            'ariaLinkLabel' => $this->translator->trans('ariaLinkLabel', [], 'altcha'),
+            'error' => $this->translator->trans('error', [], 'altcha'),
+            'expired' => $this->translator->trans('expired', [], 'altcha'),
+            'footer' => $this->translator->trans('footer', [], 'altcha'),
+            'label' => $this->translator->trans('label', [], 'altcha'),
+            'verified' => $this->translator->trans('verified', [], 'altcha'),
+            'verifying' => $this->translator->trans('verifying', [], 'altcha'),
+            'waitAlert' => $this->translator->trans('waitAlert', [], 'altcha'),
         ];
     }
 

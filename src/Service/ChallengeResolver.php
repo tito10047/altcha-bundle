@@ -10,12 +10,10 @@ use AltchaOrg\Altcha\ChallengeOptions;
 
 class ChallengeResolver implements ChallengeResolverInterface
 {
-
     public function __construct(
         private readonly string $hmacKey,
         private readonly string $expires,
-    )
-    {
+    ) {
     }
 
     public function getChallenge(): Challenge
@@ -25,6 +23,7 @@ class ChallengeResolver implements ChallengeResolverInterface
             'maxNumber' => 100000,
             'expires' => (new \DateTime())->modify($this->expires),
         ]);
+
         return Altcha::createChallenge($options);
     }
 }

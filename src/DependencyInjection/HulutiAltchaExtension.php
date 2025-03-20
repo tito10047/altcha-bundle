@@ -7,9 +7,9 @@ namespace Huluti\AltchaBundle\DependencyInjection;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\UX\StimulusBundle\StimulusBundle;
 
 class HulutiAltchaExtension extends Extension implements PrependExtensionInterface
@@ -17,14 +17,12 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         $this->registerAceEditorParameters($config, $container);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yml');
-
-
     }
 
     /**
@@ -42,7 +40,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('huluti_altcha.js_path', $config['altcha_js_path']);
 
         $useStimulus = $config['use_stimulus'];
-        if ($useStimulus === null) {
+        if (null === $useStimulus) {
             $bundles = $container->getParameter('kernel.bundles');
             assert(is_array($bundles));
             $useStimulus = in_array(StimulusBundle::class, $bundles, true) && interface_exists(AssetMapperInterface::class);
@@ -60,7 +58,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        __DIR__ . '/../../assets/controllers' => 'huluti/altcha-bundle',
+                        __DIR__.'/../../assets/controllers' => 'huluti/altcha-bundle',
                     ],
                 ],
             ]);
@@ -79,6 +77,6 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
             return false;
         }
 
-        return is_file($bundlesMetadata['FrameworkBundle']['path'] . '/Resources/config/asset_mapper.php');
+        return is_file($bundlesMetadata['FrameworkBundle']['path'].'/Resources/config/asset_mapper.php');
     }
 }
