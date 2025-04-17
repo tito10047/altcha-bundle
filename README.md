@@ -35,9 +35,9 @@ Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
 
 Add a config file:
 
-`config/packages/huluti_altcha.yaml`
-
 ### YML
+
+`config/packages/huluti_altcha.yaml`
 
 ```yml
 huluti_altcha:
