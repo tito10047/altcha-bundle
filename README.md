@@ -37,7 +37,7 @@ huluti_altcha:
     type: yaml
 ```
 
-### PHP
+### PHP
 
 ```php
 Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
@@ -94,6 +94,27 @@ Import bundle routes:
 ```php
 $routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
 ```
+
+⚠️ **Important – Security Configuration**
+
+If your application restricts access globally using a rule like:
+
+```yaml
+access_control:
+    - { path: ^/, roles: ROLE_USER }
+```
+
+Then the Altcha challenge endpoint (`/huluti_altcha/challenge`) will also be protected by default.
+
+To allow it to be publicly accessible (as intended for the challenge mechanism to work), **you must explicitly add the following rule before the global one**:
+
+```yaml
+access_control:
+    - { path: ^/huluti_altcha/challenge, roles: PUBLIC_ACCESS }
+    - { path: ^/, roles: ROLE_USER }
+```
+
+This ensures that the challenge endpoint is reachable by unauthenticated users, while keeping the rest of your app secure.
 
 ### Use with your Symfony Form
 
