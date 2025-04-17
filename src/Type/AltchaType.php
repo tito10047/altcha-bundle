@@ -37,6 +37,7 @@ class AltchaType extends AbstractType
                 'hidden' => true,
             ],
             'constraints' => new Altcha(),
+            'label' => false,
         ]);
 
         $resolver->setAllowedTypes('floating', ['null', 'bool']);
