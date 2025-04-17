@@ -29,16 +29,6 @@ composer require huluti/altcha-bundle
 
 Add bundle into config/bundles.php file:
 
-### YML
-
-```yml
-huluti_altcha:
-    resource: '@HulutiAltchaBundle/config/routes.yml'
-    type: yaml
-```
-
-### PHP
-
 ```php
 Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
 ```
@@ -90,6 +80,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 ```
 
 Import bundle routes:
+
+### YML
+
+```yml
+huluti_altcha:
+    resource: '@HulutiAltchaBundle/config/routes.yml'
+    type: yaml
+```
+
+### PHP
 
 ```php
 $routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
