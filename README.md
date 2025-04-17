@@ -27,13 +27,35 @@ You can install the package via Composer:
 composer require huluti/altcha-bundle
 ```
 
-Add bundle into config/bundles.php file :
+Add bundle into config/bundles.php file:
 
 ```php
 Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
 ```
 
-Add a config file `config/packages/huluti_altcha.php`: 
+Add a config file:
+
+`config/packages/huluti_altcha.yaml`
+
+### YML
+
+```yml
+huluti_altcha:
+    enable: true
+    hmacKey: 'RANDOM_SECRET_KEY'
+    floating: true
+    use_stimulus: false
+    hide_logo: false
+    hide_footer: false
+
+when@test:
+    huluti_altcha:
+        enable: false
+```
+
+### PHP
+
+`config/packages/huluti_altcha.php`: 
 
 ```php
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
