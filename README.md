@@ -143,9 +143,9 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, ['label' => false, 'attr' => ['placeholder' => 'message']])
             ->add('security', AltchaType::class, [
                 'label' => false,
-                "floating" => true,
-                "hide_logo" => false,
-                "hide_footer" => false,
+                'floating' => true,
+                'hide_logo' => false,
+                'hide_footer' => false,
             ])
             ->add('submit', SubmitType::class)
         ;
