@@ -9,14 +9,12 @@
         "main": "controllers/altcha_controller.js",
         "webpackMode": "eager",
         "fetch": "eager",
-        "enabled": true,
-        "autoimport": {
-          "altcha/dist/altcha.js": true
-        }
+        "enabled": true
       }
     },
     "importmap": {
-      "@hotwired/stimulus": "^3.0.0"
+      "@hotwired/stimulus": "^3.0.0",
+      "altcha/dist/altcha.js": "^1.2.0"
     }
   },
   "peerDependencies": {
