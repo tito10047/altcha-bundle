@@ -89,7 +89,7 @@ huluti_altcha:
     type: yaml
 ```
 
-### PHP
+### PHP
 
 ```php
 $routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
