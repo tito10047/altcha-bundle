@@ -129,23 +129,17 @@ class ContactType extends AbstractType
 }
 ```
 
-### Use inside UX Live component
+### Use inside UX Live component or with Stimulus
 
-Asset mapper is required to use this package in the UX Live component.
+Asset mapper is required to use this package in the UX Live component or Stimulus.
 
 ```composer require symfony/asset-mapper```
 
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+There is only one option need to be changed to work with Stimulus or UX Live component.
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('huluti_altcha', [
-        'enable' => true,
-        'hmacKey' => 'RANDOM_SECRET_KEY',
-        'floating' => false,
-        'use_stimulus' => true
-    ]);
-};
+```yml
+huluti_altcha:
+    floating: false
 ```
 
 ## License
