@@ -4,6 +4,7 @@ A simple package to help integrate ALTCHA on Symfony Form.
 ![Packagist Version](https://img.shields.io/packagist/v/huluti/altcha-bundle)
 ![Packagist License](https://img.shields.io/packagist/l/huluti/altcha-bundle)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/huluti/altcha-bundle)
+[![Tests](https://github.com/Huluti/altcha-bundle/actions/workflows/tests.yml/badge.svg)](https://github.com/Huluti/altcha-bundle/actions/workflows/tests.yml)
 
 This packages integrates [ALTCHA](https://altcha.org/), a privacy-friendly Captcha alternative, with Symfony forms.
 Simply add an `AltchaType` field to your form and this package will automatically check the challenge issue. 
