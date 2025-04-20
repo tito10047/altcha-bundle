@@ -14,21 +14,23 @@ jobs:
 
     strategy:
       matrix:
-        dependencies:
-          - "lowest"
-          - "highest"
         php-version:
           - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
+        symfony:
+          - '6.4.*'
+          - '7.0.*'
+          - '7.1.*'
+          - '7.2.*'
         operating-system:
           - "ubuntu-latest"
           - "windows-latest"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3"
+        uses: actions/checkout@v4
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -36,6 +38,9 @@ jobs:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
+
+      - name: Configure Symfony
+        run: composer config extra.symfony.require "${{ matrix.symfony }}"
 
       - name: "Cache dependencies"
         uses: "actions/cache@v3"
@@ -46,17 +51,8 @@ jobs:
           key: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
           restore-keys: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
 
-      - name: "Install lowest dependencies"
-        if: ${{ matrix.dependencies == 'lowest' }}
-        run: "composer update --prefer-lowest --no-interaction --no-progress --no-suggest"
-
       - name: "Install highest dependencies"
-        if: ${{ matrix.dependencies == 'highest' }}
         run: "composer update --no-interaction --no-progress --no-suggest"
-
-      - name: "Install locked dependencies"
-        if: ${{ matrix.dependencies == 'locked' }}
-        run: "composer install --no-interaction --no-progress --no-suggest"
 
       - name: "Tests"
         run: "composer test"
