@@ -16,14 +16,12 @@ class HulutiAltchaChallengeControllerTest extends KernelTestCase
 
     public function testChallenge()
     {
-
-        $challengeOptions = new ChallengeOptions([
-            'hmacKey' => 'test-key',
-            'maxNumber' => 100000,
-            'number' => 10,
-            'expires' => (new \DateTime())->modify("+1 day"),
-        ]);
-        $challenge = Altcha::createChallenge($challengeOptions);
+        $challengeOptions = new ChallengeOptions(
+            maxNumber: 100000,
+            expires: (new \DateTime())->modify("+1 day"),
+        );
+        $altcha = new Altcha('test-key');
+        $challenge = $altcha->createChallenge($challengeOptions);
 
         $challengeResolver = $this->createMock(ChallengeResolverInterface::class);
         $challengeResolver->method('getChallenge')->willReturn($challenge);
@@ -36,9 +34,9 @@ class HulutiAltchaChallengeControllerTest extends KernelTestCase
 
         $payload = json_decode($response->getContent(), true);
 
-        $payload['number'] = 10;
+        $payload['number'] = $challengeOptions->number;
 
-        $isValid = Altcha::verifySolution($payload, 'test-key');
+        $isValid = $altcha->verifySolution($payload);
 
         $this->assertTrue($isValid);
     }

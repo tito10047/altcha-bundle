@@ -28,7 +28,7 @@
     "symfony/validator": "^6.4|^7.0",
     "symfony/twig-bundle": "^6.4|^7.0",
     "symfony/translation": "^6.4|^7.0",
-    "altcha-org/altcha": "^0.1"
+    "altcha-org/altcha": "^1.1.2"
   },
   "autoload": {
     "psr-4": {
