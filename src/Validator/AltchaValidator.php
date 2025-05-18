@@ -21,7 +21,7 @@ final class AltchaValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed      $altchaEncoded The value that should be validated
+     * @param mixed      $value         The value that should be validated
      * @param Constraint $constraint    The constraint for the validation
      */
     public function validate(mixed $value, Constraint $constraint): void
