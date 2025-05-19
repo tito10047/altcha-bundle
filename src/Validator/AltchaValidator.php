@@ -21,26 +21,28 @@ final class AltchaValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param mixed      $altchaEncoded The value that should be validated
+     * @param mixed      $value         The value that should be validated
      * @param Constraint $constraint    The constraint for the validation
      */
-    public function validate($altchaEncoded, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (false === $this->enable) {
             return;
         }
 
-        if (!$altchaEncoded) {
+        if (!$value) {
             $request = $this->requestStack->getCurrentRequest();
-            $altchaEncoded = $request->request->get('altcha');
+            $value = $request?->request->get('altcha');
         }
-        if (!is_string($altchaEncoded)) {
+
+        if (!is_string($value)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
 
             return;
         }
-        $altchaJson = base64_decode($altchaEncoded, true);
+
+        $altchaJson = base64_decode($value, true);
         if (!is_string($altchaJson)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
@@ -49,7 +51,7 @@ final class AltchaValidator extends ConstraintValidator
         }
         $payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
 
-        if (!Altcha::verifySolution($payload, $this->hmacKey, true)) {
+        if (!(new Altcha($this->hmacKey))->verifySolution($payload, true)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
         }

@@ -18,12 +18,11 @@ class ChallengeResolver implements ChallengeResolverInterface
 
     public function getChallenge(): Challenge
     {
-        $options = new ChallengeOptions([
-            'hmacKey' => $this->hmacKey,
-            'maxNumber' => 100000,
-            'expires' => (new \DateTime())->modify($this->expires),
-        ]);
+        $options = new ChallengeOptions(
+            maxNumber: 100000,
+            expires: (new \DateTime())->modify($this->expires),
+        );
 
-        return Altcha::createChallenge($options);
+        return (new Altcha($this->hmacKey))->createChallenge($options);
     }
 }
