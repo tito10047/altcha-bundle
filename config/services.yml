@@ -6,6 +6,7 @@ services:
       $enable: '%huluti_altcha.enable%'
       $floating: '%huluti_altcha.floating%'
       $useStimulus: '%huluti_altcha.use_stimulus%'
+      $useAssetMapper: '%huluti_altcha.use_asset_mapper%'
       $hideLogo: '%huluti_altcha.hide_logo%'
       $hideFooter: '%huluti_altcha.hide_footer%'
       $jsPath: '%huluti_altcha.js_path%'
