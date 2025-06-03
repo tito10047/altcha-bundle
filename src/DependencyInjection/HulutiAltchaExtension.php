@@ -39,11 +39,14 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('huluti_altcha.hide_footer', $config['hide_footer']);
         $container->setParameter('huluti_altcha.js_path', $config['altcha_js_path']);
 
+        $assetMapperInstalled = interface_exists(AssetMapperInterface::class);
+        $container->setParameter('huluti_altcha.use_asset_mapper', $assetMapperInstalled);
+
         $useStimulus = $config['use_stimulus'];
         if (null === $useStimulus) {
             $bundles = $container->getParameter('kernel.bundles');
             assert(is_array($bundles));
-            $useStimulus = in_array(StimulusBundle::class, $bundles, true) && interface_exists(AssetMapperInterface::class);
+            $useStimulus = in_array(StimulusBundle::class, $bundles, true) && $assetMapperInstalled;
         }
 
         $container->setParameter('huluti_altcha.use_stimulus', $useStimulus);

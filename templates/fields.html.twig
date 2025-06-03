@@ -8,7 +8,8 @@
                 }
             }) }}
             {{ form_errors(form) }}
-        {% else %}
+        {% endif %}
+        {% if not use_asset_mapper %}
             <script async defer src="{{ js_path }}" type="module"></script>
         {% endif %}
         <altcha-widget

@@ -29,6 +29,9 @@ class ConfigurationTest extends TestCase
         $this->assertArrayHasKey('use_stimulus', $config);
         $this->assertNull($config['use_stimulus']);
 
+        $this->assertArrayHasKey('use_asset_mapper', $config);
+        $this->assertNull($config['use_asset_mapper']);
+
         $this->assertArrayHasKey('hide_logo', $config);
         $this->assertFalse($config['hide_logo']);
 
@@ -40,6 +43,5 @@ class ConfigurationTest extends TestCase
 
         $this->assertArrayHasKey('hmacKey', $config);
         $this->assertNotNull($config['hmacKey']);
-
     }
 }

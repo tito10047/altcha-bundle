@@ -29,6 +29,7 @@ class AltchaTypeTest extends TestCase
             enable: true,
             floating: true,
             useStimulus: true,
+            useAssetMapper: false,
             hideLogo: true,
             hideFooter: true,
             jsPath: "test",
