@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AltchaTypeTest extends TestCase
 {
@@ -22,9 +21,6 @@ class AltchaTypeTest extends TestCase
 
     public function setUp(): void
     {
-        $translator = $this->createMock(TranslatorInterface::class);
-        $translator->method('trans')->willReturn('test');
-
         $this->altchaType = new AltchaType(
             enable: true,
             floating: true,
@@ -33,7 +29,6 @@ class AltchaTypeTest extends TestCase
             hideLogo: true,
             hideFooter: true,
             jsPath: "test",
-            translator: $translator
         );
     }
 

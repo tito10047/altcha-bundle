@@ -4,3 +4,6 @@ init:
 
 format:
 	PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+
+analyse:
+	vendor/bin/phpstan analyse -c phpstan.neon src
