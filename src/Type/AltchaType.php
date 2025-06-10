@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AltchaType extends AbstractType
 {
@@ -22,7 +21,6 @@ class AltchaType extends AbstractType
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
         private readonly string $jsPath,
-        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -55,16 +53,6 @@ class AltchaType extends AbstractType
         $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
-        $view->vars['strings'] = [
-            'ariaLinkLabel' => $this->translator->trans('ariaLinkLabel', [], 'altcha'),
-            'error' => $this->translator->trans('error', [], 'altcha'),
-            'expired' => $this->translator->trans('expired', [], 'altcha'),
-            'footer' => $this->translator->trans('footer', [], 'altcha'),
-            'label' => $this->translator->trans('label', [], 'altcha'),
-            'verified' => $this->translator->trans('verified', [], 'altcha'),
-            'verifying' => $this->translator->trans('verifying', [], 'altcha'),
-            'waitAlert' => $this->translator->trans('waitAlert', [], 'altcha'),
-        ];
     }
 
     public function getBlockPrefix(): string
