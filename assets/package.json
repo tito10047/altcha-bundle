@@ -14,7 +14,7 @@
     },
     "importmap": {
       "@hotwired/stimulus": "^3.0.0",
-      "altcha": "^2.0.0"
+      "altcha/dist/altcha.js": "^2.0.0"
     }
   },
   "peerDependencies": {
