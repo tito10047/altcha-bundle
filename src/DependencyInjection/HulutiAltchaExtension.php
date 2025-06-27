@@ -23,6 +23,9 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yml');
+        if ($container->getParameter('huluti_altcha.use_sentinel')) {
+            $loader->load('services_sentinel.yml');
+        }
     }
 
     /**
@@ -50,6 +53,28 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         }
 
         $container->setParameter('huluti_altcha.use_stimulus', $useStimulus);
+        /**
+         * @var array{'enabled': bool, 'base_url': string, 'api_key': string} $sentinelConfig
+         */
+        $sentinelConfig = $config['sentinel'];
+        if ($useSentinel = $sentinelConfig['enabled']) {
+            $container->setParameter('huluti_altcha.sentinel.base_url', $sentinelConfig['base_url']);
+            $container->setParameter('huluti_altcha.sentinel.api_key', $sentinelConfig['api_key']);
+            /** @see https://altcha.org/docs/v2/widget-integration/ */
+            $container->setParameter('huluti_altcha.sentinel.challenge_url', sprintf(
+                '%s/v1/challenge?apiKey=%s',
+                $sentinelConfig['base_url'],
+                $sentinelConfig['api_key']
+            ));
+            /** @see https://altcha.org/docs/v2/server-integration/ */
+            $container->setParameter('huluti_altcha.sentinel.verify_signature_url', sprintf(
+                '%s/v1/verify/signature',
+                $sentinelConfig['base_url']
+            ));
+        } else {
+            $container->setParameter('huluti_altcha.sentinel.challenge_url', null);
+        }
+        $container->setParameter('huluti_altcha.use_sentinel', $useSentinel);
     }
 
     /**

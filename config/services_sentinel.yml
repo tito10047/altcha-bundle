@@ -1,0 +1,12 @@
+services:
+  altcha.sentinel.validator:
+    class: Huluti\AltchaBundle\Validator\AltchaSentinelValidator
+    tags: ['validator.constraint_validator']
+    arguments:
+      $enable: '%huluti_altcha.enable%'
+      $apiKey: '%huluti_altcha.sentinel.api_key%'
+      $verifySignatureUrl: '%huluti_altcha.sentinel.verify_signature_url%'
+      $httpClient: '@Symfony\Contracts\HttpClient\HttpClientInterface'
+      $requestStack: '@request_stack'
+    calls:
+      - setLogger: ['@?logger']

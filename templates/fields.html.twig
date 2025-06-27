@@ -15,7 +15,11 @@
         <altcha-widget
                 data-huluti--altcha-bundle--altcha-target="altcha"
                 data-live-ignore="data-live-ignore"
-                challengeurl="{{ path('huluti_altcha_challenge') }}"
+                {% if use_sentinel %}
+                    challengeurl="{{ challenge_url }}"
+                {% else %}
+                    challengeurl="{{ path('huluti_altcha_challenge') }}"
+                {% endif %}
                 {% if hide_logo %}hidelogo{% endif %}
                 {% if hide_footer %}hidefooter{% endif %}
                 {% if floating %}floating{% endif %}

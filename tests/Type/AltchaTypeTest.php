@@ -29,6 +29,8 @@ class AltchaTypeTest extends TestCase
             hideLogo: true,
             hideFooter: true,
             jsPath: "test",
+            useSentinel: false,
+            challengeUrl: '',
         );
     }
 
