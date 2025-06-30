@@ -7,6 +7,11 @@
          colors="true"
          bootstrap="vendor/autoload.php"
 >
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
     <testsuites>
         <testsuite name="Ace Bundle Test Suite">
             <directory>tests</directory>
