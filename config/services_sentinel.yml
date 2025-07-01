@@ -8,5 +8,6 @@ services:
       $verifySignatureUrl: '%huluti_altcha.sentinel.verify_signature_url%'
       $httpClient: '@Symfony\Contracts\HttpClient\HttpClientInterface'
       $requestStack: '@request_stack'
+      $hmacKey: '%huluti_altcha.hmacKey%'
     calls:
       - setLogger: ['@?logger']

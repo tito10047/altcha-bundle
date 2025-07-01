@@ -25,6 +25,7 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
         private readonly string $verifySignatureUrl,
         private readonly HttpClientInterface $httpClient,
         private readonly RequestStack $requestStack,
+        private readonly string $hmacKey,
     ) {
     }
 
@@ -51,11 +52,10 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
         }
 
         if (!is_string($value)) {
-            /**
-             * If the client did not sent any payload, it may be due to server beeing
-             * not available, we will verify that while calling it.
-             */
-            $value = '';
+            $this->context->buildViolation($constraint->message)
+                ->addviolation();
+
+            return;
         }
 
         $response = $this->httpClient->request('POST', $this->verifySignatureUrl, [
@@ -63,26 +63,29 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
         ]);
         try {
             $responseContent = $response->toArray();
-        // we consider that when the server fails to deliver a verification, we let the user continue.
-        } catch (TransportExceptionInterface|DecodingExceptionInterface $e) {
+        } catch (TransportExceptionInterface|DecodingExceptionInterface|HttpExceptionInterface $e) {
             if ($this->logger) {
                 $this->logger->error(sprintf(
-                    'Encountered a %s exception while querying %s endpoint: details: "%s", we let the user continue.',
+                    'Encountered a %s exception while querying %s endpoint: details: "%s", will use local validation instead.',
                     get_class($e),
                     $this->verifySignatureUrl,
                     $e->getMessage()
                 ));
             }
-            return;
-        } catch (HttpExceptionInterface $e) {
-            if ($this->logger) {
-                $this->logger->error(sprintf(
-                    'Encountered a %s exception while querying %s endpoint: details: "%s", we let the user continue.',
-                    get_class($e),
-                    $this->verifySignatureUrl,
-                    $e->getMessage()
-                ));
+
+            $altchaJson = base64_decode($value, true);
+            if (!is_string($altchaJson)) {
+                $this->context->buildViolation($constraint->message)
+                    ->addviolation();
+
+                return;
             }
+            $payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
+            if (!(new Altcha($this->hmacKey))->verifySolution($payload, true)) {
+                $this->context->buildViolation($constraint->message)
+                    ->addviolation();
+            }
+
             return;
         }
 
