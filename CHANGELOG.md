@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.7.0] - 2025-07-01
+- bugfix: widget block is not responsible of displaying form errors
 - Support Altcha Sentinel
 
 ## [1.6.3] - 2025-06-10
