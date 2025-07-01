@@ -174,6 +174,22 @@ huluti_altcha:
     floating: false
 ```
 
+### Optional: usage with Sentinel
+
+Configure the package by providing your sentinel instance endpoint and your API key:
+
+```yml
+huluti_altcha:
+    sentinel:
+        base_url: 'http://localhost:8080'
+        api_key: 'key_xxxxxxxxxxxx'
+```
+
+Activating this configuration will have the effect to disable the usage of local verification, meaning that `hmacKey` won't be used at all
+and you do not have to register the bundle routes or update your security rules.
+
+If the sentinel instance is not reachable while we verify the payload at server side, the form won't be blocked and the user can continue.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.

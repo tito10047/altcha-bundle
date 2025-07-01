@@ -10,6 +10,8 @@ services:
       $hideLogo: '%huluti_altcha.hide_logo%'
       $hideFooter: '%huluti_altcha.hide_footer%'
       $jsPath: '%huluti_altcha.js_path%'
+      $useSentinel: '%huluti_altcha.use_sentinel%'
+      $challengeUrl: '%huluti_altcha.sentinel.challenge_url%'
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']

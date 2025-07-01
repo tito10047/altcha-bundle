@@ -27,7 +27,23 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
             ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()
-            ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()
+            ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()->end()
+            ->arrayNode('sentinel')->info(<<<TXT
+               Enable usage of sentinel, if enabled:
+                   - the widget will use the /v1/challenge endpoint to retrieve a new challenge instead of your app;
+                   - the challenge resolution will be validated againt /v1/verify/signature endpoint that ensure protection againt replay attacks;
+                   - the hmacKey provided in configuration is not used anymore.
+               More information available at https://altcha.org/docs/v2/server-integration/
+            TXT)
+                ->canBeEnabled()
+                ->children()
+                     ->scalarNode('base_url')->isRequired()->cannotBeEmpty()
+                          ->info('Your sentinel instance url, eg: https://sentinel.example.com')
+                          ->end()
+                     ->scalarNode('api_key')->isRequired()->cannotBeEmpty()
+                         ->info('Your sentinel client api key')
+                         ->end()
+                ->end()
             ->end()
         ->end();
 

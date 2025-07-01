@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AltchaTypeTest extends TestCase
 {
 
-    private AltchaType $altchaType;
+    protected AltchaType $altchaType;
 
     public function setUp(): void
     {
@@ -29,6 +29,8 @@ class AltchaTypeTest extends TestCase
             hideLogo: true,
             hideFooter: true,
             jsPath: "test",
+            useSentinel: false,
+            challengeUrl: '',
         );
     }
 
