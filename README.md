@@ -185,10 +185,8 @@ huluti_altcha:
         api_key: 'key_xxxxxxxxxxxx'
 ```
 
-Activating this configuration will have the effect to disable the usage of local verification, meaning that `hmacKey` won't be used at all
-and you do not have to register the bundle routes or update your security rules.
-
-If the sentinel instance is not reachable while we verify the payload at server side, the form won't be blocked and the user can continue.
+Activating this configuration will have the effect to use the sentinel server to generate a new challenge and for it's verification. 
+If the sentinel instance is not reachable by the client or by the server, we will fallback on our local configuration.
 
 ## License
 

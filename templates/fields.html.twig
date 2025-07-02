@@ -22,7 +22,19 @@
                 {% if hide_logo %}hidelogo{% endif %}
                 {% if hide_footer %}hidefooter{% endif %}
                 {% if floating %}floating{% endif %}
+                {% if use_sentinel %}customfetch=altchaChallengeFetchWithFallback{% endif %}
         ></altcha-widget>
         </div>
+    {% endif %}
+    {% if use_sentinel %}
+    <script>
+        async function altchaChallengeFetchWithFallback(url) {
+            try {
+                return await fetch(url);
+            } catch (e) {
+                return await fetch("{{ path('huluti_altcha_challenge') }}");
+            }
+          };
+    </script>
     {% endif %}
 {% endblock %}
