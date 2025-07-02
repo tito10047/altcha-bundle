@@ -60,13 +60,13 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         if ($useSentinel = $sentinelConfig['enabled']) {
             $container->setParameter('huluti_altcha.sentinel.base_url', $sentinelConfig['base_url']);
             $container->setParameter('huluti_altcha.sentinel.api_key', $sentinelConfig['api_key']);
-            /** @see https://altcha.org/docs/v2/widget-integration/ */
+            /* @see https://altcha.org/docs/v2/widget-integration/ */
             $container->setParameter('huluti_altcha.sentinel.challenge_url', sprintf(
                 '%s/v1/challenge?apiKey=%s',
                 $sentinelConfig['base_url'],
                 $sentinelConfig['api_key']
             ));
-            /** @see https://altcha.org/docs/v2/server-integration/ */
+            /* @see https://altcha.org/docs/v2/server-integration/ */
             $container->setParameter('huluti_altcha.sentinel.verify_signature_url', sprintf(
                 '%s/v1/verify/signature',
                 $sentinelConfig['base_url']

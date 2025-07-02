@@ -23,7 +23,7 @@ class AltchaType extends AbstractType
         private readonly bool $hideFooter,
         private readonly string $jsPath,
         private readonly bool $useSentinel,
-        private readonly ?string $challengeUrl = null
+        private readonly ?string $challengeUrl = null,
     ) {
     }
 
