@@ -49,7 +49,13 @@ final class AltchaValidator extends ConstraintValidator
 
             return;
         }
-        $payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
+		try {
+			$payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
+		}catch (\JsonException $e) {
+			$this->context->buildViolation($constraint->message)
+				->addviolation();
+			return;
+		}
 
         if (!(new Altcha($this->hmacKey))->verifySolution($payload, true)) {
             $this->context->buildViolation($constraint->message)
