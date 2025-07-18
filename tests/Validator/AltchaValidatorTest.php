@@ -50,9 +50,9 @@ class AltchaValidatorTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 
-        $this->expectException(JsonException::class);
-
         $validator->validate(null, $constraint);
+		$context->expects($this->once())->method('buildViolation')
+			->with($constraint->message);
 
     }
 
