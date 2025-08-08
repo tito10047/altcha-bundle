@@ -20,7 +20,7 @@ class AltchaTypeWithSentinelTest extends AltchaTypeTest
             hideLogo: true,
             hideFooter: true,
             jsPath: "test",
-			l18nPath: "test",
+			i18nPath: "test",
             useSentinel: true,
             challengeUrl: 'http://localhost',
         );

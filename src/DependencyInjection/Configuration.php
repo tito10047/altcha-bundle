@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
             ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()
-            ->scalarNode('altcha_js_18n_path')->defaultValue('https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist_i18n/all.min.js')->end()
+            ->scalarNode('altcha_js_i18n_path')->defaultValue('https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist_i18n/all.min.js')->end()
             ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode('sentinel')->info(<<<TXT
                Enable usage of sentinel, if enabled:
