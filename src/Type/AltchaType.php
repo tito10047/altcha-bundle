@@ -22,6 +22,7 @@ class AltchaType extends AbstractType
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
         private readonly string $jsPath,
+        private readonly string $i18nPath,
         private readonly bool $useSentinel,
         private readonly ?string $challengeUrl = null,
     ) {
@@ -56,6 +57,7 @@ class AltchaType extends AbstractType
         $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
+        $view->vars['i18n_path'] = $this->i18nPath;
         $view->vars['use_sentinel'] = $this->useSentinel;
         $view->vars['challenge_url'] = $this->challengeUrl;
     }
