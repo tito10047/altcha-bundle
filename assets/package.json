@@ -13,8 +13,7 @@
       }
     },
     "importmap": {
-      "@hotwired/stimulus": "^3.0.0",
-      "altcha/dist/altcha.i18n.js": "^2.0.0"
+      "@hotwired/stimulus": "^3.0.0"
     }
   },
   "peerDependencies": {

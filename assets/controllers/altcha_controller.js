@@ -1,5 +1,4 @@
 import {Controller} from '@hotwired/stimulus';
-import 'altcha/dist/altcha.i18n.js';
 
 export default class extends Controller {
 
