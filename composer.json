@@ -21,13 +21,13 @@
   ],
   "require": {
     "php": ">=8.2",
-    "symfony/form": "^6.4|^7.0",
-    "symfony/framework-bundle": "^6.4|^7.0",
-    "symfony/http-client": "^6.4|^7.0",
-    "symfony/yaml": "^6.4|^7.0",
-    "symfony/validator": "^6.4|^7.0",
-    "symfony/twig-bundle": "^6.4|^7.0",
-    "symfony/translation": "^6.4|^7.0",
+    "symfony/form": "^6.4|^7.3",
+    "symfony/framework-bundle": "^6.4|^7.3",
+    "symfony/http-client": "^6.4|^7.3",
+    "symfony/yaml": "^6.4|^7.3",
+    "symfony/validator": "^6.4|^7.3",
+    "symfony/twig-bundle": "^6.4|^7.3",
+    "symfony/translation": "^6.4|^7.3",
     "altcha-org/altcha": "^1.1.2"
   },
   "autoload": {
@@ -44,7 +44,7 @@
     "phpstan/phpstan": "^1.8",
     "phpstan/phpstan-symfony": "^1.2",
     "rector/rector": "^0.14.5",
-    "symfony/asset-mapper": "6.4 || ^7.0",
+    "symfony/asset-mapper": "6.4 || ^7.3",
     "symfony/stimulus-bundle": "^2.16",
     "phpunit/phpunit": "^10.5"
   },
