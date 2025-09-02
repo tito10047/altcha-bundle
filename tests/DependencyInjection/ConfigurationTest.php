@@ -42,7 +42,7 @@ class ConfigurationTest extends TestCase
         $this->assertIsString($config['altcha_js_path']);
 
         $this->assertArrayHasKey('altcha_js_i18n_path', $config);
-        $this->assertIsString($config['altcha_js_i18n_path']);
+        $this->assertNull($config['altcha_js_i18n_path']);
 
         $this->assertArrayHasKey('hmacKey', $config);
         $this->assertNotNull($config['hmacKey']);
