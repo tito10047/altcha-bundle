@@ -1,5 +1,5 @@
 {
-  "name": "huluti/altcha-bundle",
+  "name": "tito10047/altcha-bundle",
   "type": "symfony-bundle",
   "description": "A simple package to help integrate Altcha on Symfony.",
   "keywords": [
@@ -17,6 +17,10 @@
     {
       "name": "Hugo Posnic",
       "homepage": "https://github.com/Huluti"
+    },
+    {
+      "name": "Jozef Môstka",
+      "homepage": "https://vsetkosada.sk/en"
     }
   ],
   "require": {

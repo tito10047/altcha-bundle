@@ -25,7 +25,7 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 You can install the package via Composer:
 
 ```bash
-composer require huluti/altcha-bundle
+composer require tito10047/altcha-bundle
 ```
 
 Add bundle into config/bundles.php file:
@@ -163,7 +163,7 @@ class ContactType extends AbstractType
 
 ### Use inside UX Live component or with Stimulus
 
-Asset mapper is required to use this package in the UX Live component or Stimulus.
+**Asset mapper is required** to use this package in the UX Live component or Stimulus.
 
 ```composer require symfony/asset-mapper```
 
