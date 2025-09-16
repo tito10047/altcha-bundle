@@ -27,8 +27,8 @@ class AltchaType extends AbstractType
         private readonly string $jsPath,
         private readonly ?string $i18nPath,
         private readonly bool $useSentinel,
-        private readonly ?string $challengeUrl = null,
 		private readonly RouterInterface $router,
+		private readonly ?string $challengeUrl = null,
     ) {
     }
 
