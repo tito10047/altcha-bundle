@@ -17,7 +17,7 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 
 ## Support
 
-- Symfony 6.4+
+- Symfony 6.4|7.3+
 - PHP 8.2+
 
 ## Installation
