@@ -61,6 +61,7 @@ class AltchaType extends AbstractType
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['i18n_path'] = $this->i18nPath;
+		$view->vars['use_sentinel'] = $this->useSentinel;
 		if ($this->useSentinel){
 			$view->vars['challenge_url'] = $this->challengeUrl;
 		}else{
