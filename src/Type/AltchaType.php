@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\RouterInterface;
 
 class AltchaType extends AbstractType
 {
@@ -25,6 +27,7 @@ class AltchaType extends AbstractType
         private readonly ?string $i18nPath,
         private readonly bool $useSentinel,
         private readonly ?string $challengeUrl = null,
+		private readonly RouterInterface $router,
     ) {
     }
 
@@ -58,8 +61,15 @@ class AltchaType extends AbstractType
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['i18n_path'] = $this->i18nPath;
-        $view->vars['use_sentinel'] = $this->useSentinel;
-        $view->vars['challenge_url'] = $this->challengeUrl;
+		if ($this->useSentinel){
+			$view->vars['challenge_url'] = $this->challengeUrl;
+		}else{
+			try {
+				$view->vars['challenge_url'] = $this->router->generate('huluti_altcha_challenge');
+			}catch (RouteNotFoundException $e){
+				throw new RouteNotFoundException('The route "huluti_altcha_challenge" is not defined. Please add "@HulutiAltchaBundle/config/routes.yml" to your routes.yml file.', 0, $e);
+			}
+		}
     }
 
     public function getBlockPrefix(): string

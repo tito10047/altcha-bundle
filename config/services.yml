@@ -13,6 +13,7 @@ services:
       $i18nPath: '%huluti_altcha.i18n_path%'
       $useSentinel: '%huluti_altcha.use_sentinel%'
       $challengeUrl: '%huluti_altcha.sentinel.challenge_url%'
+      $router: '@router'
   altcha.validator:
     class: Huluti\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']
