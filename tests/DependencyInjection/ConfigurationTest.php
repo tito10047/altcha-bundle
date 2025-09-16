@@ -34,7 +34,7 @@ class ConfigurationTest extends TestCase
 
 
         $this->assertArrayHasKey('use_webpack', $config);
-        $this->assertNull($config['use_webpack']);
+        $this->assertFalse($config['use_webpack']);
 
         $this->assertArrayHasKey('hide_logo', $config);
         $this->assertFalse($config['hide_logo']);
