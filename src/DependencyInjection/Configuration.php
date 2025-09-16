@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('floating')->defaultFalse()->end()
             ->booleanNode('use_stimulus')->defaultNull()->end()
             ->booleanNode('use_asset_mapper')->defaultNull()->end()
+            ->booleanNode('use_webpack')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
             ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()

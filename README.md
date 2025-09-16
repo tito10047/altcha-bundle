@@ -163,9 +163,22 @@ class ContactType extends AbstractType
 
 ### Use inside UX Live component or with Stimulus
 
-Asset mapper is required to use this package in the UX Live component or Stimulus.
+Use altcha with asset mapper
 
 ```composer require symfony/asset-mapper```
+
+Or with webpack encore
+```js
+//webpack.config.js
+module.exports = Encore.getWebpackConfig();
+module.exports.resolve.alias["altcha/dist/altcha.i18n.js"]='altcha/i18n';
+```
+```yaml
+#config/packages/huluti_altcha.yaml
+huluti_altcha:
+    use_stimulus: true
+    use_webpack: true
+```
 
 There is only one option need to be changed to work with Stimulus or UX Live component.
 

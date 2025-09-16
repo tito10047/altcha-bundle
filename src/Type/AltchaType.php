@@ -21,6 +21,7 @@ class AltchaType extends AbstractType
         private readonly bool $floating,
         private readonly bool $useStimulus,
         private readonly bool $useAssetMapper,
+        private readonly bool $useWebpack,
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
         private readonly string $jsPath,
@@ -57,6 +58,7 @@ class AltchaType extends AbstractType
         $view->vars['floating'] = $options['floating'] ?? $this->floating;
         $view->vars['use_stimulus'] = $this->useStimulus;
         $view->vars['use_asset_mapper'] = $this->useAssetMapper;
+        $view->vars['use_webpack'] = $this->useWebpack;
         $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;

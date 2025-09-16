@@ -42,6 +42,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('huluti_altcha.hide_footer', $config['hide_footer']);
         $container->setParameter('huluti_altcha.js_path', $config['altcha_js_path']);
         $container->setParameter('huluti_altcha.i18n_path', $config['altcha_js_i18n_path']);
+        $container->setParameter('huluti_altcha.use_webpack', $config['use_webpack']);
 
         $assetMapperInstalled = interface_exists(AssetMapperInterface::class);
         $container->setParameter('huluti_altcha.use_asset_mapper', $assetMapperInstalled);
