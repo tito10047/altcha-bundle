@@ -1,0 +1,11 @@
+{
+    "controllers": {
+        "@huluti/altcha-bundle": {
+            "altcha": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        }
+    },
+    "entrypoints": []
+}

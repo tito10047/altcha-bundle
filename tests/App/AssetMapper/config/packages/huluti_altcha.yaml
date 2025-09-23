@@ -1,0 +1,9 @@
+huluti_altcha:
+  enable: true
+  hmacKey: '%env(APP_SECRET)%'
+  floating: false
+  hide_logo: false
+  hide_footer: true
+when@dev:
+  huluti_altcha:
+    enable: true

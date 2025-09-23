@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests;
+namespace Huluti\AltchaBundle\Tests\Unit;
 
 use Huluti\AltchaBundle\DependencyInjection\Compiler\HulutiAltchaBundleCompilerPass;
 use Huluti\AltchaBundle\HulutiAltchaBundle;
