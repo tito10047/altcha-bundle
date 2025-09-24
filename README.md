@@ -19,6 +19,7 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 
 - Symfony 6.4|7.3+
 - PHP 8.2+
+- Webpack | Asset Mapper | Twig
 
 ## Installation
 
@@ -43,7 +44,7 @@ Add a config file:
 ```yml
 altcha:
     enable: true
-    hmacKey: 'RANDOM_SECRET_KEY'
+    hmacKey: '%env(APP_SECRET)%'
     floating: true
     use_stimulus: false
     include_script: true
@@ -163,13 +164,8 @@ class ContactType extends AbstractType
 }
 ```
 
-### Use inside UX Live component or with Stimulus
+### Use with Webpack Encore
 
-Use altcha with asset mapper
-
-```composer require symfony/asset-mapper```
-
-Or with webpack encore
 ```js
 //webpack.config.js
 module.exports = Encore.getWebpackConfig();
@@ -182,7 +178,9 @@ altcha:
     include_script: false
 ```
 
-There is only one option need to be changed to work with Stimulus or UX Live component.
+### Optional: usage with  UX Live components
+
+There is only one option need to be changed to work with or UX Live component.
 
 ```yml
 altcha:
