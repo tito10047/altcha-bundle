@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests\Validator;
+namespace Tito10047\AltchaBundle\Tests\Validator;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
 use DateTime;
-use Huluti\AltchaBundle\Validator\AltchaValidator;
+use Tito10047\AltchaBundle\Validator\AltchaValidator;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
@@ -27,7 +27,7 @@ class AltchaValidatorTest extends TestCase
         ]);
 
         $validator = new AltchaValidator(true, 'key', $requestStack);
-        $constraint = new \Huluti\AltchaBundle\Validator\Altcha();
+        $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 
@@ -46,7 +46,7 @@ class AltchaValidatorTest extends TestCase
         ]);
 
         $validator = new AltchaValidator(true, 'key', $requestStack);
-        $constraint = new \Huluti\AltchaBundle\Validator\Altcha();
+        $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 
@@ -66,7 +66,7 @@ class AltchaValidatorTest extends TestCase
         ]);
 
         $validator = new AltchaValidator(true, 'key', $requestStack);
-        $constraint = new \Huluti\AltchaBundle\Validator\Altcha();
+        $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 
@@ -94,7 +94,7 @@ class AltchaValidatorTest extends TestCase
         ]);
 
         $validator = new AltchaValidator(true, 'test-key', $requestStack);
-        $constraint = new \Huluti\AltchaBundle\Validator\Altcha();
+        $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 

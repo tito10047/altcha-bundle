@@ -1,5 +1,5 @@
 {
-  "name": "huluti/altcha-bundle",
+  "name": "tito10047/altcha-bundle",
   "type": "symfony-bundle",
   "description": "A simple package to help integrate Altcha on Symfony.",
   "keywords": [
@@ -16,7 +16,7 @@
   "authors": [
     {
       "name": "Hugo Posnic",
-      "homepage": "https://github.com/Huluti"
+      "homepage": "https://github.com/Tito10047"
     }
   ],
   "require": {
@@ -36,12 +36,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Huluti\\AltchaBundle\\": "src/"
+      "Tito10047\\AltchaBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Huluti\\AltchaBundle\\Tests\\": "tests/"
+      "Tito10047\\AltchaBundle\\Tests\\": "tests/"
 
     }
   },

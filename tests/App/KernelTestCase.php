@@ -1,6 +1,6 @@
 <?php
 
-namespace Huluti\AltchaBundle\Tests\App;
+namespace Tito10047\AltchaBundle\Tests\App;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 

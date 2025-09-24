@@ -1,9 +1,9 @@
 <?php
 
-namespace Huluti\AltchaBundle\Tests\App\AssetMapper\Src\Form;
+namespace Tito10047\AltchaBundle\Tests\App\AssetMapper\Src\Form;
 
 
-use Huluti\AltchaBundle\Type\AltchaType;
+use Tito10047\AltchaBundle\Type\AltchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;

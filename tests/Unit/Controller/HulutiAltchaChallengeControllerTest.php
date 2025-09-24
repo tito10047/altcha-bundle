@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests\Controller;
+namespace Tito10047\AltchaBundle\Tests\Controller;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
-use Huluti\AltchaBundle\Controller\HulutiAltchaChallengeController;
-use Huluti\AltchaBundle\Service\ChallengeResolverInterface;
+use Tito10047\AltchaBundle\Controller\AltchaChallengeController;
+use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class HulutiAltchaChallengeControllerTest extends KernelTestCase
+class AltchaChallengeControllerTest extends KernelTestCase
 {
 
     public function testChallenge()
@@ -26,7 +26,7 @@ class HulutiAltchaChallengeControllerTest extends KernelTestCase
         $challengeResolver = $this->createMock(ChallengeResolverInterface::class);
         $challengeResolver->method('getChallenge')->willReturn($challenge);
 
-        $controller = new HulutiAltchaChallengeController($challengeResolver);
+        $controller = new AltchaChallengeController($challengeResolver);
 
         $response = $controller->challenge();
 

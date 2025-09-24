@@ -1,0 +1,10 @@
+altcha:
+  enable: true
+  hmacKey: '%env(APP_SECRET)%'
+  floating: false
+  hide_logo: false
+  hide_footer: true
+  include_script: true
+when@dev:
+  altcha:
+    enable: true

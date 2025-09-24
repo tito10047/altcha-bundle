@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Controller;
+namespace Tito10047\AltchaBundle\Controller;
 
-use Huluti\AltchaBundle\Service\ChallengeResolverInterface;
+use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
-class HulutiAltchaChallengeController extends AbstractController
+class AltchaChallengeController extends AbstractController
 {
     public function __construct(private readonly ChallengeResolverInterface $challengeOptionResolver)
     {
     }
 
-    #[Route('/huluti_altcha/challenge', name: 'huluti_altcha_challenge')]
+    #[Route('/altcha/challenge', name: 'altcha_challenge')]
     public function challenge(): JsonResponse
     {
         return new JsonResponse($this->challengeOptionResolver->getChallenge());

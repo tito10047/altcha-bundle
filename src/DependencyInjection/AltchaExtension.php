@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\DependencyInjection;
+namespace Tito10047\AltchaBundle\DependencyInjection;
 
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\UX\StimulusBundle\StimulusBundle;
 
-class HulutiAltchaExtension extends Extension implements PrependExtensionInterface
+class AltchaExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -23,7 +23,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yml');
-        if ($container->getParameter('huluti_altcha.use_sentinel')) {
+        if ($container->getParameter('altcha.use_sentinel')) {
             $loader->load('services_sentinel.yml');
         }
     }
@@ -35,48 +35,51 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
      */
     private function registerAceEditorParameters(array $config, ContainerBuilder $container): void
     {
-        $container->setParameter('huluti_altcha.enable', $config['enable']);
-        $container->setParameter('huluti_altcha.floating', $config['floating']);
-        $container->setParameter('huluti_altcha.hmacKey', $config['hmacKey']);
-        $container->setParameter('huluti_altcha.hide_logo', $config['hide_logo']);
-        $container->setParameter('huluti_altcha.hide_footer', $config['hide_footer']);
-        $container->setParameter('huluti_altcha.js_path', $config['altcha_js_path']);
-        $container->setParameter('huluti_altcha.i18n_path', $config['altcha_js_i18n_path']);
-        $container->setParameter('huluti_altcha.use_webpack', $config['use_webpack']);
+        $container->setParameter('altcha.enable', $config['enable']);
+        $container->setParameter('altcha.floating', $config['floating']);
+        $container->setParameter('altcha.hmacKey', $config['hmacKey']);
+        $container->setParameter('altcha.hide_logo', $config['hide_logo']);
+        $container->setParameter('altcha.hide_footer', $config['hide_footer']);
+        $container->setParameter('altcha.js_path', $config['altcha_js_path']);
+        $container->setParameter('altcha.i18n_path', $config['altcha_js_i18n_path']);
 
-        $assetMapperInstalled = interface_exists(AssetMapperInterface::class);
-        $container->setParameter('huluti_altcha.use_asset_mapper', $assetMapperInstalled);
+		if($config["include_script"]!==null){
+			$container->setParameter('altcha.include_script', $config["include_script"]);
+		}else {
+			$assetMapperInstalled = interface_exists(AssetMapperInterface::class);
+			$container->setParameter('altcha.include_script', !$assetMapperInstalled);
+		}
 
         $useStimulus = $config['use_stimulus'];
         if (null === $useStimulus) {
             $bundles = $container->getParameter('kernel.bundles');
             assert(is_array($bundles));
-            $useStimulus = in_array(StimulusBundle::class, $bundles, true) && $assetMapperInstalled;
+            $useStimulus = in_array(StimulusBundle::class, $bundles, true);
         }
 
-        $container->setParameter('huluti_altcha.use_stimulus', $useStimulus);
+        $container->setParameter('altcha.use_stimulus', $useStimulus);
         /**
          * @var array{'enabled': bool, 'base_url': string, 'api_key': string} $sentinelConfig
          */
         $sentinelConfig = $config['sentinel'];
         if ($useSentinel = $sentinelConfig['enabled']) {
-            $container->setParameter('huluti_altcha.sentinel.base_url', $sentinelConfig['base_url']);
-            $container->setParameter('huluti_altcha.sentinel.api_key', $sentinelConfig['api_key']);
+            $container->setParameter('altcha.sentinel.base_url', $sentinelConfig['base_url']);
+            $container->setParameter('altcha.sentinel.api_key', $sentinelConfig['api_key']);
             /* @see https://altcha.org/docs/v2/widget-integration/ */
-            $container->setParameter('huluti_altcha.sentinel.challenge_url', sprintf(
+            $container->setParameter('altcha.sentinel.challenge_url', sprintf(
                 '%s/v1/challenge?apiKey=%s',
                 $sentinelConfig['base_url'],
                 $sentinelConfig['api_key']
             ));
             /* @see https://altcha.org/docs/v2/server-integration/ */
-            $container->setParameter('huluti_altcha.sentinel.verify_signature_url', sprintf(
+            $container->setParameter('altcha.sentinel.verify_signature_url', sprintf(
                 '%s/v1/verify/signature',
                 $sentinelConfig['base_url']
             ));
         } else {
-            $container->setParameter('huluti_altcha.sentinel.challenge_url', null);
+            $container->setParameter('altcha.sentinel.challenge_url', null);
         }
-        $container->setParameter('huluti_altcha.use_sentinel', $useSentinel);
+        $container->setParameter('altcha.use_sentinel', $useSentinel);
     }
 
     /**
@@ -88,7 +91,7 @@ class HulutiAltchaExtension extends Extension implements PrependExtensionInterfa
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        __DIR__.'/../../assets/controllers' => 'huluti/altcha-bundle',
+                        __DIR__.'/../../assets/controllers' => 'tito10047/altcha-bundle',
                     ],
                 ],
             ]);

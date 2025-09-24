@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Validator;
+namespace Tito10047\AltchaBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
 

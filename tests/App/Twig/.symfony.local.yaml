@@ -1,0 +1,6 @@
+proxy:
+    domains:
+        - altcha-twig
+http:
+    daemon: true
+workers:

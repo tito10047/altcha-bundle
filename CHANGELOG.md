@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 
+- BC break: include_script must be set to true by default on non webpack or asset mapper projects
+- BC break: renamed namespace from Huluti\HulutiAltchaBundle to Tito10047\AltchaBundle 
+- BC break: renamed config key from huluti_altcha to altcha 
+- Introduce option include_script to disable script tag
+- Abandoned use_asset_mapper and use_webpack options which is now replaced by include_script:false
+- Added functional tests for Webpack, AssetMapper or Twig rendering
+
 ## [1.7.5] - 2025-09-10
 - Allow null value for i18npath to be more flexible in configuration
 

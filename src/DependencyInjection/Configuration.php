@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\DependencyInjection;
+namespace Tito10047\AltchaBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('huluti_altcha');
+        $treeBuilder = new TreeBuilder('altcha');
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
@@ -23,8 +23,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('enable')->defaultTrue()->end()
             ->booleanNode('floating')->defaultFalse()->end()
             ->booleanNode('use_stimulus')->defaultNull()->end()
-            ->booleanNode('use_asset_mapper')->defaultNull()->end()
-            ->booleanNode('use_webpack')->defaultFalse()->end()
+            ->booleanNode('include_script')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
             ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()

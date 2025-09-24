@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests\DependencyInjection;
+namespace Tito10047\AltchaBundle\Tests\DependencyInjection;
 
-use Huluti\AltchaBundle\DependencyInjection\Configuration;
+use Tito10047\AltchaBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 
@@ -15,7 +15,7 @@ class ConfigurationTest extends TestCase
         $configuration = new Configuration();
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, [
-            'huluti_altcha' => [
+            'altcha' => [
                 'hmacKey' => 'test',
             ],
         ]);
@@ -28,13 +28,6 @@ class ConfigurationTest extends TestCase
 
         $this->assertArrayHasKey('use_stimulus', $config);
         $this->assertNull($config['use_stimulus']);
-
-        $this->assertArrayHasKey('use_asset_mapper', $config);
-        $this->assertNull($config['use_asset_mapper']);
-
-
-        $this->assertArrayHasKey('use_webpack', $config);
-        $this->assertFalse($config['use_webpack']);
 
         $this->assertArrayHasKey('hide_logo', $config);
         $this->assertFalse($config['hide_logo']);

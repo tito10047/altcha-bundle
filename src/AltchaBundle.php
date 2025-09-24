@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle;
+namespace Tito10047\AltchaBundle;
 
-use Huluti\AltchaBundle\DependencyInjection\Compiler\HulutiAltchaBundleCompilerPass;
-use Huluti\AltchaBundle\DependencyInjection\HulutiAltchaExtension;
+use Tito10047\AltchaBundle\DependencyInjection\Compiler\AltchaBundleCompilerPass;
+use Tito10047\AltchaBundle\DependencyInjection\AltchaExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class HulutiAltchaBundle extends AbstractBundle
+class AltchaBundle extends AbstractBundle
 {
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
-        $container->addCompilerPass(new HulutiAltchaBundleCompilerPass());
+        $container->addCompilerPass(new AltchaBundleCompilerPass());
     }
 
     public function getContainerExtension(): ?ExtensionInterface
     {
-        return new HulutiAltchaExtension();
+        return new AltchaExtension();
     }
 }

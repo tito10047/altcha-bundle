@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\DependencyInjection\Compiler;
+namespace Tito10047\AltchaBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class HulutiAltchaBundleCompilerPass implements CompilerPassInterface
+class AltchaBundleCompilerPass implements CompilerPassInterface
 {
     /**
      * You can modify the container here before it is dumped to PHP code.
@@ -17,7 +17,7 @@ class HulutiAltchaBundleCompilerPass implements CompilerPassInterface
         if ($container->hasParameter('twig.form.resources')) {
             /** @var array<int, string> $resources */
             $resources = $container->getParameter('twig.form.resources') ?: [];
-            array_unshift($resources, '@HulutiAltcha/fields.html.twig');
+            array_unshift($resources, '@Altcha/fields.html.twig');
             $container->setParameter('twig.form.resources', $resources);
         }
     }

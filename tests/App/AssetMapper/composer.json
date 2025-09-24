@@ -7,7 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "huluti/altcha-bundle": "dev-main",
+        "tito10047/altcha-bundle": "dev-main",
         "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
         "symfony/dotenv": "7.3.*",

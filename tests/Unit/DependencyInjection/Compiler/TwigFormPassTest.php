@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests\DependencyInjection\Compiler;
+namespace Tito10047\AltchaBundle\Tests\DependencyInjection\Compiler;
 
-use Huluti\AltchaBundle\DependencyInjection\Compiler\HulutiAltchaBundleCompilerPass;
+use Tito10047\AltchaBundle\DependencyInjection\Compiler\AltchaBundleCompilerPass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -18,7 +18,7 @@ class TwigFormPassTest extends TestCase
 
         $container->expects($this->never())->method('setParameter');
 
-        $compiler = new HulutiAltchaBundleCompilerPass();
+        $compiler = new AltchaBundleCompilerPass();
         $compiler->process($container);
     }
 
@@ -27,11 +27,11 @@ class TwigFormPassTest extends TestCase
         $container = new ContainerBuilder();
         $container->setParameter('twig.form.resources', ['foo']);
 
-        $compiler = new HulutiAltchaBundleCompilerPass();
+        $compiler = new AltchaBundleCompilerPass();
         $compiler->process($container);
 
         $this->assertSame(
-            ['@HulutiAltcha/fields.html.twig', 'foo'],
+            ['@Altcha/fields.html.twig', 'foo'],
             $container->getParameter('twig.form.resources')
         );
     }

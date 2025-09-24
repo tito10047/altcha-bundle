@@ -1,35 +1,34 @@
 services:
   altcha.type:
-    class: Huluti\AltchaBundle\Type\AltchaType
+    class: Tito10047\AltchaBundle\Type\AltchaType
     tags: ['form.type']
     arguments:
-      $enable: '%huluti_altcha.enable%'
-      $floating: '%huluti_altcha.floating%'
-      $useStimulus: '%huluti_altcha.use_stimulus%'
-      $useAssetMapper: '%huluti_altcha.use_asset_mapper%'
-      $useWebpack: '%huluti_altcha.use_webpack%'
-      $hideLogo: '%huluti_altcha.hide_logo%'
-      $hideFooter: '%huluti_altcha.hide_footer%'
-      $jsPath: '%huluti_altcha.js_path%'
-      $i18nPath: '%huluti_altcha.i18n_path%'
-      $useSentinel: '%huluti_altcha.use_sentinel%'
-      $challengeUrl: '%huluti_altcha.sentinel.challenge_url%'
+      $enable: '%altcha.enable%'
+      $floating: '%altcha.floating%'
+      $useStimulus: '%altcha.use_stimulus%'
+      $hideLogo: '%altcha.hide_logo%'
+      $hideFooter: '%altcha.hide_footer%'
+      $jsPath: '%altcha.js_path%'
+      $i18nPath: '%altcha.i18n_path%'
+      $useSentinel: '%altcha.use_sentinel%'
+      $challengeUrl: '%altcha.sentinel.challenge_url%'
+      $includeScript: '%altcha.include_script%'
       $router: '@router'
   altcha.validator:
-    class: Huluti\AltchaBundle\Validator\AltchaValidator
+    class: Tito10047\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']
     arguments:
-      $enable: '%huluti_altcha.enable%'
-      $hmacKey: '%huluti_altcha.hmacKey%'
+      $enable: '%altcha.enable%'
+      $hmacKey: '%altcha.hmacKey%'
       $requestStack: '@request_stack'
-  Huluti\AltchaBundle\Controller\HulutiAltchaChallengeController:
+  Tito10047\AltchaBundle\Controller\AltchaChallengeController:
     public: true
     autowire: true
     autoconfigure: true
     arguments:
-      $challengeOptionResolver: '@Huluti\AltchaBundle\Service\ChallengeResolverInterface'
-  Huluti\AltchaBundle\Service\ChallengeResolverInterface:
-    class: Huluti\AltchaBundle\Service\ChallengeResolver
+      $challengeOptionResolver: '@Tito10047\AltchaBundle\Service\ChallengeResolverInterface'
+  Tito10047\AltchaBundle\Service\ChallengeResolverInterface:
+    class: Tito10047\AltchaBundle\Service\ChallengeResolver
     arguments:
-      $hmacKey: '%huluti_altcha.hmacKey%'
+      $hmacKey: '%altcha.hmacKey%'
       $expires: '+15 minute'

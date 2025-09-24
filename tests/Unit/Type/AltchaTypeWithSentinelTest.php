@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Tests\Type;
+namespace Tito10047\AltchaBundle\Tests\Type;
 
 use Generator;
-use Huluti\AltchaBundle\Type\AltchaType;
+use Tito10047\AltchaBundle\Type\AltchaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AltchaTypeWithSentinelTest extends AltchaTypeTest

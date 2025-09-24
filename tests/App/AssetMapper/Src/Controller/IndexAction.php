@@ -1,8 +1,8 @@
 <?php
 
-namespace Huluti\AltchaBundle\Tests\App\AssetMapper\Src\Controller;
+namespace Tito10047\AltchaBundle\Tests\App\AssetMapper\Src\Controller;
 
-use Huluti\AltchaBundle\Tests\App\AssetMapper\Src\Form\IndexType;
+use Tito10047\AltchaBundle\Tests\App\AssetMapper\Src\Form\IndexType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 
