@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Service;
+namespace Tito10047\AltchaBundle\Service;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\Challenge;

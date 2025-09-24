@@ -1,21 +1,21 @@
 {% block altcha_widget %}
     {% if enable %}
-        <div data-controller="huluti--altcha-bundle--altcha">
+        <div data-controller="tito10047--altcha-bundle--altcha">
         {% if use_stimulus %}
             {{ form_widget(form,{
                 attr:{
-                    'data-huluti--altcha-bundle--altcha-target':'input',
+                    'data-tito10047--altcha-bundle--altcha-target':'input',
                 }
             }) }}
         {% endif %}
-        {% if not use_asset_mapper and not use_webpack %}
+        {% if include_script %}
             <script async defer src="{{ js_path }}" type="module"></script>
             {% if i18n_path is not null %}
                 <script async defer src="{{ i18n_path }}" type="module"></script>
             {% endif %}
         {% endif %}
         <altcha-widget
-                data-huluti--altcha-bundle--altcha-target="altcha"
+                data-tito10047--altcha-bundle--altcha-target="altcha"
                 data-live-ignore="data-live-ignore"
 				challengeurl="{{ challenge_url }}"
                 {% if hide_logo %}hidelogo{% endif %}
@@ -31,7 +31,7 @@
             try {
                 return await fetch(url);
             } catch (e) {
-                return await fetch("{{ path('huluti_altcha_challenge') }}");
+                return await fetch("{{ path('altcha_challenge') }}");
             }
           };
     </script>

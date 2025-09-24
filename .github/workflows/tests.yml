@@ -23,11 +23,15 @@ jobs:
           - '7.3.*'
         operating-system:
           - "ubuntu-latest"
-          - "windows-latest"
 
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+            node-version: 20.x
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -36,8 +40,11 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
 
-      - name: Configure Symfony
-        run: composer config extra.symfony.require "${{ matrix.symfony }}"
+      - name: "install chromiom"
+        uses: "nanasess/setup-chromedriver@v2"
+
+      - name: "Configure Symfony"
+        run: 'composer config extra.symfony.require "${{ matrix.symfony }}"'
 
       - name: "Cache dependencies"
         uses: "actions/cache@v3"
@@ -50,6 +57,21 @@ jobs:
 
       - name: "Install highest dependencies"
         run: "composer update --no-interaction --no-progress --no-suggest"
+
+      - name: "Detect drivers"
+        run: "vendor/bin/bdi detect drivers"
+
+      - name: "Asset Mapper Install"
+        run: "./tests/App/AssetMapper/bin/console importmap:install"
+
+      - name: "Asset Mapper compile"
+        run: "./tests/App/AssetMapper/bin/console asset-map:compile"
+
+      - name: "yarn install"
+        run: "yarn --cwd tests/App/Webpack/ install"
+
+      - name: "yarn install"
+        run: "yarn --cwd tests/App/Webpack/ build"
 
       - name: "Tests"
         run: "composer test"

@@ -1,10 +1,10 @@
 A simple package to help integrate ALTCHA on Symfony Form.
 ======================
 
-![Packagist Version](https://img.shields.io/packagist/v/huluti/altcha-bundle)
-![Packagist License](https://img.shields.io/packagist/l/huluti/altcha-bundle)
-![Packagist Downloads](https://img.shields.io/packagist/dt/huluti/altcha-bundle)
-[![Tests](https://github.com/Huluti/altcha-bundle/actions/workflows/tests.yml/badge.svg)](https://github.com/Huluti/altcha-bundle/actions/workflows/tests.yml)
+![Packagist Version](https://img.shields.io/packagist/v/tito10047/altcha-bundle)
+![Packagist License](https://img.shields.io/packagist/l/tito10047/altcha-bundle)
+![Packagist Downloads](https://img.shields.io/packagist/dt/tito10047/altcha-bundle)
+[![Tests](https://github.com/Tito10047/altcha-bundle/actions/workflows/tests.yml/badge.svg)](https://github.com/Tito10047/altcha-bundle/actions/workflows/tests.yml)
 
 This packages integrates [ALTCHA](https://altcha.org/), a privacy-friendly Captcha alternative, with Symfony forms.
 Simply add an `AltchaType` field to your form and this package will automatically check the challenge issue. 
@@ -19,61 +19,64 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 
 - Symfony 6.4|7.3+
 - PHP 8.2+
+- Webpack | Asset Mapper | Twig
 
 ## Installation
 
 You can install the package via Composer:
 
 ```bash
-composer require huluti/altcha-bundle
+composer require tito10047/altcha-bundle
 ```
 
 Add bundle into config/bundles.php file:
 
 ```php
-Huluti\AltchaBundle\HulutiAltchaBundle::class => ['all' => true]
+Tito10047\AltchaBundle\AltchaBundle::class => ['all' => true]
 ```
 
 Add a config file:
 
 ### YML
 
-`config/packages/huluti_altcha.yaml`
+`config/packages/altcha.yaml`
 
 ```yml
-huluti_altcha:
+altcha:
     enable: true
-    hmacKey: 'RANDOM_SECRET_KEY'
+    hmacKey: '%env(APP_SECRET)%'
     floating: true
     use_stimulus: false
+    include_script: true
     hide_logo: false
     hide_footer: false
 
 when@test:
-    huluti_altcha:
+    altcha:
         enable: false
 ```
 
 ### PHP
 
-`config/packages/huluti_altcha.php`: 
+`config/packages/altcha.php`: 
 
 ```php
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('huluti_altcha', [
+    $containerConfigurator->extension('altcha', [
         'enable' => true,
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => true,
         'use_stimulus' => false,
+        'include_script' => true,
         'hide_logo' => false,
         'hide_footer' => false
     ]);
 
     if ('test' === $containerConfigurator->env()) {
         // Disable captcha in test environment
-        $containerConfigurator->extension('huluti_altcha', [
+        $containerConfigurator->extension('altcha', [
             'enable' => false,
         ]);
     }
@@ -85,15 +88,15 @@ Import bundle routes:
 ### YML
 
 ```yml
-huluti_altcha:
-    resource: '@HulutiAltchaBundle/config/routes.yml'
+altcha:
+    resource: '@AltchaBundle/config/routes.yml'
     type: yaml
 ```
 
 ### PHP
 
 ```php
-$routingConfigurator->import('@HulutiAltchaBundle/config/routes.yml');
+$routingConfigurator->import('@AltchaBundle/config/routes.yml');
 ```
 
 ⚠️ **Important – Security Configuration**
@@ -105,13 +108,13 @@ access_control:
     - { path: ^/, roles: ROLE_USER }
 ```
 
-Then the Altcha challenge endpoint (`/huluti_altcha/challenge`) will also be protected by default.
+Then the Altcha challenge endpoint (`/altcha/challenge`) will also be protected by default.
 
 To allow it to be publicly accessible (as intended for the challenge mechanism to work), **you must explicitly add the following rule before the global one**:
 
 ```yaml
 access_control:
-    - { path: ^/huluti_altcha/challenge, roles: PUBLIC_ACCESS }
+    - { path: ^/altcha/challenge, roles: PUBLIC_ACCESS }
     - { path: ^/, roles: ROLE_USER }
 ```
 
@@ -127,7 +130,7 @@ Create a form type and insert an AltchaType to add the captcha:
 namespace App\Form;
 
 use App\Entity\Contact;
-use Huluti\AltchaBundle\Type\AltchaType;
+use Tito10047\AltchaBundle\Type\AltchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -161,30 +164,29 @@ class ContactType extends AbstractType
 }
 ```
 
-### Use inside UX Live component or with Stimulus
+### Use with Webpack Encore
 
-Use altcha with asset mapper
-
-```composer require symfony/asset-mapper```
-
-Or with webpack encore
 ```js
 //webpack.config.js
 module.exports = Encore.getWebpackConfig();
 module.exports.resolve.alias["altcha/dist/altcha.i18n.js"]='altcha/i18n';
 ```
 ```yaml
-#config/packages/huluti_altcha.yaml
-huluti_altcha:
+#config/packages/altcha.yaml
+altcha:
     use_stimulus: true
-    use_webpack: true
+    include_script: false
 ```
 
-There is only one option need to be changed to work with Stimulus or UX Live component.
+### Optional: usage with  UX Live components
+
+There is only one option need to be changed to work with or UX Live component.
 
 ```yml
-huluti_altcha:
+altcha:
+    use_stimulus: true
     floating: false
+    include_script: false
 ```
 
 ### Optional: usage with Sentinel
@@ -192,7 +194,7 @@ huluti_altcha:
 Configure the package by providing your sentinel instance endpoint and your API key:
 
 ```yml
-huluti_altcha:
+altcha:
     sentinel:
         base_url: 'http://localhost:8080'
         api_key: 'key_xxxxxxxxxxxx'

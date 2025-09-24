@@ -1,0 +1,6 @@
+proxy:
+    domains:
+        - altcha-mapper
+http:
+    daemon: true
+workers:

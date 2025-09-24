@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Huluti\AltchaBundle\Type;
+namespace Tito10047\AltchaBundle\Type;
 
-use Huluti\AltchaBundle\Validator\Altcha;
-use Huluti\AltchaBundle\Validator\AltchaSentinel;
+use Tito10047\AltchaBundle\Validator\Altcha;
+use Tito10047\AltchaBundle\Validator\AltchaSentinel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
@@ -20,13 +20,12 @@ class AltchaType extends AbstractType
         private readonly bool $enable,
         private readonly bool $floating,
         private readonly bool $useStimulus,
-        private readonly bool $useAssetMapper,
-        private readonly bool $useWebpack,
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
         private readonly string $jsPath,
         private readonly ?string $i18nPath,
         private readonly bool $useSentinel,
+		private readonly bool $includeScript,
 		private readonly RouterInterface $router,
 		private readonly ?string $challengeUrl = null,
     ) {
@@ -57,20 +56,19 @@ class AltchaType extends AbstractType
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $options['floating'] ?? $this->floating;
         $view->vars['use_stimulus'] = $this->useStimulus;
-        $view->vars['use_asset_mapper'] = $this->useAssetMapper;
-        $view->vars['use_webpack'] = $this->useWebpack;
         $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['i18n_path'] = $this->i18nPath;
 		$view->vars['use_sentinel'] = $this->useSentinel;
+		$view->vars['include_script'] = $this->includeScript;
 		if ($this->useSentinel){
 			$view->vars['challenge_url'] = $this->challengeUrl;
 		}else{
 			try {
-				$view->vars['challenge_url'] = $this->router->generate('huluti_altcha_challenge');
+				$view->vars['challenge_url'] = $this->router->generate('altcha_challenge');
 			}catch (RouteNotFoundException $e){
-				throw new RouteNotFoundException('The route "huluti_altcha_challenge" is not defined. Please add "@HulutiAltchaBundle/config/routes.yml" to your routes.yml file.', 0, $e);
+				throw new RouteNotFoundException('The route "altcha_challenge" is not defined. Please add "@AltchaBundle/config/routes.yml" to your routes.yml file.', 0, $e);
 			}
 		}
     }
