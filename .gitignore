@@ -4,3 +4,7 @@ tools/
 /.phpunit.result.cache
 .php-cs-fixer.cache
 .idea
+/tests/App/Webpack/node_modules/
+/tests/App/Webpack/public/build
+/tests/App/Webpack/yarn.lock
+var/cache
