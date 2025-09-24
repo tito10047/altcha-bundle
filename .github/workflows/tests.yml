@@ -23,7 +23,6 @@ jobs:
           - '7.3.*'
         operating-system:
           - "ubuntu-latest"
-          - "windows-latest"
 
     steps:
       - name: "Checkout"
@@ -36,8 +35,11 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
 
-      - name: Configure Symfony
-        run: composer config extra.symfony.require "${{ matrix.symfony }}"
+      - name: "install chromiom"
+        uses: "nanasess/setup-chromedriver@v2"
+
+      - name: "Configure Symfony"
+        run: 'composer config extra.symfony.require "${{ matrix.symfony }}"'
 
       - name: "Cache dependencies"
         uses: "actions/cache@v3"
@@ -50,6 +52,9 @@ jobs:
 
       - name: "Install highest dependencies"
         run: "composer update --no-interaction --no-progress --no-suggest"
+
+      - name: "Detect drivers"
+        run: "vendor/bin/bdi detect drivers"
 
       - name: "Tests"
         run: "composer test"
