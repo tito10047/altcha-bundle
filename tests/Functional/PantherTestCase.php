@@ -16,6 +16,11 @@ abstract class PantherTestCase extends KernelTestCase
 	protected function tearDown(): void
 	{
 		$this->doTearDown();
+		try {
+			static::stopWebServer();
+		} catch (\Throwable $e) {
+			// ignore if already stopped
+		}
 	}
 
 	private function doTearDown(): void

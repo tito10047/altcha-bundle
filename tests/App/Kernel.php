@@ -28,7 +28,6 @@ class Kernel extends BaseKernel {
         if (!$this->configDir) {
             return __DIR__ . '/config';
         }
-		dump($this->configDir);
         return __DIR__ . '/' . $this->configDir;
     }
 
