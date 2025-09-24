@@ -62,7 +62,9 @@
     "symfony/web-profiler-bundle": "7.3.*",
     "symfony/debug-bundle": "7.3.*",
     "symfony/webpack-encore-bundle": "^2.3",
-    "twig/twig": "^2.12|^3.21.1"
+    "twig/twig": "^2.12|^3.21.1",
+    "symfony/panther": "^2.2",
+    "dbrekelmans/bdi": "^1.4"
   },
   "scripts" : {
     "test": [
@@ -74,5 +76,9 @@
       "symfony/flex": true,
       "symfony/runtime": true
     }
+  },
+  "extra": {
+    "symfony-web-dir": "./tests/App/AssetMapper/public",
+    "public-dir": "./tests/App/AssetMapper/public"
   }
 }

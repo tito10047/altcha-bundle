@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html -->
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="vendor/autoload.php">
-  <testsuites>
-    <testsuite name="Ace Bundle Test Suite">
-      <directory>tests</directory>
-    </testsuite>
-  </testsuites>
-  <source>
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
-  </source>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" backupGlobals="false"
+         colors="true" bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Ace Bundle Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+    <extensions>
+        <!-- use this with PHPUnit 10 or newer -->
+        <bootstrap class="Symfony\Component\Panther\ServerExtension"/>
+    </extensions>
 </phpunit>

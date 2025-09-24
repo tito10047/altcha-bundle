@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tito10047\AltchaBundle\Tests\Validator;
+namespace Tito10047\AltchaBundle\Tests\Unit\Validator;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;

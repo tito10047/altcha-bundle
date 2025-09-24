@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tito10047\AltchaBundle\Tests\DependencyInjection;
+namespace Tito10047\AltchaBundle\Tests\Unit\DependencyInjection;
 
 use Tito10047\AltchaBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
