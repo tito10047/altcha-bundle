@@ -4,6 +4,8 @@ framework:
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
+    assets:
+        base_path: '%kernel.project_dir%/tests/App/Twig/public'
 
     #esi: true
     #fragments: true
