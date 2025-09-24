@@ -76,5 +76,9 @@
       "symfony/flex": true,
       "symfony/runtime": true
     }
+  },
+  "extra": {
+    "symfony-web-dir": "./tests/App/AssetMapper/public",
+    "public-dir": "./tests/App/AssetMapper/public"
   }
 }

@@ -28,18 +28,24 @@ abstract class PantherTestCase extends KernelTestCase
 	protected static function createPantherWebpackClient(): \Symfony\Component\Panther\Client {
 		return static::createPantherClient([
 			'webServerDir'=>__DIR__.'/../App/Webpack/public',
+		],[
+			'configDir'=>'Webpack/config',
 		]);
 	}
 
 	protected static function createPantherTwigClient(): \Symfony\Component\Panther\Client {
 		return static::createPantherClient([
 			'webServerDir'=>__DIR__.'/../App/Twig/public',
+		],[
+			'configDir'=>'Twig/config',
 		]);
 	}
 
 	protected static function createPantherAssetMapperClient(): \Symfony\Component\Panther\Client {
 		return static::createPantherClient([
 			'webServerDir'=>__DIR__.'/../App/AssetMapper/public',
+		],[
+			'configDir'=>'AssetMapper/config',
 		]);
 	}
 

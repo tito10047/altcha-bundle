@@ -3,6 +3,7 @@ altcha:
   hmacKey: '%env(APP_SECRET)%'
   floating: false
   hide_logo: false
+  include_script: false
   hide_footer: true
 when@dev:
   altcha:

@@ -61,5 +61,17 @@ jobs:
       - name: "Detect drivers"
         run: "vendor/bin/bdi detect drivers"
 
+      - name: "Asset Mapper Install"
+        run: "./tests/App/AssetMapper/bin/console importmap:install"
+
+      - name: "Asset Mapper compile"
+        run: "./tests/App/AssetMapper/bin/console asset-map:compile"
+
+      - name: "yarn install"
+        run: "yarn --cwd tests/App/Webpack/ install"
+
+      - name: "yarn install"
+        run: "yarn --cwd tests/App/Webpack/ build"
+
       - name: "Tests"
         run: "composer test"

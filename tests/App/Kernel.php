@@ -28,7 +28,7 @@ class Kernel extends BaseKernel {
         if (!$this->configDir) {
             return __DIR__ . '/config';
         }
-
+		dump($this->configDir);
         return __DIR__ . '/' . $this->configDir;
     }
 
@@ -40,7 +40,7 @@ class Kernel extends BaseKernel {
 
 
 	public function getCacheDir(): string {
-        return $this->getProjectDir() . '/var/cache/' . $this->environment;
+        return $this->getProjectDir() . '/var/cache/'.$this->configDir.'/' . $this->environment;
 	}
 
 
