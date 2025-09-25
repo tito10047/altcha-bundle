@@ -62,13 +62,8 @@ jobs:
           key: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}"
           restore-keys: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}"
 
-      - name: "Install highest dependencies (PHP != 8.1)"
-        if: matrix.php-version != '8.1'
+      - name: "Install highest dependencies"
         run: "composer update --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies (PHP 8.1 with ignore platform req)"
-        if: matrix.php-version == '8.1'
-        run: "composer update --no-interaction --no-progress --no-suggest --ignore-platform-req=php"
 
       - name: "Detect drivers"
         run: "vendor/bin/bdi detect drivers"
