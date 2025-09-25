@@ -13,8 +13,10 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      fail-fast: false
       matrix:
         php-version:
+          - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
@@ -23,6 +25,11 @@ jobs:
           - '7.3.*'
         operating-system:
           - "ubuntu-latest"
+        exclude:
+          # Symfony 7.3 does not support PHP 8.1
+          - php-version: "8.1"
+            symfony: '7.3.*'
+            operating-system: "ubuntu-latest"
 
     steps:
       - name: "Checkout"
@@ -52,8 +59,8 @@ jobs:
           path: |
             ~/.composer/cache
             vendor
-          key: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
-          restore-keys: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
+          key: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}"
+          restore-keys: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}"
 
       - name: "Install highest dependencies"
         run: "composer update --no-interaction --no-progress --no-suggest"
@@ -70,7 +77,7 @@ jobs:
       - name: "yarn install"
         run: "yarn --cwd tests/App/Webpack/ install"
 
-      - name: "yarn install"
+      - name: "yarn build"
         run: "yarn --cwd tests/App/Webpack/ build"
 
       - name: "Tests"
