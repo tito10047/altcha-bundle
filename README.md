@@ -18,7 +18,7 @@ Simply add an `AltchaType` field to your form and this package will automaticall
 ## Support
 
 - Symfony 6.4|7.3+
-- PHP 8.2+
+- PHP 8.1+
 - Webpack | Asset Mapper | Twig
 
 ## Installation
