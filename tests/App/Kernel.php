@@ -3,11 +3,25 @@
 namespace Tito10047\AltchaBundle\Tests\App;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel {
-	use MicroKernelTrait;
+	use MicroKernelTrait {
+		registerContainerConfiguration as registerContainerConfigurationTrait;
+	}
 
+
+	public function registerContainerConfiguration(LoaderInterface $loader)
+	{
+		$this->registerContainerConfigurationTrait($loader);
+
+		// load importmap extension here because it not work when is in dev requiremdents
+		$file = $this->getProjectDir() . '/vendor/symfony/twig-bundle/Resources/config/importmap.php';
+		if (file_exists($file)) {
+			$loader->load($file);
+		}
+	}
 
     public function bootProject(): void
     {
