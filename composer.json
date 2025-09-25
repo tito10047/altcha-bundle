@@ -31,7 +31,6 @@
     "altcha-org/altcha": "^1.1.2",
     "symfony/twig-pack": "^1.0",
     "symfony/console": "^7.3",
-    "symfony/asset-mapper": "^7.3",
     "symfony/asset": "^7.3"
   },
   "autoload": {
@@ -64,6 +63,7 @@
     "symfony/webpack-encore-bundle": "^2.3",
     "twig/twig": "^2.12|^3.21.1",
     "symfony/panther": "^2.2",
+    "symfony/asset-mapper": "^7.3",
     "dbrekelmans/bdi": "^1.4"
   },
   "scripts" : {
