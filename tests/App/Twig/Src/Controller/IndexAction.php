@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace Tito10047\AltchaBundle\Tests\App\Twig\Src\Controller;
 
 use Tito10047\AltchaBundle\Tests\App\Twig\Src\Form\IndexType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
