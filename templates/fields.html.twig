@@ -9,9 +9,9 @@
             }) }}
         {% endif %}
         {% if include_script %}
-            <script async defer src="{{ js_path }}" type="module"></script>
+            <script async defer src="{{ js_path }}" id="script-altcha" type="module"></script>
             {% if i18n_path is not null %}
-                <script async defer src="{{ i18n_path }}" type="module"></script>
+                <script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
             {% endif %}
         {% endif %}
         <altcha-widget

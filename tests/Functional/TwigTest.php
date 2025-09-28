@@ -15,6 +15,9 @@ class TwigTest  extends PantherTestCase {
 		$this->assertPageTitleContains('Welcome!');
 		$this->assertSelectorTextContains('.altcha-label', 'I\'m not a robot');
 
+		$this->assertSelectorExists("#script-altcha","Altcha script need be included");
+		$this->assertSelectorExists("#script-altcha-i18n","Altcha i18n script need be included");
+
 		$this->assertSelectorIsVisible('.altcha-main');
 		$this->assertSelectorAttributeContains('body>form>div>div>div', 'data-controller', 'tito10047--altcha-bundle--altcha');
 	}
