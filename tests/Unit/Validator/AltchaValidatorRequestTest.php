@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class AltchaValidatorTest extends TestCase
+class AltchaValidatorRequestTest extends TestCase
 {
     public function testAltchaNotInRequest()
     {
