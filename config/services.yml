@@ -5,6 +5,7 @@ services:
     arguments:
       $enable: '%altcha.enable%'
       $floating: '%altcha.floating%'
+      $overlay: '%altcha.overlay%'
       $useStimulus: '%altcha.use_stimulus%'
       $hideLogo: '%altcha.hide_logo%'
       $hideFooter: '%altcha.hide_footer%'
