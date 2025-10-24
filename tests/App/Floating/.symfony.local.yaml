@@ -1,0 +1,6 @@
+proxy:
+    domains:
+        - altcha-floating
+http:
+    daemon: true
+workers:

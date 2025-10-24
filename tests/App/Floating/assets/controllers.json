@@ -1,0 +1,11 @@
+{
+    "controllers": {
+        "@tito10047/altcha-bundle": {
+            "altcha": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        }
+    },
+    "entrypoints": []
+}

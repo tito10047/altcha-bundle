@@ -1,0 +1,4 @@
+stimulus:
+    controller_paths:
+        - '%kernel.project_dir%/tests/App/Floating/assets/controllers'
+    controllers_json: "%kernel.project_dir%/tests/App/Floating/assets/controllers.json"

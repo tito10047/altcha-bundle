@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+use Tito10047\AltchaBundle\Tests\App\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
+$vendorDir = dirname(__DIR__,4);
+if (!is_dir($vendorDir .'/vendor')) {
+    throw new LogicException('Dependencies are missing. Try running "composer install".');
+}
+
+if (!is_file($vendorDir .'/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
+require_once $vendorDir .'/vendor/autoload_runtime.php';
+
+return function (array $context) {
+    $kernel = new Kernel($context['APP_ENV'], '/Floating/config');
+
+    return new Application($kernel);
+};
