@@ -6,7 +6,7 @@ namespace Tito10047\AltchaBundle\Tests\Functional;
 class AssetMapperTest  extends PantherTestCase {
 	public function testAssetMapper(): void
 	{
-		$client = static::createPantherAssetMapperClient();
+		$client = static::createPantherClient('AssetMapper');
 		$client->request('GET', '/');
 		$client->waitFor('.altcha-main',3);
 

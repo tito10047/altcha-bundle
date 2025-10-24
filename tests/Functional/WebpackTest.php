@@ -9,7 +9,7 @@ class WebpackTest  extends PantherTestCase {
 
 	public function testWebpack(): void
 	{
-		$client = static::createPantherWebpackClient();
+		$client = static::createPantherClient('Webpack');
 		$client->request('GET', '/');
 		$client->waitFor('.altcha-main',3);
 

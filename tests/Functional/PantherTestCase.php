@@ -7,7 +7,9 @@ use Tito10047\AltchaBundle\Tests\App\KernelTestCase;
 
 abstract class PantherTestCase extends KernelTestCase
 {
-	use WebTestAssertionsTrait;
+	use WebTestAssertionsTrait {
+		createPantherClient as createPantherClientTrait;
+	}
 
 	public const CHROME = 'chrome';
 	public const FIREFOX = 'firefox';
@@ -30,36 +32,13 @@ abstract class PantherTestCase extends KernelTestCase
 		self::getClient(null);
 	}
 
-	protected static function createPantherWebpackClient(): \Symfony\Component\Panther\Client {
-		return static::createPantherClient([
-			'webServerDir'=>__DIR__.'/../App/Webpack/public',
+	public static function createPantherClient(string $app): \Symfony\Component\Panther\Client {
+		return self::createPantherClientTrait([
+			'webServerDir'=>__DIR__."/../App/{$app}/public",
 		],[
-			'configDir'=>'Webpack/config',
+			'configDir'=>"{$app}/config",
 		]);
 	}
 
-	protected static function createPantherTwigClient(): \Symfony\Component\Panther\Client {
-		return static::createPantherClient([
-			'webServerDir'=>__DIR__.'/../App/Twig/public',
-		],[
-			'configDir'=>'Twig/config',
-		]);
-	}
-
-	protected static function createPantherAssetMapperClient(): \Symfony\Component\Panther\Client {
-		return static::createPantherClient([
-			'webServerDir'=>__DIR__.'/../App/AssetMapper/public',
-		],[
-			'configDir'=>'AssetMapper/config',
-		]);
-	}
-
-	protected static function createPantherOverlayClient(): \Symfony\Component\Panther\Client {
-		return static::createPantherClient([
-			'webServerDir'=>__DIR__.'/../App/Overlay/public',
-		],[
-			'configDir'=>'Overlay/config',
-		]);
-	}
 
 }

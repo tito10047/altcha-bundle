@@ -8,7 +8,7 @@ use Tito10047\AltchaBundle\Tests\Functional\PantherTestCase;
 class OverlayTest  extends PantherTestCase {
 	public function testOverlay(): void
 	{
-		$client = static::createPantherOverlayClient();
+		$client = static::createPantherClient('Overlay');
 		$client->request('GET', '/');
 		$client->waitFor('.altcha-main',3);
 
