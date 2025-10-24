@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\UX\StimulusBundle\StimulusBundle;
+use Symfony\Component\DependencyInjection\Exception\LogicException;
 
 class AltchaExtension extends Extension implements PrependExtensionInterface
 {
@@ -35,8 +36,13 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
      */
     private function registerAceEditorParameters(array $config, ContainerBuilder $container): void
     {
+        if ($config['floating'] && $config['overlay']) {
+            throw new LogicException('You must choose betwen floating and overlay modes.');
+        }
+
         $container->setParameter('altcha.enable', $config['enable']);
         $container->setParameter('altcha.floating', $config['floating']);
+        $container->setParameter('altcha.overlay', $config['overlay']);
         $container->setParameter('altcha.hmacKey', $config['hmacKey']);
         $container->setParameter('altcha.hide_logo', $config['hide_logo']);
         $container->setParameter('altcha.hide_footer', $config['hide_footer']);

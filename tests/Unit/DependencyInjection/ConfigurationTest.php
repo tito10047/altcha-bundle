@@ -26,6 +26,9 @@ class ConfigurationTest extends TestCase
         $this->assertArrayHasKey('floating', $config);
         $this->assertFalse($config['floating']);
 
+        $this->assertArrayHasKey('overlay', $config);
+        $this->assertFalse($config['overlay']);
+
         $this->assertArrayHasKey('use_stimulus', $config);
         $this->assertNull($config['use_stimulus']);
 

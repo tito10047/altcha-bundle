@@ -14,13 +14,14 @@
                 <script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
             {% endif %}
         {% endif %}
-        <altcha-widget
+        <altcha-widget debug="true"
                 data-tito10047--altcha-bundle--altcha-target="altcha"
                 data-live-ignore="data-live-ignore"
 				challengeurl="{{ challenge_url }}"
                 {% if hide_logo %}hidelogo{% endif %}
                 {% if hide_footer %}hidefooter{% endif %}
                 {% if floating %}floating{% endif %}
+                {% if overlay %}overlay="true"{% endif %}
                 {% if use_sentinel %}customfetch=altchaChallengeFetchWithFallback{% endif %}
         ></altcha-widget>
         </div>

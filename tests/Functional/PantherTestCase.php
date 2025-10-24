@@ -54,4 +54,12 @@ abstract class PantherTestCase extends KernelTestCase
 		]);
 	}
 
+	protected static function createPantherOverlayClient(): \Symfony\Component\Panther\Client {
+		return static::createPantherClient([
+			'webServerDir'=>__DIR__.'/../App/Overlay/public',
+		],[
+			'configDir'=>'Overlay/config',
+		]);
+	}
+
 }

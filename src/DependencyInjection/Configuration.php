@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->booleanNode('enable')->defaultTrue()->end()
             ->booleanNode('floating')->defaultFalse()->end()
+            ->booleanNode('overlay')->defaultFalse()->end()
             ->booleanNode('use_stimulus')->defaultNull()->end()
             ->booleanNode('include_script')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()

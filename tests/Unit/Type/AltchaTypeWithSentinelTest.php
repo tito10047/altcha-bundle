@@ -16,6 +16,7 @@ class AltchaTypeWithSentinelTest extends AltchaTypeTest
         $this->altchaType = new AltchaType(
             enable: true,
 			floating: true,
+			overlay: false,
 			useStimulus: true,
 			hideLogo: true,
 			hideFooter: true,
