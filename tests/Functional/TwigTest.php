@@ -20,5 +20,10 @@ class TwigTest  extends PantherTestCase {
 
 		$this->assertSelectorIsVisible('.altcha-main');
 		$this->assertSelectorAttributeContains('body>form>div>div>div', 'data-controller', 'tito10047--altcha-bundle--altcha');
+
+		//element must not contains debut attribute
+		$this->expectException(\TypeError::class);
+		$this->assertSelectorAttributeNotContains('altcha-widget', 'debug', 'true');
+
 	}
 }
