@@ -46,6 +46,7 @@ altcha:
     enable: true
     hmacKey: '%env(APP_SECRET)%'
     floating: true
+    overlay: false
     use_stimulus: false
     include_script: true
     hide_logo: false
@@ -68,6 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'enable' => true,
         'hmacKey' => 'RANDOM_SECRET_KEY',
         'floating' => true,
+        'overlay' => true,
         'use_stimulus' => false,
         'include_script' => true,
         'hide_logo' => false,

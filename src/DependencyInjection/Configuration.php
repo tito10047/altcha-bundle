@@ -22,7 +22,26 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->booleanNode('enable')->defaultTrue()->end()
             ->booleanNode('floating')->defaultFalse()->end()
-            ->booleanNode('overlay')->defaultFalse()->end()
+            ->arrayNode('overlay')
+                    ->beforeNormalization()
+                        ->ifTrue(static function ($v) {
+                            return \is_bool($v);
+                        })
+                        ->then(static function ($v) {
+                            return ['enabled' => $v];
+                        })
+                    ->end()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')
+                            ->defaultFalse()
+                        ->end()
+                        ->scalarNode('content')
+                            ->defaultValue(null)
+                            ->info('CSS selector for overlay content')
+                        ->end()
+                    ->end()
+                ->end() // end arrayNode('overlay')
             ->booleanNode('use_stimulus')->defaultNull()->end()
             ->booleanNode('include_script')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()

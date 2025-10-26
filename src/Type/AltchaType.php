@@ -21,6 +21,7 @@ class AltchaType extends AbstractType
         private readonly bool $enable,
         private readonly bool $floating,
         private readonly bool $overlay,
+        private readonly ?string $overlayContent,
         private readonly bool $useStimulus,
         private readonly bool $hideLogo,
         private readonly bool $hideFooter,
@@ -40,6 +41,7 @@ class AltchaType extends AbstractType
             'required' => false,
             'floating' => null,
             'overlay' => null,
+            'overlay_content' => null,
             'hide_logo' => null,
             'hide_footer' => null,
             'attr' => [
@@ -51,6 +53,7 @@ class AltchaType extends AbstractType
 
         $resolver->setAllowedTypes('floating', ['null', 'bool']);
         $resolver->setAllowedTypes('overlay', ['null', 'bool']);
+        $resolver->setAllowedTypes('overlay_content', ['null', 'string']);
         $resolver->setAllowedTypes('hide_logo', ['null', 'bool']);
         $resolver->setAllowedTypes('hide_footer', ['null', 'bool']);
     }
@@ -64,6 +67,7 @@ class AltchaType extends AbstractType
         $view->vars['enable'] = $this->enable;
         $view->vars['floating'] = $options['floating'] ?? $this->floating;
         $view->vars['overlay'] = $options['overlay'] ?? $this->overlay;
+        $view->vars['overlay_content'] = $options['overlay_content'] ?? $this->overlayContent;
         $view->vars['use_stimulus'] = $this->useStimulus;
         $view->vars['hide_logo'] = $options['hide_logo'] ?? $this->hideLogo;
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;

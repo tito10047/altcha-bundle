@@ -1,7 +1,9 @@
 altcha:
   enable: true
   hmacKey: '%env(APP_SECRET)%'
-  overlay: true
+  overlay:
+      enabled: true
+      content: "#my-content"
   include_script: true
   use_stimulus: false
   altcha_js_path: 'https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.js'

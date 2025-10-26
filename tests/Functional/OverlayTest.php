@@ -14,7 +14,10 @@ class OverlayTest  extends PantherTestCase {
 
 		$this->assertPageTitleContains('Welcome!');
 		$this->assertSelectorExists('.altcha-label');
+		$this->assertSelectorExists('.altcha-overlay');
 		$this->assertSelectorIsNotVisible('.altcha-label');
+
+		$this->assertSelectorExists('.altcha-overlay>#my-content');
 
 		$this->assertSelectorExists("#script-altcha","Altcha script need be included");
 		$this->assertSelectorExists("#script-altcha-i18n","Altcha i18n script need be included");

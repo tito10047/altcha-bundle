@@ -22,6 +22,7 @@
                 {% if hide_footer %}hidefooter{% endif %}
                 {% if floating %}floating{% endif %}
                 {% if overlay %}overlay="true"{% endif %}
+                {% if overlay_content %}overlaycontent="{{ overlay_content }}"{% endif %}
                 {% if use_sentinel %}customfetch=altchaChallengeFetchWithFallback{% endif %}
         ></altcha-widget>
         </div>
