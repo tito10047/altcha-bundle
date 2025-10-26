@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2025-09-10
+
+
+## [2.0.6] - 2025-10-26
+- Add 'content' option to Overlay UI mode
+
+## [2.0.4] - 2025-10-24
+- Implement Altcha Overlay UI mode
+
+## [2.0.3] - 2025-10-22
+- fix dependencies
+
+## [2.0.0] - 2025-09-24
 - BC break: include_script must be set to true by default on non webpack or asset mapper projects
 - BC break: renamed namespace from Huluti\HulutiAltchaBundle to Tito10047\AltchaBundle 
 - BC break: renamed config key from huluti_altcha to altcha 
