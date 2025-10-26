@@ -36,13 +36,14 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
      */
     private function registerAceEditorParameters(array $config, ContainerBuilder $container): void
     {
-        if ($config['floating'] && $config['overlay']) {
+        if ($config['floating'] && $config['overlay']['enabled']) {
             throw new LogicException('You must choose betwen floating and overlay modes.');
         }
 
         $container->setParameter('altcha.enable', $config['enable']);
         $container->setParameter('altcha.floating', $config['floating']);
-        $container->setParameter('altcha.overlay', $config['overlay']);
+        $container->setParameter('altcha.overlay', $config['overlay']['enabled']);
+        $container->setParameter('altcha.overlay_content', $config['overlay']['content']);
         $container->setParameter('altcha.hmacKey', $config['hmacKey']);
         $container->setParameter('altcha.hide_logo', $config['hide_logo']);
         $container->setParameter('altcha.hide_footer', $config['hide_footer']);

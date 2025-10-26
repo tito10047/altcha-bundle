@@ -17,6 +17,7 @@ class AltchaTypeWithSentinelTest extends AltchaTypeTest
             enable: true,
 			floating: true,
 			overlay: false,
+			overlayContent: null,
 			useStimulus: true,
 			hideLogo: true,
 			hideFooter: true,

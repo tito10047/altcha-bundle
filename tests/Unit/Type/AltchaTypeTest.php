@@ -26,6 +26,7 @@ class AltchaTypeTest extends TestCase
             enable: true,
 			floating: true,
 			overlay: false,
+			overlayContent: null,
 			useStimulus: true,
 			hideLogo: true,
 			hideFooter: true,
@@ -64,7 +65,7 @@ class AltchaTypeTest extends TestCase
     {
         $opts = new OptionsResolver();
         $this->altchaType->configureOptions($opts);
-        $resolved = $opts->resolve([$option => null]);
+        $resolved = $opts->resolve([$option => $value]);
 
         $formView = $this->createMock(FormView::class);
         $formInterface = $this->createMock(FormInterface::class);
@@ -103,7 +104,7 @@ class AltchaTypeTest extends TestCase
     }
     public static function defaultOptionsProvide(): Generator
     {
-        foreach(["floating"=>true, "overlay"=>false, "hide_logo"=>true, "hide_footer"=>true] as $option=>$value){
+        foreach(["floating"=>true, "overlay"=>false,"overlay_content"=>"foo", "hide_logo"=>true, "hide_footer"=>true] as $option=>$value){
                 yield "good option {$option} ".json_encode($value)=>[$option, $value];
         }
     }
