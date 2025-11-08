@@ -50,6 +50,8 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('altcha.hide_footer', $config['hide_footer']);
         $container->setParameter('altcha.js_path', $config['altcha_js_path']);
         $container->setParameter('altcha.i18n_path', $config['altcha_js_i18n_path']);
+        $container->setParameter('altcha.max_number', $config['max_number']);
+        $container->setParameter('altcha.expires', $config['expires']);
 
 		if($config["include_script"]!==null){
 			$container->setParameter('altcha.include_script', $config["include_script"]);

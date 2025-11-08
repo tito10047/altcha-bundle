@@ -87,7 +87,7 @@ class AltchaTypeTest extends TestCase
 
     public static function badOptionsProvider(): Generator
     {
-        foreach(["floating", "overlay", "hide_logo", "hide_footer"] as $option){
+        foreach(["floating", "overlay", "hide_logo", "hide_footer", 'expires'] as $option){
             foreach(["foo",1,1.1,[], new \stdClass()] as $value){
                 yield "bad option {$option} ".json_encode($value)=>[$option, $value];
             }
@@ -104,7 +104,15 @@ class AltchaTypeTest extends TestCase
     }
     public static function defaultOptionsProvide(): Generator
     {
-        foreach(["floating"=>true, "overlay"=>false,"overlay_content"=>"foo", "hide_logo"=>true, "hide_footer"=>true] as $option=>$value){
+        foreach([
+			"floating"=>true,
+			"overlay"=>false,
+			"overlay_content"=>"foo",
+			"hide_logo"=>true,
+			"hide_footer"=>true,
+			"max_number"=>100000,
+			"expires"=>'+15 minutes',
+		] as $option=>$value){
                 yield "good option {$option} ".json_encode($value)=>[$option, $value];
         }
     }
