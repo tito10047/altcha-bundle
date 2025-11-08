@@ -12,12 +12,14 @@ class Configuration implements ConfigurationInterface
     /**
      * @psalm-suppress PossiblyNullReference
      * @psalm-suppress UndefinedInterfaceMethod
+	 * @psalm-suppress InvalidReturnType
      */
-    public function getConfigTreeBuilder(): TreeBuilder
+    public function getConfigTreeBuilder(): TreeBuilder // @phpstan-ignore  missingType.generics
     {
         $treeBuilder = new TreeBuilder('altcha');
         $rootNode = $treeBuilder->getRootNode();
 
+		// @phpstan-ignore-next-line
         $rootNode
             ->children()
             ->booleanNode('enable')->defaultTrue()->end()
