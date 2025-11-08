@@ -13,13 +13,14 @@ class ChallengeResolver implements ChallengeResolverInterface
     public function __construct(
         private readonly string $hmacKey,
         private readonly string $expires,
+        private readonly int $maxNumber,
     ) {
     }
 
     public function getChallenge(): Challenge
     {
         $options = new ChallengeOptions(
-            maxNumber: 100000,
+            maxNumber: $this->maxNumber,
             expires: (new \DateTime())->modify($this->expires),
         );
 

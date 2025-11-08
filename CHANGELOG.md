@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [2.0.7] - 2025-11-08
+- Add 'max_number' and 'expires' options to config
+
 ## [2.0.6] - 2025-10-26
 - Add 'content' option to Overlay UI mode
 

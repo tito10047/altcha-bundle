@@ -33,4 +33,5 @@ services:
     class: Tito10047\AltchaBundle\Service\ChallengeResolver
     arguments:
       $hmacKey: '%altcha.hmacKey%'
-      $expires: '+15 minute'
+      $expires: '%altcha.expires%'
+      $maxNumber: '%altcha.max_number%'

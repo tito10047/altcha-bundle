@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
@@ -47,6 +49,8 @@ class AltchaType extends AbstractType
             'attr' => [
                 'hidden' => true,
             ],
+			'expires'=>'+15 minutes',
+			'max_number'=>100000,
             'constraints' => $this->useSentinel ? new AltchaSentinel() : new Altcha(),
             'label' => false,
         ]);
@@ -56,6 +60,21 @@ class AltchaType extends AbstractType
         $resolver->setAllowedTypes('overlay_content', ['null', 'string']);
         $resolver->setAllowedTypes('hide_logo', ['null', 'bool']);
         $resolver->setAllowedTypes('hide_footer', ['null', 'bool']);
+        $resolver->setAllowedTypes('expires', ['null', 'string']);
+        $resolver->setAllowedTypes('max_number', ['null', 'integer']);
+
+        // Validate that "expires" is either null or a valid time expression parsable by strtotime
+        $resolver->setNormalizer('expires', static function (Options $options, $value): mixed {
+            if (null === $value) {
+                return $value;
+            }
+
+            if (!\is_string($value) || '' === trim($value) || false === \strtotime($value)) {
+                throw new InvalidOptionsException('Invalid time expression for "expires". Use a string parseable by strtotime, e.g., "+15 minutes" or "2025-12-31 23:59:00".');
+            }
+
+            return $value;
+        });
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
@@ -73,6 +92,8 @@ class AltchaType extends AbstractType
         $view->vars['hide_footer'] = $options['hide_footer'] ?? $this->hideFooter;
         $view->vars['js_path'] = $this->jsPath;
         $view->vars['i18n_path'] = $this->i18nPath;
+        $view->vars['expires'] = $options['expires'];
+        $view->vars['max_number'] = $options['max_number'];
 		$view->vars['use_sentinel'] = $this->useSentinel;
 		$view->vars['include_script'] = $this->includeScript;
 		if ($this->useSentinel){

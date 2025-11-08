@@ -43,6 +43,17 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end() // end arrayNode('overlay')
             ->booleanNode('use_stimulus')->defaultNull()->end()
+			->integerNode('max_number')->defaultValue(100000)->end()
+			->scalarNode('expires')
+				->defaultValue('+15 minute')
+                ->cannotBeEmpty()
+                ->validate()
+                    ->ifTrue(static function ($v) {
+                        return !\is_string($v) || false === \strtotime($v);
+                    })
+                    ->thenInvalid('Invalid time expression for "expires". Use a string parseable by strtotime, e.g., "+15 minutes" or "2025-12-31 23:59:00".')
+                ->end()
+            ->end()
             ->booleanNode('include_script')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
