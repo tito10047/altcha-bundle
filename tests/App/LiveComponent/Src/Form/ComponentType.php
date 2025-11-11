@@ -20,7 +20,7 @@ class ComponentType extends AbstractType {
 			->add("name",TextType::class,[
 				"label"=>"Name",
 				"constraints"=>[
-					new Length(5,100),
+					new Length(min:5,max:100),
 					new NotBlank()
 				]
 			])

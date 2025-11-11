@@ -84,6 +84,12 @@ jobs:
       - name: "Asset Mapper compile"
         run: "./tests/App/AssetMapper/bin/console asset-map:compile"
 
+      - name: "Asset Mapper Install"
+        run: "./tests/App/LiveComponent/bin/console importmap:install"
+
+      - name: "Asset Mapper compile"
+        run: "./tests/App/LiveComponent/bin/console asset-map:compile"
+
       - name: "yarn install"
         run: "yarn --cwd tests/App/Webpack/ install"
 

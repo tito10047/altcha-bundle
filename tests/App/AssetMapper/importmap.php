@@ -22,9 +22,6 @@ return [
     '@symfony/stimulus-bundle' => [
         'path' => '../../../vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
-    '@hotwired/turbo' => [
-        'version' => '7.3.0',
-    ],
     'altcha/dist/altcha.i18n.js' => [
         'version' => '2.2.3',
     ],

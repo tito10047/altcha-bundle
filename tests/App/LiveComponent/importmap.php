@@ -25,9 +25,6 @@ return [
     '@symfony/ux-live-component' => [
         'path' => '../../../vendor/symfony/ux-live-component/assets/dist/live_controller.js',
     ],
-    '@hotwired/turbo' => [
-        'version' => '7.3.0',
-    ],
     'altcha/dist/altcha.i18n.js' => [
         'version' => '2.2.3',
     ],

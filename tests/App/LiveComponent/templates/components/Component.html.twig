@@ -5,6 +5,9 @@
 			'data-live-action-param': 'save'
 		}
 	}) }}
+	{% if this.message is not null %}
+		<h3>{{ this.message }}</h3>
+	{% endif %}
 	{{ form_rest(form) }}
 
 	{{ form_end(form) }}
