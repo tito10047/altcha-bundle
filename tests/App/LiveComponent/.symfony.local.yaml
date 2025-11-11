@@ -1,0 +1,6 @@
+proxy:
+    domains:
+        - altcha-component
+http:
+    daemon: true
+workers:

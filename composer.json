@@ -62,7 +62,9 @@
     "twig/twig": "^2.12|^3.21.1",
     "symfony/panther": "^2.2",
     "dbrekelmans/bdi": "^1.4",
-    "symfony/asset-mapper": "^6.4|^7.3|8.0"
+    "symfony/asset-mapper": "^6.4|^7.3|8.0",
+    "symfony/ux-live-component": "^2.31",
+    "symfony/ux-twig-component": "^2.31"
   },
   "scripts" : {
     "test": [
