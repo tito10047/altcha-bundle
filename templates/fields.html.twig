@@ -29,11 +29,11 @@
     {% endif %}
     {% if use_sentinel %}
     <script>
-        async function altchaChallengeFetchWithFallback(url) {
+        async function altchaChallengeFetchWithFallback(url, init) {
             try {
-                return await fetch(url);
+                return await fetch(url, init);
             } catch (e) {
-                return await fetch("{{ path('altcha_challenge') }}");
+                return await fetch("{{ path('altcha_challenge') }}", init);
             }
           };
     </script>
