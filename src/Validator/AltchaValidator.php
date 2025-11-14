@@ -35,6 +35,11 @@ final class AltchaValidator extends ConstraintValidator
             $value = $request?->request->get('altcha');
         }
 
+        if (!$value) {
+            $request = $this->requestStack->getMainRequest();
+            $value = $request?->request->get('altcha');
+        }
+
         if (!is_string($value)) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();

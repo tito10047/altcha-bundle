@@ -7,6 +7,7 @@ namespace Tito10047\AltchaBundle\Tests\Unit\Validator;
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
 use DateTime;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tito10047\AltchaBundle\Validator\AltchaValidator;
 use JsonException;
 use PHPUnit\Framework\TestCase;
@@ -75,7 +76,8 @@ class AltchaValidatorRequestTest extends TestCase
         $validator->validate(null, $constraint);
     }
 
-    public function testAltchaIsValid():void
+    #[DataProvider('requestTypeProvider')]
+    public function testAltchaIsValid(bool $mainRequest):void
     {
         $options = new ChallengeOptions(
             maxNumber: 100000,
@@ -88,10 +90,13 @@ class AltchaValidatorRequestTest extends TestCase
 
         $requestStack = $this->createMock(RequestStack::class);
         $request = $this->createMock(Request::class);
-        $requestStack->method('getCurrentRequest')->willReturn($request);
+        $emptyRequest = $this->createMock(Request::class);
+        $requestStack->method('getCurrentRequest')->willReturn($mainRequest ? $emptyRequest : $request);
+        $requestStack->method('getMainRequest')->willReturn($mainRequest ? $request : $emptyRequest);
         $request->request = new InputBag([
             "altcha" => base64_encode(json_encode($challenge))
         ]);
+        $emptyRequest->request = new InputBag();
 
         $validator = new AltchaValidator(true, 'test-key', $requestStack);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
@@ -101,6 +106,11 @@ class AltchaValidatorRequestTest extends TestCase
         $context->expects($this->never())->method('buildViolation');
 
         $validator->validate(null, $constraint);
+    }
 
+    public static function requestTypeProvider(): iterable
+    {
+        yield 'Current request' => [false];
+        yield 'Main request' => [true];
     }
 }
