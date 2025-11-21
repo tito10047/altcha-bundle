@@ -16,7 +16,14 @@
   "authors": [
     {
       "name": "Hugo Posnic",
-      "homepage": "https://github.com/Tito10047"
+      "homepage": "https://github.com/Huluti",
+      "role": "Founder of package"
+    },
+    {
+      "name": "Jozef Môstka",
+      "homepage": "https://vsetkosada.sk/en",
+      "email": "kontakt@vsetkosada.sk",
+      "role": "Main developer of package"
     }
   ],
   "require": {
