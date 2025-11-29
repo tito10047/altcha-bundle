@@ -23,6 +23,7 @@ jobs:
         symfony:
           - '6.4.*'
           - '7.3.*'
+          - '7.4.*'
           - '8.0.*'
         operating-system:
           - "ubuntu-latest"
@@ -30,6 +31,9 @@ jobs:
           # Symfony 7.3 does not support PHP 8.1
           - php-version: "8.1"
             symfony: '7.3.*'
+            operating-system: "ubuntu-latest"
+          - php-version: "8.1"
+            symfony: '7.4.*'
             operating-system: "ubuntu-latest"
           - php-version: "8.1"
             symfony: '8.0.*'
