@@ -12,8 +12,7 @@ class Kernel extends BaseKernel {
 	}
 
 
-	public function registerContainerConfiguration(LoaderInterface $loader)
-	{
+	public function registerContainerConfiguration(LoaderInterface $loader): void {
 		$this->registerContainerConfigurationTrait($loader);
 
 		// load importmap extension here because it not work when is in dev requiremdents
