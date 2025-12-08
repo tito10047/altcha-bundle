@@ -14,7 +14,7 @@ class Configuration implements ConfigurationInterface
      * @psalm-suppress UndefinedInterfaceMethod
 	 * @psalm-suppress InvalidReturnType
      */
-    public function getConfigTreeBuilder(): TreeBuilder // @phpstan-ignore  missingType.generics
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('altcha');
         $rootNode = $treeBuilder->getRootNode();
