@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
+          - "8.5"
         symfony:
           - '6.4.*'
           - '7.3.*'
@@ -28,16 +28,6 @@ jobs:
         operating-system:
           - "ubuntu-latest"
         exclude:
-          # Symfony 7.3 does not support PHP 8.1
-          - php-version: "8.1"
-            symfony: '7.3.*'
-            operating-system: "ubuntu-latest"
-          - php-version: "8.1"
-            symfony: '7.4.*'
-            operating-system: "ubuntu-latest"
-          - php-version: "8.1"
-            symfony: '8.0.*'
-            operating-system: "ubuntu-latest"
           - php-version: "8.2"
             symfony: '8.0.*'
             operating-system: "ubuntu-latest"
