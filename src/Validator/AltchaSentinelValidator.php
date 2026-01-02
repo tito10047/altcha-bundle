@@ -69,10 +69,10 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
         try {
             $responseContent = $response->toArray();
         } catch (TransportExceptionInterface|DecodingExceptionInterface|HttpExceptionInterface $e) {
-            if ($this->logger) {
+            if ($this->logger instanceof \Psr\Log\LoggerInterface) {
                 $this->logger->error(sprintf(
                     'Encountered a %s exception while querying %s endpoint: details: "%s", will use local validation instead.',
-                    get_class($e),
+                    $e::class,
                     $this->verifySignatureUrl,
                     $e->getMessage()
                 ));
@@ -102,7 +102,7 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
         ) {
             return;
         }
-        if ($this->logger) {
+        if ($this->logger instanceof \Psr\Log\LoggerInterface) {
             $this->logger->warning(sprintf(
                 'Sentinel server refused the verification, received "%s"; it may be due to a mismatch of api key.',
                 json_encode($responseContent)

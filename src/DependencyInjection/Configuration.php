@@ -26,12 +26,8 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('floating')->defaultFalse()->end()
             ->arrayNode('overlay')
                     ->beforeNormalization()
-                        ->ifTrue(static function ($v) {
-                            return \is_bool($v);
-                        })
-                        ->then(static function ($v) {
-                            return ['enabled' => $v];
-                        })
+                        ->ifTrue(\is_bool(...))
+                        ->then(static fn($v): array => ['enabled' => $v])
                     ->end()
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -50,9 +46,7 @@ class Configuration implements ConfigurationInterface
 				->defaultValue('+15 minute')
                 ->cannotBeEmpty()
                 ->validate()
-                    ->ifTrue(static function ($v) {
-                        return !\is_string($v) || false === \strtotime($v);
-                    })
+                    ->ifTrue(static fn($v): bool => !\is_string($v) || false === \strtotime($v))
                     ->thenInvalid('Invalid time expression for "expires". Use a string parseable by strtotime, e.g., "+15 minutes" or "2025-12-31 23:59:00".')
                 ->end()
             ->end()
