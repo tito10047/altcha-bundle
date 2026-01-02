@@ -56,7 +56,7 @@ final class AltchaValidator extends ConstraintValidator
         }
 		try {
 			$payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
-		}catch (\JsonException $e) {
+		}catch (\JsonException) {
 			$this->context->buildViolation($constraint->message)
 				->addviolation();
 			return;

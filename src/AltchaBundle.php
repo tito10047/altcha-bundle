@@ -18,6 +18,7 @@ class AltchaBundle extends AbstractBundle
         $container->addCompilerPass(new AltchaBundleCompilerPass());
     }
 
+    #[\Override]
     public function getContainerExtension(): ?ExtensionInterface
     {
         return new AltchaExtension();

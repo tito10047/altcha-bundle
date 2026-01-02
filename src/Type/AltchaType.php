@@ -107,11 +107,13 @@ class AltchaType extends AbstractType
 		}
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'altcha';
     }
 
+    #[\Override]
     public function getParent(): ?string
     {
         return TextType::class;

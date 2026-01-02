@@ -29,14 +29,14 @@
   "require": {
     "php": ">=8.2",
     "altcha-org/altcha": "^v1.3.1",
-    "symfony/console": "^6.4|^7.3|^7.4|8.0",
-    "symfony/form": "^6.4|^7.3|^7.4|8.0",
-    "symfony/framework-bundle": "^6.4|^7.3|^7.4|8.0",
-    "symfony/http-client": "^6.4|^7.3|^7.4|8.0",
-    "symfony/translation": "^6.4|^7.3|^7.4|8.0",
-    "symfony/twig-bundle": "^6.4|^7.3|^7.4|8.0",
-    "symfony/validator": "^6.4|^7.3|^7.4|8.0",
-    "symfony/yaml": "^6.4|^7.3|^7.4|8.0"
+    "symfony/console": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/form": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/framework-bundle": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/http-client": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/translation": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/twig-bundle": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/validator": "^6.4|^7.3|^7.4|^8.0",
+    "symfony/yaml": "^6.4|^7.3|^7.4|^8.0"
   },
   "autoload": {
     "psr-4": {
@@ -56,16 +56,16 @@
     "phpunit/phpunit": "^10.5",
     "ext-ctype": "*",
     "ext-iconv": "*",
-    "symfony/dotenv": "^6.4|7.4.*|8.0",
-    "symfony/runtime": "^6.4|7.4.*|8.0",
+    "symfony/dotenv": "^6.4|7.4.*|^8.0",
+    "symfony/runtime": "^6.4|7.4.*|^8.0",
     "symfony/stimulus-bundle": "^2.30",
-    "symfony/web-profiler-bundle": "^6.4|7.4.*|8.0",
-    "symfony/debug-bundle": "^6.4|7.4.*|8.0",
+    "symfony/web-profiler-bundle": "^6.4|7.4.*|^8.0",
+    "symfony/debug-bundle": "^6.4|7.4.*|^8.0",
     "symfony/webpack-encore-bundle": "^2.3",
     "twig/twig": "^2.12|^3.21.1",
     "symfony/panther": "dev-symfony-8-support",
     "dbrekelmans/bdi": "^1.4",
-    "symfony/asset-mapper": "^6.4|^7.3|^7.4|8.0"
+    "symfony/asset-mapper": "^6.4|^7.3|^7.4|^8.0"
   },
   "scripts" : {
     "test": [
