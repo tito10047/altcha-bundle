@@ -63,7 +63,7 @@
     "symfony/debug-bundle": "^6.4|7.4.*|^8.0",
     "symfony/webpack-encore-bundle": "^2.3",
     "twig/twig": "^2.12|^3.21.1",
-    "symfony/panther": "dev-symfony-8-support",
+    "symfony/panther": "^v2.4.0",
     "dbrekelmans/bdi": "^1.4",
     "symfony/asset-mapper": "^6.4|^7.3|^7.4|^8.0"
   },
@@ -85,11 +85,5 @@
       "require": "8.0.*"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/Kocal/symfony-panther"
-    }
-  ],
   "minimum-stability": "beta"
 }
