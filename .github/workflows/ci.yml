@@ -95,13 +95,13 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: "Cache dependencies"
-                uses: "actions/cache@v3"
+                uses: "actions/cache@v4"
                 with:
                     path: |
                         ~/.composer/cache
                         vendor
-                    key: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}-${{ matrix.dependencies }}"
-                    restore-keys: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}-${{ matrix.dependencies }}"
+                    key: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}"
+                    restore-keys: "php-${{ matrix.php-version }}-symfony-${{ matrix.symfony }}-${{ matrix.dependencies }}-"
 
             -   name: "Install dependencies"
                 run: |
@@ -155,7 +155,7 @@ jobs:
                 uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-composer-
             -   name: Install Dependencies
