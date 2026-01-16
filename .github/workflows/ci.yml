@@ -180,13 +180,13 @@ jobs:
                     curl -s http://127.0.0.1:8000/test-bundle > response.html
                     RESPONSE=$(cat response.html)
 
-                    if [[ "$RESPONSE" == *"altcha-main"* ]]; then
+                    if [[ "$RESPONSE" == *"altcha-widget"* ]]; then
                       echo "Altcha widget found in response."
                     else
                       echo "Altcha widget NOT found in response!"
                       exit 1
                     fi
-                    if [[ "$RESPONSE" == *"altcha-org/altcha"* || "$RESPONSE" == *"tito10047--altcha-bundle--altcha"* ]]; then
+                    if [[ "$RESPONSE" == *"altcha.min.js"* || "$RESPONSE" == *"tito10047--altcha-bundle--altcha"* ]]; then
                       echo "Altcha assets/controller found."
                     else
                       echo "Altcha assets/controller NOT found!"
