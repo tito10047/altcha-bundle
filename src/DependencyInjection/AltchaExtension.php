@@ -101,7 +101,7 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
             $container->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        __DIR__.'/../../assets/controllers' => 'tito10047/altcha-bundle',
+                        __DIR__.'/../../assets/controllers' => '@tito10047/altcha-bundle',
                     ],
                 ],
             ]);
