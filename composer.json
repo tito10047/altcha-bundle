@@ -81,6 +81,9 @@
   "extra": {
     "symfony-web-dir": "./tests/App/AssetMapper/public",
     "public-dir": "./tests/App/AssetMapper/public",
+    "branch-alias": {
+      "dev-main": "2.0-dev"
+    },
     "symfony": {
       "require": "8.0.*"
     }

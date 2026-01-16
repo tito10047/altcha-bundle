@@ -147,8 +147,6 @@ jobs:
             -   name: Create Dummy Symfony Project
                 run: |
                     composer create-project symfony/skeleton dummy-project
-                    cd dummy-project
-                    composer config repositories.local '{"type": "path", "url": "../my-bundle"}'
             -   name: Get Composer Cache Directory
                 id: composer-cache
                 run: |
@@ -166,7 +164,9 @@ jobs:
                     composer config extra.symfony.allow-contrib true
                     composer config minimum-stability dev
                     composer config prefer-stable true
-                    composer require tito10047/altcha-bundle:dev-main --no-scripts
+                    # Explicitly set the repository with path and version as requested
+                    composer config repositories.local '{"type": "path", "url": "../my-bundle", "options": {"symlink": true, "versions": {"tito10047/altcha-bundle": "2.0.0"}}}'
+                    composer require tito10047/altcha-bundle:"2.0.0" --no-scripts
             -   name: Copy E2E Test Files
                 run: |
                     cp -R my-bundle/tests_e2e/basic/* dummy-project/
