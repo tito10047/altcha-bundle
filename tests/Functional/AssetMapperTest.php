@@ -11,7 +11,7 @@ class AssetMapperTest  extends PantherTestCase {
 		$client->waitFor('.altcha-main',3);
 
 		$this->assertPageTitleContains('Welcome!');
-		$this->assertSelectorTextContains('.altcha-label', 'Nie som robot');
+		$this->assertSelectorTextContains('.altcha-label', 'I\'m not a robot');
 
 		$this->assertSelectorNotExists("#script-altcha","Altcha script need not included");
 		$this->assertSelectorNotExists("#script-altcha-i18n","Altcha i18n script need not included");
