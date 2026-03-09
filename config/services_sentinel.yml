@@ -1,4 +1,12 @@
 services:
+  altcha.sentinel.http_client:
+    class: Symfony\Component\HttpClient\HttpClient
+    constructor: 'create'
+    arguments:
+      $defaultOptions:
+        base_uri: '%altcha.sentinel.base_url%'
+    tags: ['http_client.client']
+
   altcha.sentinel.validator:
     class: Tito10047\AltchaBundle\Validator\AltchaSentinelValidator
     tags: ['validator.constraint_validator']
@@ -6,7 +14,7 @@ services:
       $enable: '%altcha.enable%'
       $apiKey: '%altcha.sentinel.api_key%'
       $verifySignatureUrl: '%altcha.sentinel.verify_signature_url%'
-      $httpClient: '@Symfony\Contracts\HttpClient\HttpClientInterface'
+      $httpClient: '@altcha.sentinel.http_client'
       $requestStack: '@request_stack'
       $hmacKey: '%altcha.hmacKey%'
     calls:
