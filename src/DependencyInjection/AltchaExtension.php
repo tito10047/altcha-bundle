@@ -82,7 +82,7 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
                 $sentinelConfig['api_key']
             ));
             /* @see https://altcha.org/docs/v2/server-integration/ */
-            $container->setParameter('altcha.sentinel.verify_signature_url', '%s/v1/verify/signature');
+            $container->setParameter('altcha.sentinel.verify_signature_url', '/v1/verify/signature');
         } else {
             $container->setParameter('altcha.sentinel.challenge_url', null);
         }
