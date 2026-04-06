@@ -1,0 +1,11 @@
+/.env              export-ignore
+/.git*             export-ignore
+/.php-cs-fixer.php export-ignore
+/bin               export-ignore
+/CHANGELOG.md      export-ignore
+/Makefile          export-ignore
+/phpstan.neon      export-ignore
+/phpunit.xml.dist  export-ignore
+/rector.php        export-ignore
+/SECURITY.md       export-ignore
+/tests*            export-ignore
