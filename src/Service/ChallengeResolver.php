@@ -13,6 +13,7 @@ use Random\RandomException;
 class ChallengeResolver implements ChallengeResolverInterface
 {
     public function __construct(
+		private readonly DriverKeyProviderInterface $driverKeyProvider,
 		private readonly string $hmacSignature,
 		private readonly string $hmacKeySignature,
 		private readonly int $cost,
@@ -27,9 +28,8 @@ class ChallengeResolver implements ChallengeResolverInterface
 	 */
 	public function getChallenge(): Challenge
     {
-		$pbkdf2 = new Pbkdf2();
         $options = new CreateChallengeOptions(
-			algorithm: $pbkdf2,
+			algorithm: $this->driverKeyProvider->getAlgorithm(),
 			cost: $this->cost,
 			counter: random_int($this->counterMin, $this->counterMax),
 			expiresAt: new \DateTimeImmutable($this->expiresAt),

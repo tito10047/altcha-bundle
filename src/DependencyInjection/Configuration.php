@@ -73,6 +73,13 @@ class Configuration implements ConfigurationInterface
                 ->setDeprecated('tito10047/altcha-bundle', '1.1', 'The "%node%" option is deprecated, use "hmacSignature" instead.')
                 ->defaultValue(null)
             ->end()
+            ->scalarNode('hmacAlgorithm')
+                ->defaultValue('SHA-256')
+                ->validate()
+                    ->ifNotInArray(['SHA-256', 'SHA-384', 'SHA-512'])
+                    ->thenInvalid('Invalid HMAC algorithm "%s". Permitted values are SHA-256, SHA-384, SHA-512.')
+                ->end()
+            ->end()
             ->scalarNode('hmacSignature')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('hmacKeySignature')->defaultNull()->end()
             ->arrayNode('sentinel')->info(<<<TXT

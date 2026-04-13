@@ -4,20 +4,35 @@ declare(strict_types=1);
 
 namespace Tito10047\AltchaBundle\Tests\Unit\Validator;
 
-use AltchaOrg\Altcha\Altcha;
-use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\V1\Altcha;
+use AltchaOrg\Altcha\V1\ChallengeOptions;
 use DateTime;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tito10047\AltchaBundle\Validator\AltchaValidator;
-use JsonException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
+use Tito10047\AltchaBundle\Service\DriverKeyProviderInterface;
+use Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface;
+use Tito10047\AltchaBundle\Validator\AltchaValidator;
 
 class AltchaValidatorRequestTest extends TestCase
 {
+    private function createValidator(RequestStack $requestStack): AltchaValidator
+    {
+        return new AltchaValidator(
+            true,
+            'key',
+            'key-sig',
+            $requestStack,
+            $this->createMock(DriverKeyProviderInterface::class),
+            $this->createMock(SolveChallengeResolverInterface::class),
+            $this->createMock(ChallengeResolverInterface::class)
+        );
+    }
+
     public function testAltchaNotInRequest()
     {
         $requestStack = $this->createMock(RequestStack::class);
@@ -27,7 +42,7 @@ class AltchaValidatorRequestTest extends TestCase
             "altcha" => null
         ]);
 
-        $validator = new AltchaValidator(true, 'key', $requestStack);
+        $validator = $this->createValidator($requestStack);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
@@ -46,7 +61,7 @@ class AltchaValidatorRequestTest extends TestCase
             "altcha" => 'not base64 encoded'
         ]);
 
-        $validator = new AltchaValidator(true, 'key', $requestStack);
+        $validator = $this->createValidator($requestStack);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
@@ -66,7 +81,7 @@ class AltchaValidatorRequestTest extends TestCase
             "altcha" => base64_encode(json_encode(['solution' => 'not valid']))
         ]);
 
-        $validator = new AltchaValidator(true, 'key', $requestStack);
+        $validator = $this->createValidator($requestStack);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
@@ -98,7 +113,7 @@ class AltchaValidatorRequestTest extends TestCase
         ]);
         $emptyRequest->request = new InputBag();
 
-        $validator = new AltchaValidator(true, 'test-key', $requestStack);
+        $validator = $this->createValidator($requestStack);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);

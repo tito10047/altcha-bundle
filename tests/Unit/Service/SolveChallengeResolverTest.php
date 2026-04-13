@@ -7,6 +7,7 @@ namespace Tito10047\AltchaBundle\Tests\Unit\Service;
 use AltchaOrg\Altcha\Solution;
 use PHPUnit\Framework\TestCase;
 use Tito10047\AltchaBundle\Service\ChallengeResolver;
+use Tito10047\AltchaBundle\Service\DriverKeyProvider;
 use Tito10047\AltchaBundle\Service\SolveChallengeResolver;
 
 class SolveChallengeResolverTest extends TestCase
@@ -21,6 +22,7 @@ class SolveChallengeResolverTest extends TestCase
         $expiresAt = '+1 hour';
 
         $resolver = new ChallengeResolver(
+            new DriverKeyProvider('SHA-256'),
             $hmacSignature,
             $hmacKeySignature,
             100, // Menšia náročnosť pre rýchlejšie riešenie

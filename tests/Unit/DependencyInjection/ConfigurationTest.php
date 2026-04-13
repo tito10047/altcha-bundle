@@ -44,6 +44,35 @@ class ConfigurationTest extends TestCase
         $this->assertEquals('legacy_key', $config['hmacSignature']);
         $this->assertArrayHasKey('hmacKey', $config);
         $this->assertEquals('legacy_key', $config['hmacKey']);
+        $this->assertEquals('SHA-256', $config['hmacAlgorithm']);
+    }
+
+    public function testCustomHmacAlgorithm(): void
+    {
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $config = $processor->processConfiguration($configuration, [
+            'altcha' => [
+                'hmacSignature' => 'test_sig',
+                'hmacAlgorithm' => 'SHA-512',
+            ],
+        ]);
+        $this->assertEquals('SHA-512', $config['hmacAlgorithm']);
+    }
+
+    public function testInvalidHmacAlgorithmThrowsException(): void
+    {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectExceptionMessage('Invalid HMAC algorithm ""INVALID"". Permitted values are SHA-256, SHA-384, SHA-512.');
+
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $processor->processConfiguration($configuration, [
+            'altcha' => [
+                'hmacSignature' => 'test_sig',
+                'hmacAlgorithm' => 'INVALID',
+            ],
+        ]);
     }
 
     public function testMissingHmacThrowsException(): void
