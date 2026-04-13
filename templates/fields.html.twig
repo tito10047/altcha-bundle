@@ -9,6 +9,27 @@
 		     data-{{ controller }}-overlay_content-value="{{ overlay_content|json_encode }}"
 		     data-{{ controller }}-challenge-url-value="{{ path('altcha_challenge') }}"
 		>
+			{% if include_script %}
+				<script async defer src="{{ js_path }}" id="script-altcha" type="module"></script>
+			{% if i18n_path is not null %}
+				<script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
+			{% endif %}
+			{% endif %}
+
+			<altcha-widget
+					id="{{ id }}"
+					data-{{ controller }}-target="altcha"
+					data-live-ignore="data-live-ignore"
+					challenge="{{ challenge_url }}"
+					{% if floating %}
+						display="floating"
+					{% elseif overlay %}
+						display="overlay"
+					{% else %}
+						display="standard"
+					{% endif %}
+			></altcha-widget>
+
 			{% if use_stimulus %}
 				{{ form_widget(form,{
 					attr:{
@@ -27,58 +48,30 @@
 					};
 					{% endif %}
 					window.addEventListener('load', () => {
-						// Nájdeme náš widget pomocou tvojho unikátneho data atribútu
 						const widget = document.getElementById('{{ id }}');
 
 						if (widget) {
-							// Vytvoríme prázdny konfiguračný objekt
 							const config = {};
-
-							// Dynamicky pridáme nastavenia podľa podmienok z tvojej šablóny
 							{% if hide_logo %}
 							config.hideLogo = true;
 							{% endif %}
-
 							{% if hide_footer %}
 							config.hideFooter = true;
 							{% endif %}
-
 							{% if overlay_content %}
 							config.overlayContent = "{{ overlay_content }}";
 							{% endif %}
-
 							{% if use_sentinel %}
-							// Namiesto "customfetch" sa teraz parameter volá "fetch"
 							config.fetch = altchaChallengeFetchWithFallback;
 							{% endif %}
-
-							// Aplikujeme kompletnú konfiguráciu priamo na inštanciu widgetu
 							widget.configure(config);
+						}else{
+							console.error("Altcha widget not found");
 						}
 					});
 				</script>
 
 			{% endif %}
-			{% if include_script %}
-				<script async defer src="{{ js_path }}" id="script-altcha" type="module"></script>
-			{% if i18n_path is not null %}
-				<script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
-			{% endif %}
-			{% endif %}
-
-			<altcha-widget
-					if="{{ id }}"
-					data-{{ controller }}-target="altcha"
-					data-live-ignore="data-live-ignore"
-					challenge="{{ challenge_url }}"
-					{% if floating %}
-						display="floating"
-					{% elseif overlay %}
-						display="overlay"
-					{% else %}
-						display="standard"
-					{% endif %}
-			></altcha-widget>
 		</div>
 	{% endif %}
 {% endblock %}
