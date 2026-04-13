@@ -1,6 +1,6 @@
-# Migration Guide: 1.0 to 2.0
+# Migration Guide: 2.0 to 3.0
 
-This guide outlines the changes required to migrate from version 1.0 to 2.0 of the `altcha-bundle`.
+This guide outlines the changes required to migrate from version 2.0 to 3.0 of the `altcha-bundle`.
 
 ## JavaScript Changes
 
