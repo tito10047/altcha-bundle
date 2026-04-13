@@ -15,6 +15,10 @@ services:
       $useSentinel: '%altcha.use_sentinel%'
       $challengeUrl: '%altcha.sentinel.challenge_url%'
       $includeScript: '%altcha.include_script%'
+      $cost: '%altcha.cost%'
+      $counterMin: '%altcha.counter_min%'
+      $counterMax: '%altcha.counter_max%'
+      $timeout: '%altcha.timeout%'
       $router: '@router'
   altcha.validator:
     class: Tito10047\AltchaBundle\Validator\AltchaValidator

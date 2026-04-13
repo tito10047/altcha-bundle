@@ -34,6 +34,10 @@ class AltchaTypeTest extends TestCase
 			i18nPath: "test",
 			useSentinel: false,
 			includeScript: true,
+			cost: 5000,
+			counterMin: 5000,
+			counterMax: 10000,
+			timeout: 30,
 			router: $router,
 			challengeUrl: '',
         );
@@ -112,6 +116,10 @@ class AltchaTypeTest extends TestCase
 			"hide_footer"=>true,
 			"max_number"=>100000,
 			"expires"=>'+15 minutes',
+			"cost"=>5000,
+			"counter_min"=>5000,
+			"counter_max"=>10000,
+			"timeout"=>30,
 		] as $option=>$value){
                 yield "good option {$option} ".json_encode($value)=>[$option, $value];
         }
