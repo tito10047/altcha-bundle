@@ -19,7 +19,7 @@ class SolveChallengeResolver implements SolveChallengeResolverInterface{
 	public function __construct(
 		private readonly ChallengeResolverInterface $challengeResolver,
 		private readonly string $hmacSignature,
-		private readonly string $hmacKeySignature,
+		private readonly ?string $hmacKeySignature,
 		private readonly float $timeout
 	) {
 	}

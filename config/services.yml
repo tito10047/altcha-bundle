@@ -29,8 +29,6 @@ services:
       $hmacKeySignature: '%altcha.hmacKeySignature%'
       $requestStack: '@request_stack'
       $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
-      $solveChallengeResolver: '@Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface'
-      $challengeOptionResolver: '@Tito10047\AltchaBundle\Service\ChallengeResolverInterface'
   Tito10047\AltchaBundle\Controller\AltchaChallengeController:
     public: true
     autowire: true

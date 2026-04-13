@@ -8,6 +8,6 @@ services:
       $verifySignatureUrl: '%altcha.sentinel.verify_signature_url%'
       $httpClient: '@Symfony\Contracts\HttpClient\HttpClientInterface'
       $requestStack: '@request_stack'
-      $hmacKey: '%altcha.hmacKey%'
+      $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
     calls:
       - setLogger: ['@?logger']
