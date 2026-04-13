@@ -15,18 +15,14 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
 use Tito10047\AltchaBundle\Service\DriverKeyProviderInterface;
-use Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface;
 use Tito10047\AltchaBundle\Validator\AltchaValidator;
 
 class AltchaValidatorValueTest extends TestCase
 {
     private function createValidator(
         RequestStack $requestStack,
-        ?DriverKeyProviderInterface $driverKeyProvider = null,
-        ?SolveChallengeResolverInterface $solveChallengeResolver = null,
-        ?ChallengeResolverInterface $challengeResolver = null
+        ?DriverKeyProviderInterface $driverKeyProvider = null
     ): AltchaValidator
     {
         return new AltchaValidator(
@@ -34,9 +30,7 @@ class AltchaValidatorValueTest extends TestCase
             'key',
             'key-sig',
             $requestStack,
-            $driverKeyProvider ?? $this->createMock(DriverKeyProviderInterface::class),
-            $solveChallengeResolver ?? $this->createMock(SolveChallengeResolverInterface::class),
-            $challengeResolver ?? $this->createMock(ChallengeResolverInterface::class)
+            $driverKeyProvider ?? $this->createMock(DriverKeyProviderInterface::class)
         );
     }
 
@@ -74,23 +68,7 @@ class AltchaValidatorValueTest extends TestCase
         $requestStack = $this->createMock(RequestStack::class);
 		$value    = base64_encode(json_encode(['solution' => 'not valid']));
 
-        $challenge = new Challenge(new ChallengeParameters(
-            algorithm: 'SHA-256',
-            nonce: 'nonce',
-            salt: 'salt',
-            cost: 100,
-            keyLength: 32,
-            keyPrefix: '00'
-        ), 'sig');
-        $solution = new Solution(1, 'derived-key', 0.1);
-
-        $solveChallengeResolver = $this->createMock(SolveChallengeResolverInterface::class);
-        $solveChallengeResolver->method('solveChallenge')->willReturn($solution);
-
-        $challengeResolver = $this->createMock(ChallengeResolverInterface::class);
-        $challengeResolver->method('getChallenge')->willReturn($challenge);
-
-        $validator = $this->createValidator($requestStack, null, $solveChallengeResolver, $challengeResolver);
+        $validator = $this->createValidator($requestStack, null);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
@@ -121,20 +99,17 @@ class AltchaValidatorValueTest extends TestCase
         $driverKeyProvider = $this->createMock(DriverKeyProviderInterface::class);
         $driverKeyProvider->method('getAlgorithm')->willReturn($algorithm);
 
-        $solveChallengeResolver = $this->createMock(SolveChallengeResolverInterface::class);
-        $solveChallengeResolver->method('solveChallenge')->willReturn($solution);
-
-        $challengeResolver = $this->createMock(ChallengeResolverInterface::class);
-        $challengeResolver->method('getChallenge')->willReturn($challenge);
-
-        $validator = $this->createValidator($requestStack, $driverKeyProvider, $solveChallengeResolver, $challengeResolver);
+        $validator = $this->createValidator($requestStack, $driverKeyProvider);
         $constraint = new \Tito10047\AltchaBundle\Validator\Altcha();
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator->initialize($context);
 
         $context->expects($this->never())->method('buildViolation');
 
-        $value = base64_encode(json_encode($challenge));
+        $value = base64_encode(json_encode([
+            "challenge" => $challenge,
+            "solution" => $solution,
+        ]));
         $validator->validate($value, $constraint);
     }
 }
