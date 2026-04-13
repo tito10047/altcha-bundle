@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
             ->integerNode('cost')->defaultValue(5000)->end()
             ->integerNode('counter_min')->defaultValue(5000)->end()
             ->integerNode('counter_max')->defaultValue(10000)->end()
-            ->integerNode('timeout')->defaultValue(30)->end()
+            ->floatNode('timeout')->defaultValue(30.0)->end()
             ->integerNode('max_number')
                 ->setDeprecated('tito10047/altcha-bundle', '1.1', 'The "%node%" option is deprecated and will be removed.')
                 ->defaultValue(100000)
