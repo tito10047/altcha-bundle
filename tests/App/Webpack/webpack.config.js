@@ -75,4 +75,4 @@ Encore
 ;
 
 module.exports = Encore.getWebpackConfig();
-module.exports.resolve.alias["altcha/dist/altcha.i18n.js"]='altcha/i18n';
+module.exports.resolve.alias["altcha/dist/main/altcha.i18n.js"]='altcha/i18n';
