@@ -13,8 +13,8 @@ class FloatingTest  extends PantherTestCase {
 		$client->waitFor('.altcha-main',3);
 
 		$this->assertPageTitleContains('Welcome!');
-		$this->assertSelectorExists('.altcha-label');
-		$this->assertSelectorIsNotVisible('.altcha-label');
+		$this->assertSelectorExists('label[for^="altcha-checkbox-"]');
+		$this->assertSelectorIsNotVisible('label[for^="altcha-checkbox-"]');
 
 		$this->assertSelectorExists("#script-altcha","Altcha script need be included");
 		$this->assertSelectorExists("#script-altcha-i18n","Altcha i18n script need be included");

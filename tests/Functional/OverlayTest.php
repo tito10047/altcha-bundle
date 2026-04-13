@@ -13,9 +13,9 @@ class OverlayTest  extends PantherTestCase {
 		$client->waitFor('.altcha-main',3);
 
 		$this->assertPageTitleContains('Welcome!');
-		$this->assertSelectorExists('.altcha-label');
+		$this->assertSelectorExists('label[for^="altcha-checkbox-"]');
 		$this->assertSelectorExists('.altcha-overlay');
-		$this->assertSelectorIsNotVisible('.altcha-label');
+		$this->assertSelectorIsNotVisible('label[for^="altcha-checkbox-"]');
 
 		$this->assertSelectorExists('.altcha-overlay>#my-content');
 
