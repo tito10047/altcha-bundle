@@ -4,26 +4,40 @@ declare(strict_types=1);
 
 namespace Tito10047\AltchaBundle\Service;
 
+use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\Challenge;
-use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\CreateChallengeOptions;
+use Random\RandomException;
 
 class ChallengeResolver implements ChallengeResolverInterface
 {
     public function __construct(
-        private readonly string $hmacKey,
-        private readonly string $expires,
-        private readonly int $maxNumber,
+		private readonly string $hmacSignature,
+		private readonly string $hmacKeySignature,
+		private readonly int $cost,
+		private readonly int $counterMin,
+		private readonly int $counterMax,
+        private readonly string $expiresAt,
     ) {
     }
 
-    public function getChallenge(): Challenge
+	/**
+	 * @throws RandomException
+	 */
+	public function getChallenge(): Challenge
     {
-        $options = new ChallengeOptions(
-            maxNumber: $this->maxNumber,
-            expires: (new \DateTime())->modify($this->expires),
+		$pbkdf2 = new Pbkdf2();
+        $options = new CreateChallengeOptions(
+			algorithm: $pbkdf2,
+			cost: $this->cost,
+			counter: random_int($this->counterMin, $this->counterMax),
+			expiresAt: new \DateTimeImmutable($this->expiresAt),
         );
 
-        return (new Altcha($this->hmacKey))->createChallenge($options);
+        return (new Altcha(
+			hmacSignatureSecret: $this->hmacSignature,
+			hmacKeySignatureSecret: $this->hmacKeySignature,
+		))->createChallenge($options);
     }
 }

@@ -32,6 +32,9 @@ services:
   Tito10047\AltchaBundle\Service\ChallengeResolverInterface:
     class: Tito10047\AltchaBundle\Service\ChallengeResolver
     arguments:
-      $hmacKey: '%altcha.hmacKey%'
-      $expires: '%altcha.expires%'
-      $maxNumber: '%altcha.max_number%'
+      $hmacSignature: '%altcha.hmacSignature%'
+      $hmacKeySignature: '%altcha.hmacKeySignature%'
+      $cost: '%altcha.cost%'
+      $counterMin: '%altcha.counter_min%'
+      $counterMax: '%altcha.counter_max%'
+      $expiresAt: '%altcha.expires%'
