@@ -44,7 +44,12 @@ Add a config file:
 ```yml
 altcha:
     enable: true
-    hmacKey: '%env(APP_SECRET)%'
+    hmacSignature: '%env(APP_SECRET)%'
+    hmacAlgorithm: 'SHA-256'
+    cost: 5000
+    counter_min: 5000
+    counter_max: 10000
+    timeout: 30.0
     floating: true
     overlay: false
     use_stimulus: false
@@ -57,34 +62,6 @@ when@test:
         enable: false
 ```
 
-### PHP
-
-`config/packages/altcha.php`: 
-
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('altcha', [
-        'enable' => true,
-        'hmacKey' => 'RANDOM_SECRET_KEY',
-        'floating' => true,
-        'overlay' => true,
-        'use_stimulus' => false,
-        'include_script' => true,
-        'hide_logo' => false,
-        'hide_footer' => false
-    ]);
-
-    if ('test' === $containerConfigurator->env()) {
-        // Disable captcha in test environment
-        $containerConfigurator->extension('altcha', [
-            'enable' => false,
-        ]);
-    }
-};
-```
-
 Import bundle routes:
 
 ### YML
@@ -93,12 +70,6 @@ Import bundle routes:
 altcha:
     resource: '@AltchaBundle/config/routes.yml'
     type: yaml
-```
-
-### PHP
-
-```php
-$routingConfigurator->import('@AltchaBundle/config/routes.yml');
 ```
 
 ⚠️ **Important – Security Configuration**
@@ -171,7 +142,7 @@ class ContactType extends AbstractType
 ```js
 //webpack.config.js
 module.exports = Encore.getWebpackConfig();
-module.exports.resolve.alias["altcha/dist/altcha.i18n.js"]='altcha/i18n';
+module.exports.resolve.alias["altcha/dist/i18n/all.js"]='altcha/i18n';
 ```
 ```yaml
 #config/packages/altcha.yaml

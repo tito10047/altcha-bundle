@@ -15,7 +15,7 @@ class ChallengeResolver implements ChallengeResolverInterface
     public function __construct(
 		private readonly DriverKeyProviderInterface $driverKeyProvider,
 		private readonly string $hmacSignature,
-		private readonly string $hmacKeySignature,
+		private readonly ?string $hmacKeySignature,
 		private readonly int $cost,
 		private readonly int $counterMin,
 		private readonly int $counterMax,

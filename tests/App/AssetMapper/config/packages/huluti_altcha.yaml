@@ -2,7 +2,7 @@ altcha:
   enable: true
   hmacKey: '%env(APP_SECRET)%'
   floating: false
-  hide_logo: false
+  hide_logo: true
   include_script: false
   hide_footer: true
 when@dev:

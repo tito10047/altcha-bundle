@@ -7,5 +7,11 @@ tools/
 /tests/App/Webpack/node_modules/
 /tests/App/Webpack/public/build
 /tests/App/Webpack/yarn.lock
+/tests/App/AssetMapper/config/reference.php
+/tests/App/Floating/config/reference.php
+/tests/App/LiveComponent/config/reference.php
+/tests/App/Overlay/config/reference.php
+/tests/App/Twig/config/reference.php
+/tests/App/Webpack/config/reference.php
 var/cache
 /drivers
