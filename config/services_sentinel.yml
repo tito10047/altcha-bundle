@@ -16,6 +16,6 @@ services:
       $verifySignatureUrl: '%altcha.sentinel.verify_signature_url%'
       $httpClient: '@altcha.sentinel.http_client'
       $requestStack: '@request_stack'
-      $hmacKey: '%altcha.hmacKey%'
+      $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
     calls:
       - setLogger: ['@?logger']

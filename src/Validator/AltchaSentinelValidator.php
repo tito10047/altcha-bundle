@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Tito10047\AltchaBundle\Validator;
 
 use AltchaOrg\Altcha\Altcha;
+use AltchaOrg\Altcha\Challenge;
+use AltchaOrg\Altcha\ChallengeParameters;
 use AltchaOrg\Altcha\Payload;
+use AltchaOrg\Altcha\Solution;
 use AltchaOrg\Altcha\VerifySolutionOptions;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -33,8 +36,6 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
 		private readonly string                          $hmacSignature,
 		private readonly string                          $hmacKeySignature,
 		private readonly DriverKeyProviderInterface      $driverKeyProvider,
-		private readonly SolveChallengeResolverInterface $solveChallengeResolver,
-		private readonly ChallengeResolverInterface      $challengeOptionResolver
 	) {
 	}
 
@@ -92,15 +93,20 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
 
 				return;
 			}
-			$solution  = $this->solveChallengeResolver->solveChallenge();
-			$challenge = $this->challengeOptionResolver->getChallenge();
+			$payload = json_decode($altchaJson, true, 512, JSON_THROW_ON_ERROR);
 
-			$payload = new Payload($challenge, $solution);
-			$result  = (new Altcha(
+			$result = (new Altcha(
 				hmacSignatureSecret: $this->hmacSignature,
 				hmacKeySignatureSecret: $this->hmacKeySignature,
 			))->verifySolution(new VerifySolutionOptions(
-				payload: $payload,
+				payload: new Payload(new Challenge(
+					parameters:ChallengeParameters::fromArray($payload["challenge"]["parameters"]??[]) ,
+					signature: $payload["challenge"]["signature"]??"",
+				), new Solution(
+					counter: $payload["solution"]["counter"]??10,
+					derivedKey: $payload["solution"]["derivedKey"]??"",
+					time: $payload["solution"]["time"]??0,
+				)),
 				algorithm: $this->driverKeyProvider->getAlgorithm(),
 			));
 
