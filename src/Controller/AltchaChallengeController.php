@@ -18,7 +18,6 @@ class AltchaChallengeController extends AbstractController
     #[Route('/altcha/challenge', name: 'altcha_challenge')]
     public function challenge(): JsonResponse
     {
-		sleep(60);
         return new JsonResponse($this->challengeOptionResolver->getChallenge());
     }
 }

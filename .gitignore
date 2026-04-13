@@ -14,4 +14,4 @@ tools/
 /tests/App/Twig/config/reference.php
 /tests/App/Webpack/config/reference.php
 var/cache
-/drivers
+/driver
