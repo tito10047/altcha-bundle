@@ -45,7 +45,13 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('altcha.floating', $config['floating']);
         $container->setParameter('altcha.overlay', $config['overlay']['enabled']);
         $container->setParameter('altcha.overlay_content', $config['overlay']['content']);
-        $container->setParameter('altcha.hmacKey', $config['hmacKey']);
+        $container->setParameter('altcha.hmacSignature', $config['hmacSignature']);
+        $container->setParameter('altcha.hmacAlgorithm', $config['hmacAlgorithm']);
+        $container->setParameter('altcha.hmacKeySignature', $config['hmacKeySignature']);
+        $container->setParameter('altcha.cost', $config['cost']);
+        $container->setParameter('altcha.counter_min', $config['counter_min']);
+        $container->setParameter('altcha.counter_max', $config['counter_max']);
+        $container->setParameter('altcha.timeout', $config['timeout']);
         $container->setParameter('altcha.hide_logo', $config['hide_logo']);
         $container->setParameter('altcha.hide_footer', $config['hide_footer']);
         $container->setParameter('altcha.js_path', $config['altcha_js_path']);

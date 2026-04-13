@@ -4,17 +4,27 @@ declare(strict_types=1);
 
 namespace Tito10047\AltchaBundle\Validator;
 
+use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
+use AltchaOrg\Altcha\Payload;
+use AltchaOrg\Altcha\VerifySolutionOptions;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
+use Tito10047\AltchaBundle\Service\DriverKeyProviderInterface;
+use Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface;
 
 final class AltchaValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly bool $enable,
-        private readonly string $hmacKey,
+        private readonly string $hmacSignature,
+        private readonly string $hmacKeySignature,
         private readonly RequestStack $requestStack,
+        private readonly DriverKeyProviderInterface $driverKeyProvider,
+		private readonly SolveChallengeResolverInterface $solveChallengeResolver,
+		private readonly ChallengeResolverInterface $challengeOptionResolver
     ) {
     }
 
@@ -62,7 +72,18 @@ final class AltchaValidator extends ConstraintValidator
 			return;
 		}
 
-        if (!(new Altcha($this->hmacKey))->verifySolution($payload, true)) {
+		$solution = $this->solveChallengeResolver->solveChallenge();
+		$challenge = $this->challengeOptionResolver->getChallenge();
+
+		$result = (new Altcha(
+			hmacSignatureSecret: $this->hmacSignature,
+			hmacKeySignatureSecret: $this->hmacKeySignature,
+		))->verifySolution(new VerifySolutionOptions(
+			payload: new Payload($challenge, $solution),
+			algorithm: $this->driverKeyProvider->getAlgorithm(),
+		));
+
+        if (!$result->verified) {
             $this->context->buildViolation($constraint->message)
                 ->addviolation();
         }

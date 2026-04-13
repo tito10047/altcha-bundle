@@ -21,6 +21,13 @@ class Configuration implements ConfigurationInterface
 
 		// @phpstan-ignore-next-line
         $rootNode
+            ->beforeNormalization()
+                ->ifTrue(static fn($v): bool => \is_array($v) && isset($v['hmacKey']) && !isset($v['hmacSignature']))
+                ->then(static function ($v): array {
+                    $v['hmacSignature'] = $v['hmacKey'];
+                    return $v;
+                })
+            ->end()
             ->children()
             ->booleanNode('enable')->defaultTrue()->end()
             ->booleanNode('floating')->defaultFalse()->end()
@@ -41,7 +48,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end() // end arrayNode('overlay')
             ->booleanNode('use_stimulus')->defaultNull()->end()
-			->integerNode('max_number')->defaultValue(100000)->end()
+            ->integerNode('cost')->defaultValue(5000)->end()
+            ->integerNode('counter_min')->defaultValue(5000)->end()
+            ->integerNode('counter_max')->defaultValue(10000)->end()
+            ->floatNode('timeout')->defaultValue(30.0)->end()
+            ->integerNode('max_number')
+                ->setDeprecated('tito10047/altcha-bundle', '1.1', 'The "%node%" option is deprecated and will be removed.')
+                ->defaultValue(100000)
+            ->end()
 			->scalarNode('expires')
 				->defaultValue('+15 minute')
                 ->cannotBeEmpty()
@@ -53,9 +67,21 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('include_script')->defaultNull()->end()
             ->booleanNode('hide_logo')->defaultFalse()->end()
             ->booleanNode('hide_footer')->defaultFalse()->end()
-            ->scalarNode('altcha_js_path')->defaultValue('https://eu.altcha.org/js/latest/altcha.min.js')->end()
-            ->scalarNode('altcha_js_i18n_path')->defaultValue('https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist_i18n/all.min.js')->end()
-            ->scalarNode('hmacKey')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('altcha_js_path')->defaultValue('https://cdn.jsdelivr.net/npm/altcha/dist/main/altcha.min.js')->end()
+            ->scalarNode('altcha_js_i18n_path')->defaultValue('https://cdn.jsdelivr.net/npm/altcha/dist/i18n/all.min.js')->end()
+            ->scalarNode('hmacKey')
+                ->setDeprecated('tito10047/altcha-bundle', '1.1', 'The "%node%" option is deprecated, use "hmacSignature" instead.')
+                ->defaultValue(null)
+            ->end()
+            ->scalarNode('hmacAlgorithm')
+                ->defaultValue('SHA-256')
+                ->validate()
+                    ->ifNotInArray(['SHA-256', 'SHA-384', 'SHA-512'])
+                    ->thenInvalid('Invalid HMAC algorithm "%s". Permitted values are SHA-256, SHA-384, SHA-512.')
+                ->end()
+            ->end()
+            ->scalarNode('hmacSignature')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('hmacKeySignature')->defaultNull()->end()
             ->arrayNode('sentinel')->info(<<<TXT
                Enable usage of sentinel, if enabled:
                    - the widget will use the /v1/challenge endpoint to retrieve a new challenge instead of your app;

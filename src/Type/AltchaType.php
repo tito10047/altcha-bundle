@@ -31,6 +31,10 @@ class AltchaType extends AbstractType
         private readonly ?string $i18nPath,
         private readonly bool $useSentinel,
 		private readonly bool $includeScript,
+		private readonly int $cost,
+		private readonly int $counterMin,
+		private readonly int $counterMax,
+		private readonly int $timeout,
 		private readonly RouterInterface $router,
 		private readonly ?string $challengeUrl = null,
     ) {
@@ -51,6 +55,10 @@ class AltchaType extends AbstractType
             ],
 			'expires'=>'+15 minutes',
 			'max_number'=>100000,
+			'cost' => null,
+			'counter_min' => null,
+			'counter_max' => null,
+			'timeout' => null,
             'constraints' => $this->useSentinel ? new AltchaSentinel() : new Altcha(),
             'label' => false,
         ]);
@@ -62,6 +70,12 @@ class AltchaType extends AbstractType
         $resolver->setAllowedTypes('hide_footer', ['null', 'bool']);
         $resolver->setAllowedTypes('expires', ['null', 'string']);
         $resolver->setAllowedTypes('max_number', ['null', 'integer']);
+        $resolver->setAllowedTypes('cost', ['null', 'integer']);
+        $resolver->setAllowedTypes('counter_min', ['null', 'integer']);
+        $resolver->setAllowedTypes('counter_max', ['null', 'integer']);
+        $resolver->setAllowedTypes('timeout', ['null', 'integer']);
+
+        $resolver->setDeprecated('max_number', 'tito10047/altcha-bundle', '1.1', 'The option "max_number" is deprecated and will be removed in 2.0.');
 
         // Validate that "expires" is either null or a valid time expression parsable by strtotime
         $resolver->setNormalizer('expires', static function (Options $options, $value): mixed {
@@ -94,6 +108,10 @@ class AltchaType extends AbstractType
         $view->vars['i18n_path'] = $this->i18nPath;
         $view->vars['expires'] = $options['expires'];
         $view->vars['max_number'] = $options['max_number'];
+        $view->vars['cost'] = $options['cost'] ?? $this->cost;
+        $view->vars['counter_min'] = $options['counter_min'] ?? $this->counterMin;
+        $view->vars['counter_max'] = $options['counter_max'] ?? $this->counterMax;
+        $view->vars['timeout'] = $options['timeout'] ?? $this->timeout;
 		$view->vars['use_sentinel'] = $this->useSentinel;
 		$view->vars['include_script'] = $this->includeScript;
 		if ($this->useSentinel){

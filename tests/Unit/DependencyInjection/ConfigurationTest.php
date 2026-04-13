@@ -16,43 +16,74 @@ class ConfigurationTest extends TestCase
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, [
             'altcha' => [
-                'hmacKey' => 'test',
+                'hmacSignature' => 'test_sig',
+                'hmacKeySignature' => 'test_key_sig',
             ],
         ]);
 
-        $this->assertArrayHasKey('enable', $config);
-        $this->assertTrue($config['enable']);
+        $this->assertArrayHasKey('hmacSignature', $config);
+        $this->assertEquals('test_sig', $config['hmacSignature']);
 
-        $this->assertArrayHasKey('floating', $config);
-        $this->assertFalse($config['floating']);
+        $this->assertArrayHasKey('hmacKeySignature', $config);
+        $this->assertEquals('test_key_sig', $config['hmacKeySignature']);
 
-        $this->assertArrayHasKey('overlay', $config);
-        $this->assertFalse($config['overlay']['enabled']);
-        $this->assertNull($config['overlay']['content']);
+        $this->assertEquals(5000, $config['cost']);
+        $this->assertEquals(5000, $config['counter_min']);
+        $this->assertEquals(10000, $config['counter_max']);
+        $this->assertEquals(30, $config['timeout']);
+        $this->assertEquals(100000, $config['max_number']);
 
-        $this->assertArrayHasKey('use_stimulus', $config);
-        $this->assertNull($config['use_stimulus']);
+        // Test migration from hmacKey
+        $config = $processor->processConfiguration($configuration, [
+            'altcha' => [
+                'hmacKey' => 'legacy_key',
+            ],
+        ]);
 
-        $this->assertArrayHasKey('hide_logo', $config);
-        $this->assertFalse($config['hide_logo']);
-
-        $this->assertArrayHasKey('hide_footer', $config);
-        $this->assertFalse($config['hide_footer']);
-
-        $this->assertArrayHasKey('altcha_js_path', $config);
-        $this->assertIsString($config['altcha_js_path']);
-
-        $this->assertArrayHasKey('altcha_js_i18n_path', $config);
-        $this->assertIsString($config['altcha_js_i18n_path']);
-
-        $this->assertArrayHasKey('max_number', $config);
-        $this->assertIsInt($config['max_number']);
-
-        $this->assertArrayHasKey('expires', $config);
-        $this->assertIsString($config['expires']);
-		$this->assertNotNull(strtotime($config['expires']));
-
+        $this->assertArrayHasKey('hmacSignature', $config);
+        $this->assertEquals('legacy_key', $config['hmacSignature']);
         $this->assertArrayHasKey('hmacKey', $config);
-        $this->assertNotNull($config['hmacKey']);
+        $this->assertEquals('legacy_key', $config['hmacKey']);
+        $this->assertEquals('SHA-256', $config['hmacAlgorithm']);
+    }
+
+    public function testCustomHmacAlgorithm(): void
+    {
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $config = $processor->processConfiguration($configuration, [
+            'altcha' => [
+                'hmacSignature' => 'test_sig',
+                'hmacAlgorithm' => 'SHA-512',
+            ],
+        ]);
+        $this->assertEquals('SHA-512', $config['hmacAlgorithm']);
+    }
+
+    public function testInvalidHmacAlgorithmThrowsException(): void
+    {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectExceptionMessage('Invalid HMAC algorithm ""INVALID"". Permitted values are SHA-256, SHA-384, SHA-512.');
+
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $processor->processConfiguration($configuration, [
+            'altcha' => [
+                'hmacSignature' => 'test_sig',
+                'hmacAlgorithm' => 'INVALID',
+            ],
+        ]);
+    }
+
+    public function testMissingHmacThrowsException(): void
+    {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectExceptionMessage('The child config "hmacSignature" under "altcha" must be configured.');
+
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $processor->processConfiguration($configuration, [
+            'altcha' => [],
+        ]);
     }
 }

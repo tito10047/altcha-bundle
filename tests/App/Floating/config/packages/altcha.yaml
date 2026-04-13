@@ -4,7 +4,7 @@ altcha:
   floating: true
   include_script: true
   use_stimulus: false
-  altcha_js_path: 'https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.js'
+  altcha_js_path: 'https://cdn.jsdelivr.net/npm/altcha/dist/main/altcha.min.js'
 when@dev:
   altcha:
     enable: true

@@ -25,6 +25,10 @@ class AltchaTypeWithSentinelTest extends AltchaTypeTest
 			i18nPath: "test",
 			useSentinel: true,
 			includeScript: true,
+			cost: 5000,
+			counterMin: 5000,
+			counterMax: 10000,
+			timeout: 30,
 			router: $router,
 			challengeUrl: 'http://localhost',
         );

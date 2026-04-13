@@ -13,7 +13,7 @@ class TwigTest  extends PantherTestCase {
 		$client->waitFor('.altcha-main',3);
 
 		$this->assertPageTitleContains('Welcome!');
-		$this->assertSelectorTextContains('.altcha-label', 'I\'m not a robot');
+		$this->assertSelectorTextContains('label[for^="altcha-checkbox-"]', 'I\'m not a robot');
 
 		$this->assertSelectorExists("#script-altcha","Altcha script need be included");
 		$this->assertSelectorExists("#script-altcha-i18n","Altcha i18n script need be included");

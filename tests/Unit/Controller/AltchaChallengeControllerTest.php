@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Tito10047\AltchaBundle\Tests\Unit\Controller;
 
+use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
-use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\CreateChallengeOptions;
+use AltchaOrg\Altcha\Payload;
+use AltchaOrg\Altcha\SolveChallengeOptions;
+use AltchaOrg\Altcha\VerifySolutionOptions;
 use Tito10047\AltchaBundle\Controller\AltchaChallengeController;
 use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -16,11 +20,14 @@ class AltchaChallengeControllerTest extends KernelTestCase
 
     public function testChallenge()
     {
-        $challengeOptions = new ChallengeOptions(
-            maxNumber: 100000,
-            expires: (new \DateTime())->modify("+1 day"),
+        $algorithm = new Pbkdf2();
+        $challengeOptions = new CreateChallengeOptions(
+            algorithm: $algorithm,
+            cost: 100,
+            counter: 12345,
+            expiresAt: (new \DateTime())->modify("+1 day"),
         );
-        $altcha = new Altcha('test-key');
+        $altcha = new Altcha('test-key', 'test-sig-key');
         $challenge = $altcha->createChallenge($challengeOptions);
 
         $challengeResolver = $this->createMock(ChallengeResolverInterface::class);
@@ -32,13 +39,19 @@ class AltchaChallengeControllerTest extends KernelTestCase
 
         $this->assertInstanceOf(JsonResponse::class, $response);
 
-        $payload = json_decode($response->getContent(), true);
+        $payloadData = json_decode($response->getContent(), true);
 
-        $payload['number'] = $challengeOptions->number;
+        $solution = $altcha->solveChallenge(new SolveChallengeOptions(
+            algorithm: $algorithm,
+            challenge: $challenge,
+        ));
 
-        $isValid = $altcha->verifySolution($payload);
+        $result = $altcha->verifySolution(new VerifySolutionOptions(
+            payload: new Payload($challenge, $solution),
+            algorithm: $algorithm,
+        ));
 
-        $this->assertTrue($isValid);
+        $this->assertTrue($result->verified);
     }
 
 }

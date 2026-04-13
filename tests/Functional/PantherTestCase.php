@@ -34,6 +34,21 @@ abstract class PantherTestCase extends KernelTestCase
 
 	public static function createPantherClient(string $app): \Symfony\Component\Panther\Client {
 		return self::createPantherClientTrait([
+			'capabilities' => [
+				'goog:chromeOptions' => [
+					'args' => [
+						'--lang=en-US',
+					],
+					'prefs' => [
+						'intl.accept_languages' => 'en-US,en',
+					]
+				],
+				'moz:firefoxOptions' => [
+					'prefs' => [
+						'intl.accept_languages' => 'en-US, en',
+					],
+				],
+			],
 			'webServerDir'=>__DIR__."/../App/{$app}/public",
 		],[
 			'configDir'=>"{$app}/config",

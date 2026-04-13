@@ -15,14 +15,22 @@ services:
       $useSentinel: '%altcha.use_sentinel%'
       $challengeUrl: '%altcha.sentinel.challenge_url%'
       $includeScript: '%altcha.include_script%'
+      $cost: '%altcha.cost%'
+      $counterMin: '%altcha.counter_min%'
+      $counterMax: '%altcha.counter_max%'
+      $timeout: '%altcha.timeout%'
       $router: '@router'
   altcha.validator:
     class: Tito10047\AltchaBundle\Validator\AltchaValidator
     tags: ['validator.constraint_validator']
     arguments:
       $enable: '%altcha.enable%'
-      $hmacKey: '%altcha.hmacKey%'
+      $hmacSignature: '%altcha.hmacSignature%'
+      $hmacKeySignature: '%altcha.hmacKeySignature%'
       $requestStack: '@request_stack'
+      $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
+      $solveChallengeResolver: '@Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface'
+      $challengeOptionResolver: '@Tito10047\AltchaBundle\Service\ChallengeResolverInterface'
   Tito10047\AltchaBundle\Controller\AltchaChallengeController:
     public: true
     autowire: true
@@ -32,6 +40,22 @@ services:
   Tito10047\AltchaBundle\Service\ChallengeResolverInterface:
     class: Tito10047\AltchaBundle\Service\ChallengeResolver
     arguments:
-      $hmacKey: '%altcha.hmacKey%'
-      $expires: '%altcha.expires%'
-      $maxNumber: '%altcha.max_number%'
+      $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
+      $hmacSignature: '%altcha.hmacSignature%'
+      $hmacKeySignature: '%altcha.hmacKeySignature%'
+      $cost: '%altcha.cost%'
+      $counterMin: '%altcha.counter_min%'
+      $counterMax: '%altcha.counter_max%'
+      $expiresAt: '%altcha.expires%'
+  Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface:
+    class: Tito10047\AltchaBundle\Service\SolveChallengeResolver
+    arguments:
+      $challengeResolver: '@Tito10047\AltchaBundle\Service\ChallengeResolverInterface'
+      $hmacSignature: '%altcha.hmacSignature%'
+      $hmacKeySignature: '%altcha.hmacKeySignature%'
+      $timeout: '%altcha.timeout%'
+
+  Tito10047\AltchaBundle\Service\DriverKeyProviderInterface:
+    class: Tito10047\AltchaBundle\Service\DriverKeyProvider
+    arguments:
+      $hmacAlgorithm: '%altcha.hmacAlgorithm%'

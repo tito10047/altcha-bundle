@@ -1,41 +1,77 @@
 {% block altcha_widget %}
-    {% if enable %}
-        <div data-controller="tito10047--altcha-bundle--altcha">
-        {% if use_stimulus %}
-            {{ form_widget(form,{
-                attr:{
-                    'data-tito10047--altcha-bundle--altcha-target':'input',
-                }
-            }) }}
-        {% endif %}
-        {% if include_script %}
-            <script async defer src="{{ js_path }}" id="script-altcha" type="module"></script>
-            {% if i18n_path is not null %}
-                <script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
-            {% endif %}
-        {% endif %}
-        <altcha-widget
-                data-tito10047--altcha-bundle--altcha-target="altcha"
-                data-live-ignore="data-live-ignore"
-				challengeurl="{{ challenge_url }}"
-                {% if hide_logo %}hidelogo{% endif %}
-                {% if hide_footer %}hidefooter{% endif %}
-                {% if floating %}floating{% endif %}
-                {% if overlay %}overlay="true"{% endif %}
-                {% if overlay_content %}overlaycontent="{{ overlay_content }}"{% endif %}
-                {% if use_sentinel %}customfetch=altchaChallengeFetchWithFallback{% endif %}
-        ></altcha-widget>
-        </div>
-    {% endif %}
-    {% if use_sentinel %}
-    <script>
-        async function altchaChallengeFetchWithFallback(url, init) {
-            try {
-                return await fetch(url, init);
-            } catch (e) {
-                return await fetch("{{ path('altcha_challenge') }}", init);
-            }
-          };
-    </script>
-    {% endif %}
+	{% if enable %}
+		{% set controller = 'tito10047--altcha-bundle--altcha' %}
+		{% set id='altcha-id-'~ random(50000, 100000) %}
+		<div data-controller="{{ controller }}"
+		     data-{{ controller }}-hide-logo-value="{{ hide_logo|json_encode }}"
+		     data-{{ controller }}-hide-footer-value="{{ hide_footer|json_encode }}"
+		     data-{{ controller }}-use-sentinel-value="{{ use_sentinel|json_encode }}"
+		     data-{{ controller }}-overlay_content-value="{{ overlay_content|json_encode }}"
+		     data-{{ controller }}-challenge-url-value="{{ path('altcha_challenge') }}"
+		>
+			{% if include_script %}
+				<script async defer src="{{ js_path }}" id="script-altcha" type="module"></script>
+			{% if i18n_path is not null %}
+				<script async defer src="{{ i18n_path }}" id="script-altcha-i18n" type="module"></script>
+			{% endif %}
+			{% endif %}
+
+			<altcha-widget
+					id="{{ id }}"
+					data-{{ controller }}-target="altcha"
+					data-live-ignore="data-live-ignore"
+					challenge="{{ challenge_url }}"
+					{% if floating %}
+						display="floating"
+					{% elseif overlay %}
+						display="overlay"
+					{% else %}
+						display="standard"
+					{% endif %}
+			></altcha-widget>
+
+			{% if use_stimulus %}
+				{{ form_widget(form,{
+					attr:{
+						('data-'~controller~'-target'):'input',
+					}
+				}) }}
+			{% else %}
+				<script>
+					{% if use_sentinel %}
+					async function altchaChallengeFetchWithFallback(url, init) {
+						try {
+							return await fetch(url, init);
+						} catch (e) {
+							return await fetch("{{ path('altcha_challenge') }}", init);
+						}
+					};
+					{% endif %}
+					window.addEventListener('load', () => {
+						const widget = document.getElementById('{{ id }}');
+
+						if (widget) {
+							const config = {};
+							{% if hide_logo %}
+							config.hideLogo = true;
+							{% endif %}
+							{% if hide_footer %}
+							config.hideFooter = true;
+							{% endif %}
+							{% if overlay_content %}
+							config.overlayContent = "{{ overlay_content }}";
+							{% endif %}
+							{% if use_sentinel %}
+							config.fetch = altchaChallengeFetchWithFallback;
+							{% endif %}
+							widget.configure(config);
+						}else{
+							console.error("Altcha widget not found");
+						}
+					});
+				</script>
+
+			{% endif %}
+		</div>
+	{% endif %}
 {% endblock %}
