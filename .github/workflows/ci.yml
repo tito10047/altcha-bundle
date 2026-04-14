@@ -148,6 +148,8 @@ jobs:
 
     e2e-tests:
         name: "E2E Test"
+        # Recipe from version 2.0 does not work. Once we release version 3.0, we will create a recipe and restore this test.
+        if: false
         runs-on: ubuntu-latest
 
         steps:

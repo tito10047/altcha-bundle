@@ -4,6 +4,7 @@ framework:
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
+    lock: true
     rate_limiter:
         altcha_challenge:
             policy: 'fixed_window'
