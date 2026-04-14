@@ -4,12 +4,16 @@ framework:
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
-
-    #esi: true
-    #fragments: true
+    rate_limiter:
+        altcha_challenge:
+            policy: 'fixed_window'
+            limit: 1
+            interval: '1 hour'
+            cache_pool: cache.app
 
 when@test:
     framework:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+        csrf_protection: false

@@ -738,7 +738,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     hide_footer?: bool|Param, // Default: false
  *     altcha_js_path?: scalar|Param|null, // Default: "https://cdn.jsdelivr.net/npm/altcha/dist/main/altcha.min.js"
  *     altcha_js_i18n_path?: scalar|Param|null, // Default: "https://cdn.jsdelivr.net/npm/altcha/dist/i18n/all.min.js"
- *     hmacKey?: scalar|Param|null, // Deprecated: The "hmacKey" option is deprecated, use "hmacSignature" instead. // Default: null
  *     hmacAlgorithm?: scalar|Param|null, // Default: "SHA-256"
  *     hmacSignature?: scalar|Param|null,
  *     hmacKeySignature?: scalar|Param|null, // Default: null

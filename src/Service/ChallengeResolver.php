@@ -35,6 +35,7 @@ class ChallengeResolver implements ChallengeResolverInterface
 			expiresAt: new \DateTimeImmutable($this->expiresAt),
         );
 
+
         return (new Altcha(
 			hmacSignatureSecret: $this->hmacSignature,
 			hmacKeySignatureSecret: $this->hmacKeySignature,

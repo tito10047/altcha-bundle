@@ -1,7 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
     paths:
-        'tests/App/AssetMapper/templates': ~
+        'tests/App/RateLimiter/templates': ~
 
 when@test:
     twig:

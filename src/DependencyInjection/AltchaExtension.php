@@ -36,7 +36,7 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
                 );
             }
             $container->getDefinition('altcha.validator')
-                ->addArgument(new Reference($config['rate_limiter']));
+                ->setArgument('$rateLimiter',new Reference($config['rate_limiter']));
         }
     }
 

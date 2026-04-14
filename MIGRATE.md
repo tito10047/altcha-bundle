@@ -22,12 +22,26 @@ module.exports.resolve.alias["altcha/dist/i18n/all.js"] = 'altcha/i18n';
 
 ## Configuration
 
-The configuration remains mostly backward compatible, but it is recommended to update to the new keys.
-
 | Old Key | New Key | Status |
 |---------|---------|--------|
-| `hmacKey` | `hmacSignature` | Deprecated (fallback exists) |
+| `hmacKey` | `hmacSignature` | **BC break: removed, use `hmacSignature`** |
 | `max_number` | - | Deprecated (replaced by `cost` and `counter_max`) |
+
+### BC Break: `hmacKey` removed
+
+The `hmacKey` configuration option has been **removed**. There is no automatic migration.
+
+Update your config manually:
+
+```yaml
+# Before (2.x)
+altcha:
+    hmacKey: '%env(APP_SECRET)%'
+
+# After (3.0)
+altcha:
+    hmacSignature: '%env(APP_SECRET)%'
+```
 
 ### New Configuration Options
 - `hmacAlgorithm`: Specify the HMAC algorithm (default: `SHA-256`).

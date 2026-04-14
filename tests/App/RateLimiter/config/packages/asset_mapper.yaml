@@ -2,10 +2,10 @@ framework:
     asset_mapper:
         # The paths to make available to the asset mapper.
         paths:
-            - '%kernel.project_dir%/tests/App/AssetMapper/assets'
+            - '%kernel.project_dir%/tests/App/RateLimiter/assets'
         missing_import_mode: strict
-        importmap_path: '%kernel.project_dir%/tests/App/AssetMapper/importmap.php'
-        vendor_dir: '%kernel.project_dir%/tests/App/AssetMapper/assets/vendor/'
+        importmap_path: '%kernel.project_dir%/tests/App/RateLimiter/importmap.php'
+        vendor_dir: '%kernel.project_dir%/tests/App/RateLimiter/assets/vendor/'
 
 when@prod:
     framework:

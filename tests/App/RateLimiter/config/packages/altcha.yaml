@@ -1,0 +1,11 @@
+altcha:
+  enable: true
+  hmacSignature: '%env(APP_SECRET)%'
+  rate_limiter: 'limiter.altcha_challenge'
+  floating: false
+  hide_logo: true
+  include_script: false
+  hide_footer: true
+when@dev:
+  altcha:
+    enable: true

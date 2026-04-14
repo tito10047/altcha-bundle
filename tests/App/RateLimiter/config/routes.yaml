@@ -1,5 +1,5 @@
 controllers:
     resource:
         path: ../Src/Controller/
-        namespace: Tito10047\AltchaBundle\Tests\App\AssetMapper\Src\Controller
+        namespace: Tito10047\AltchaBundle\Tests\App\RateLimiter\Src\Controller
     type: attribute
