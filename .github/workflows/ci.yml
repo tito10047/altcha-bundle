@@ -9,6 +9,9 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
+env:
+    APP_SECRET: s3cret
+
 jobs:
     php-cs-fixer:
         name: "Coding Standard"
