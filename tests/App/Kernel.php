@@ -62,6 +62,10 @@ class Kernel extends BaseKernel {
 		$this->removeDir($this->getCacheDir());
 	}
 
+	public function __destruct() {
+		$this->clearCache();
+	}
+
 	private function removeDir(string $dir): void {
 		$files = scandir($dir);
 		foreach ($files as $file) {
