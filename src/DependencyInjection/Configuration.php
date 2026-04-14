@@ -82,6 +82,10 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->scalarNode('hmacSignature')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('hmacKeySignature')->defaultNull()->end()
+            ->scalarNode('rate_limiter')
+                ->defaultNull()
+                ->info('Service ID of a Symfony RateLimiterFactory. The challenge signature is used as the rate limiter key.')
+            ->end()
             ->arrayNode('sentinel')->info(<<<TXT
                Enable usage of sentinel, if enabled:
                    - the widget will use the /v1/challenge endpoint to retrieve a new challenge instead of your app;

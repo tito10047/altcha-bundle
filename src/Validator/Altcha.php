@@ -12,4 +12,9 @@ final class Altcha extends Constraint
      * @var string
      */
     public $message = 'invalid_altcha';
+
+    /**
+     * @var string
+     */
+    public $rateLimitMessage = 'altcha_rate_limit_exceeded';
 }

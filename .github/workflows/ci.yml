@@ -129,6 +129,23 @@ jobs:
             -   name: "Execute tests"
                 run: "composer test"
 
+    dependency-free:
+        name: "Dependency Free (no Rate Limiter)"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    php-version: "8.2"
+            -   name: "Install dependencies"
+                run: composer update --no-interaction --no-progress
+            -   name: "Remove symfony/rate-limiter"
+                run: composer remove symfony/rate-limiter --dev --no-interaction
+            -   name: "Run unit tests (no rate-limiter)"
+                run: vendor/bin/phpunit tests/Unit/
+
     e2e-tests:
         name: "E2E Test"
         runs-on: ubuntu-latest

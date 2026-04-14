@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\UX\StimulusBundle\StimulusBundle;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 
@@ -26,6 +28,15 @@ class AltchaExtension extends Extension implements PrependExtensionInterface
         $loader->load('services.yml');
         if ($container->getParameter('altcha.use_sentinel')) {
             $loader->load('services_sentinel.yml');
+        }
+        if ($config['rate_limiter'] !== null) {
+            if (!class_exists(RateLimiterFactory::class)) {
+                throw new LogicException(
+                    'symfony/rate-limiter is required to use the "rate_limiter" option. Run "composer require symfony/rate-limiter".'
+                );
+            }
+            $container->getDefinition('altcha.validator')
+                ->addArgument(new Reference($config['rate_limiter']));
         }
     }
 

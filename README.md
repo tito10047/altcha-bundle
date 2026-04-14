@@ -176,6 +176,39 @@ altcha:
 Activating this configuration will have the effect to use the sentinel server to generate a new challenge and for it's verification. 
 If the sentinel instance is not reachable by the client or by the server, we will fallback on our local configuration.
 
+### Optional: Rate Limiting
+
+Rate limiting prevents the same challenge token from being validated multiple times (replay attack protection). Requires `symfony/rate-limiter`:
+
+```bash
+composer require symfony/rate-limiter
+```
+
+Configure a rate limiter policy:
+
+```yaml
+# config/packages/framework.yaml
+framework:
+    rate_limiter:
+        altcha_challenge:
+            policy: 'fixed_window'
+            limit: 1
+            interval: '15 minutes'
+```
+
+Reference the limiter service in the altcha config:
+
+```yaml
+# config/packages/altcha.yaml
+altcha:
+    hmacSignature: '%env(APP_SECRET)%'
+    rate_limiter: 'limiter.altcha_challenge'
+```
+
+The challenge signature is used as the rate limiter key. With the configuration above, each unique challenge token can only be validated **once** per 15 minutes. If the limit is exceeded, the form will display: *"Too many attempts. Please try again later."*
+
+If `symfony/rate-limiter` is not installed and `rate_limiter` is configured, the container build will throw a `LogicException` with a helpful message.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.

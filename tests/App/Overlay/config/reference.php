@@ -742,6 +742,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     hmacAlgorithm?: scalar|Param|null, // Default: "SHA-256"
  *     hmacSignature?: scalar|Param|null,
  *     hmacKeySignature?: scalar|Param|null, // Default: null
+ *     rate_limiter?: scalar|Param|null, // Service ID of a Symfony RateLimiterFactory. The challenge signature is used as the rate limiter key. // Default: null
  *     sentinel?: bool|array{ // Enable usage of sentinel, if enabled: - the widget will use the /v1/challenge endpoint to retrieve a new challenge instead of your app; - the challenge resolution will be validated againt /v1/verify/signature endpoint that ensure protection againt replay attacks; - the hmacKey provided in configuration is not used anymore. More information available at https://altcha.org/docs/v2/server-integration/
  *         enabled?: bool|Param, // Default: false
  *         base_url?: scalar|Param|null, // Your sentinel instance url, eg: https://sentinel.example.com

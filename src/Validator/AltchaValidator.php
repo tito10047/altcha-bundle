@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tito10047\AltchaBundle\Validator;
 
-use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\Challenge;
 use AltchaOrg\Altcha\ChallengeParameters;
@@ -13,12 +12,10 @@ use AltchaOrg\Altcha\Solution;
 use AltchaOrg\Altcha\VerifySolutionOptions;
 use Random\RandomException;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Tito10047\AltchaBundle\Controller\AltchaChallengeController;
-use Tito10047\AltchaBundle\Service\ChallengeResolverInterface;
 use Tito10047\AltchaBundle\Service\DriverKeyProviderInterface;
-use Tito10047\AltchaBundle\Service\SolveChallengeResolverInterface;
 
 final class AltchaValidator extends ConstraintValidator
 {
@@ -28,6 +25,7 @@ final class AltchaValidator extends ConstraintValidator
         private readonly ?string $hmacKeySignature,
         private readonly RequestStack $requestStack,
         private readonly DriverKeyProviderInterface $driverKeyProvider,
+        private readonly ?RateLimiterFactory $rateLimiter = null,
     ) {
     }
 
@@ -78,15 +76,27 @@ final class AltchaValidator extends ConstraintValidator
 		}
 
 
+		$challenge = new Challenge(
+			parameters: ChallengeParameters::fromArray($payload["challenge"]["parameters"] ?? []),
+			signature: $payload["challenge"]["signature"] ?? "",
+		);
 
-		$result = (new Altcha(
+        if ($this->rateLimiter !== null) {
+            $key = hash('sha256', $challenge->signature);
+            $limit = $this->rateLimiter->create($key)->consume();
+            if (!$limit->isAccepted()) {
+                $this->context->buildViolation($constraint->rateLimitMessage)
+                    ->addViolation();
+
+                return;
+            }
+        }
+
+	    $result    = (new Altcha(
 			hmacSignatureSecret: $this->hmacSignature,
 			hmacKeySignatureSecret: $this->hmacKeySignature,
 		))->verifySolution(new VerifySolutionOptions(
-			payload: new Payload(new Challenge(
-				parameters:ChallengeParameters::fromArray($payload["challenge"]["parameters"]??[]) ,
-				signature: $payload["challenge"]["signature"]??"",
-			), new Solution(
+			payload: new Payload($challenge, new Solution(
 				counter: $payload["solution"]["counter"]??10,
 				derivedKey: $payload["solution"]["derivedKey"]??"",
 				time: $payload["solution"]["time"]??0,

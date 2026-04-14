@@ -1,0 +1,6 @@
+proxy:
+    domains:
+        - altcha-rate-limiter
+http:
+    daemon: true
+workers:

@@ -1,1 +1,2 @@
 invalid_altcha: Captcha not resolved
+altcha_rate_limit_exceeded: Too many attempts. Please try again later.
