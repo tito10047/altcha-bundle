@@ -69,7 +69,7 @@
     "symfony/panther": "^v2.4.0",
     "dbrekelmans/bdi": "^1.4",
     "symfony/asset-mapper": "^6.4|^7.4|^8.0",
-    "symfony/rate-limiter": "^8.0"
+    "symfony/rate-limiter": "^6.4|^7.4|^8.0"
   },
   "scripts" : {
     "test": [
