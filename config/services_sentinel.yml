@@ -17,5 +17,7 @@ services:
       $httpClient: '@altcha.sentinel.http_client'
       $requestStack: '@request_stack'
       $driverKeyProvider: '@Tito10047\AltchaBundle\Service\DriverKeyProviderInterface'
+      $hmacSignature: '%altcha.hmacSignature%'
+      $hmacKeySignature: '%altcha.hmacKeySignature%'
     calls:
       - setLogger: ['@?logger']

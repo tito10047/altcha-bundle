@@ -34,7 +34,7 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
 		private readonly HttpClientInterface             $httpClient,
 		private readonly RequestStack                    $requestStack,
 		private readonly string                          $hmacSignature,
-		private readonly string                          $hmacKeySignature,
+		private readonly ?string                         $hmacKeySignature,
 		private readonly DriverKeyProviderInterface      $driverKeyProvider,
 	) {
 	}
