@@ -44,8 +44,9 @@ Add a config file:
 ```yml
 altcha:
     enable: true
-    hmacSignature: '%env(APP_SECRET)%'
+    hmacSignature: '%env(APP_SECRET)%' # Replaces deprecated hmacKey
     hmacAlgorithm: 'SHA-256'
+    hmacKeySignature: ~ # Optional signature key
     cost: 5000
     counter_min: 5000
     counter_max: 10000
@@ -123,6 +124,11 @@ class ContactType extends AbstractType
                 'floating' => true,
                 'hide_logo' => false,
                 'hide_footer' => false,
+                // Optional: override global config
+                // 'cost' => 5000,
+                // 'timeout' => 30.0,
+                // 'counter_min' => 5000,
+                // 'counter_max' => 10000,
             ])
             ->add('submit', SubmitType::class)
         ;
