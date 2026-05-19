@@ -87,9 +87,9 @@ final class AltchaValidator extends ConstraintValidator
 				parameters:ChallengeParameters::fromArray($payload["challenge"]["parameters"]??[]) ,
 				signature: $payload["challenge"]["signature"]??"",
 			), new Solution(
-				counter: $payload["solution"]["counter"]??10,
+				counter: (int)($payload["solution"]["counter"]??10),
 				derivedKey: $payload["solution"]["derivedKey"]??"",
-				time: $payload["solution"]["time"]??0,
+				time: (float)($payload["solution"]["time"]??0),
 			)),
 			algorithm: $this->driverKeyProvider->getAlgorithm(),
 		));
