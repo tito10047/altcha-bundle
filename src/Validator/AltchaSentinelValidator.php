@@ -104,7 +104,7 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
 					signature: (string)($payload["challenge"]["signature"]??""),
 				), new Solution(
 					counter: (int)($payload["solution"]["counter"]??10),
-					derivedKey: (string)$payload["solution"]["derivedKey"]??"",
+					derivedKey: (string)($payload["solution"]["derivedKey"]??""),
 					time: (float)($payload["solution"]["time"]??0),
 				)),
 				algorithm: $this->driverKeyProvider->getAlgorithm(),
