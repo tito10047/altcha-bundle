@@ -101,11 +101,11 @@ final class AltchaSentinelValidator extends ConstraintValidator implements Logge
 			))->verifySolution(new VerifySolutionOptions(
 				payload: new Payload(new Challenge(
 					parameters:ChallengeParameters::fromArray($payload["challenge"]["parameters"]??[]) ,
-					signature: $payload["challenge"]["signature"]??"",
+					signature: (string)($payload["challenge"]["signature"]??""),
 				), new Solution(
-					counter: $payload["solution"]["counter"]??10,
-					derivedKey: $payload["solution"]["derivedKey"]??"",
-					time: $payload["solution"]["time"]??0,
+					counter: (int)($payload["solution"]["counter"]??10),
+					derivedKey: (string)($payload["solution"]["derivedKey"]??""),
+					time: (float)($payload["solution"]["time"]??0),
 				)),
 				algorithm: $this->driverKeyProvider->getAlgorithm(),
 			));
