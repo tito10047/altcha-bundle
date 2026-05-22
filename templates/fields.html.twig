@@ -37,7 +37,11 @@
 					}
 				}) }}
 			{% else %}
-				<script>
+			    {% guard function csp_nonce %}
+                <script nonce="{{ csp_nonce('script') }}">
+                {% else %}
+                <script>
+                {% endguard %}
 					{% if use_sentinel %}
 					async function altchaChallengeFetchWithFallback(url, init) {
 						try {
@@ -70,7 +74,6 @@
 						}
 					});
 				</script>
-
 			{% endif %}
 		</div>
 	{% endif %}
