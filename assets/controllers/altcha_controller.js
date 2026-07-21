@@ -1,30 +1,5 @@
 import {Controller} from '@hotwired/stimulus';
-
-// Altcha v3+ (Svelte 5) sets `data-loading` SYNCHRONOUSLY during connectedCallback
-// (initial render), which conflicts with Symfony UX Live Component's `data-loading`
-// loading-state directive. Static imports are hoisted and run before any module code,
-// so we must use a dynamic import to ensure this patch is active before altcha executes.
-//
-// At the time setAttribute is called the element is not yet appended to the DOM, so
-// closest('altcha-widget') returns null. We target altcha's known internal class names
-// instead: altcha-checkbox, altcha-checkbox-native, altcha-switch.
-{
-	const _orig = Element.prototype.setAttribute;
-	if (!_orig._altchaDataLoadingPatched) {
-		const patched = function (name, value) {
-			if (name === 'data-loading' && (
-				this.classList.contains('altcha-checkbox') ||
-				this.classList.contains('altcha-checkbox-native') ||
-				this.classList.contains('altcha-switch')
-			)) return;
-			return _orig.call(this, name, value);
-		};
-		patched._altchaDataLoadingPatched = true;
-		Element.prototype.setAttribute = patched;
-	}
-}
-
-await import('altcha/dist/main/altcha.i18n.js');
+import 'altcha/dist/main/altcha.i18n.js';
 
 export default class extends Controller {
 
