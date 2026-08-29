@@ -182,6 +182,31 @@ altcha:
 Activating this configuration will have the effect to use the sentinel server to generate a new challenge and for it's verification. 
 If the sentinel instance is not reachable by the client or by the server, we will fallback on our local configuration.
 
+## Need stronger protection?
+
+ALTCHA is invisible to the user, but proof-of-work alone only makes submitting a form
+*expensive* — it cannot tell a patient bot from a human. If your forms are being hit by
+targeted spam that is willing to pay that cost, add a challenge the visitor has to solve.
+
+For that case I recommend [`tito10047/iconcaptcha-bundle`](https://github.com/tito10047/icon-captcha-bundle),
+a Symfony integration of [IconCaptcha](https://github.com/fabianwennink/IconCaptcha-PHP):
+the visitor picks the least-common icon out of five to eight. It is self-hosted as well —
+no third-party service, no tracking, no API key — and it integrates exactly the same way
+as this bundle: install it, import its route, and add a single field to your form type.
+
+```bash
+composer require tito10047/iconcaptcha-bundle
+```
+
+```php
+->add('security', \Tito10047\IconcaptchaBundle\Type\IconCaptchaType::class, [
+    'label' => false,
+])
+```
+
+Both bundles can live side by side — use ALTCHA where UX matters most and IconCaptcha on
+the few endpoints that need a real challenge.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
