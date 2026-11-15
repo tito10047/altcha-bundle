@@ -17,7 +17,7 @@ If you are using a custom alias in `webpack.config.js`, update it as follows:
 module.exports.resolve.alias["altcha/dist/altcha.i18n.js"] = 'altcha/i18n';
 
 // After
-module.exports.resolve.alias["altcha/dist/i18n/all.js"] = 'altcha/i18n';
+module.exports.resolve.alias["altcha/dist/main/altcha.i18n.js"] = 'altcha/i18n';
 ```
 
 ## Configuration
