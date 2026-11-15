@@ -12,14 +12,36 @@ export default class extends Controller {
 		challengeUrl:   String,
 	}
 
-	connect() {
-		this.altchaTarget.addEventListener('statechange', (ev) => {
+	async connect() {
+		const widget = this.altchaTarget;
+
+		widget.addEventListener('statechange', (ev) => {
 			if (ev.detail.state === 'verified') {
 				this.inputTarget.value = ev.detail.payload;
 				this.inputTarget.dispatchEvent(new Event('change', {bubbles: true}));
 			}
 		});
 
+		await this.waitForWidget(widget);
+		if (!this.element.isConnected) {
+			return;
+		}
+
+		widget.configure(this.buildConfig());
+	}
+
+	/**
+	 * Altcha v3 (Svelte 5 custom element) exposes configure() only after the
+	 * inner component is mounted, which happens asynchronously in connectedCallback.
+	 */
+	async waitForWidget(widget) {
+		await customElements.whenDefined('altcha-widget');
+		while (typeof widget.configure !== 'function' && this.element.isConnected) {
+			await new Promise((resolve) => requestAnimationFrame(resolve));
+		}
+	}
+
+	buildConfig() {
 		const config = {};
 
 		if (this.hasHideLogoValue) {
@@ -35,7 +57,8 @@ export default class extends Controller {
 		if (this.hasOverlayContentValue) {
 			config.overlayContent = this.overlayContentValue;
 		}
-		this.altchaTarget.configure(config);
+
+		return config;
 	}
 
 	async altchaChallengeFetchWithFallback(url, init) {
